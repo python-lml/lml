@@ -1,0 +1,12 @@
+name: "lml"
+organisation: "chfw"
+author: "C.W."
+contact: "wangc_2011(@)hotmail.com"
+company: "Onni Software Ltd."
+version: "0.0.1"
+release: "0.0.1"
+copyright_year: 2017
+license: New BSD
+dependencies:
+  - six
+description: "Plugin first, Load me later"
