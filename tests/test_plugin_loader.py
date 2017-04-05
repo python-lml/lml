@@ -14,7 +14,7 @@ def test_load_from_pyinstaller(pkgutil_get_importer):
 
 @patch('pkgutil.get_importer')
 @patch('pkgutil.iter_modules')
-@patch('lml.plugin.plugin_first')
+@patch('lml.plugin.load_me_later')
 def test_load_plugins(pre_register,
                       pkgutil_iter_modules,
                       pkgutil_get_importer):
@@ -35,7 +35,7 @@ def test_load_plugins(pre_register,
 
 @patch('pkgutil.get_importer')
 @patch('pkgutil.iter_modules')
-@patch('lml.plugin.plugin_first')
+@patch('lml.plugin.load_me_later')
 def test_load_plugins_without_pyinstaller(pre_register,
                                           pkgutil_iter_modules,
                                           pkgutil_get_importer):
@@ -56,7 +56,7 @@ def test_load_plugins_without_pyinstaller(pre_register,
 
 @patch('pkgutil.get_importer')
 @patch('pkgutil.iter_modules')
-@patch('lml.plugin.plugin_first')
+@patch('lml.plugin.load_me_later')
 def test_load_plugins_without_any_plugins(pre_register,
                                           pkgutil_iter_modules,
                                           pkgutil_get_importer):
@@ -70,7 +70,7 @@ def test_load_plugins_without_any_plugins(pre_register,
 
 @patch('pkgutil.get_importer')
 @patch('pkgutil.iter_modules')
-@patch('lml.plugin.plugin_first')
+@patch('lml.plugin.load_me_later')
 def test_load_plugins_import_error(pre_register,
                                    pkgutil_iter_modules,
                                    pkgutil_get_importer):
