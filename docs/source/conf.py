@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 DESCRIPTION = (
-    'Plugin first, Load me later' +
+    'Load me later. A lazy loading plugin management system.' +
     ''
 )
 extensions = [

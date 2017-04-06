@@ -7,6 +7,5 @@ version: "0.0.1"
 release: "0.0.1"
 copyright_year: 2017
 license: New BSD
-dependencies:
-  - six
-description: "Plugin first, Load me later"
+dependencies: []
+description: "Load me later. A lazy loading plugin management system."

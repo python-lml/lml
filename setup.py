@@ -15,7 +15,7 @@ VERSION = '0.0.1'
 EMAIL = 'wangc_2011(@)hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
-    'Plugin first, Load me later' +
+    'Load me later. A lazy loading plugin management system.' +
     ''
 )
 KEYWORDS = [
@@ -32,13 +32,11 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
-    'six',
 ]
 
 
 PACKAGES = find_packages(exclude=['ez_setup', 'examples', 'tests'])
-EXTRAS_REQUIRE = {
-}
+EXTRAS_REQUIRE = {}
 
 
 def read_files(*files):
