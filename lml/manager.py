@@ -5,6 +5,7 @@ PLUG_IN_MANAGERS = {}
 
 log = logging.getLogger(__name__)
 
+
 def register_class(cls):
     log.debug("register " + cls.name)
     PLUG_IN_MANAGERS[cls.name] = cls

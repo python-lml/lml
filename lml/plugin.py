@@ -5,6 +5,7 @@ from lml.manager import load_me_later, do_import
 
 log = logging.getLogger(__name__)
 
+
 def scan_plugins(prefix, marker, path, black_list=None, white_list=None):
     if black_list is None:
         black_list = []
