@@ -34,6 +34,22 @@ class PluginManager(object):
         return do_import(library_import_path[0])
 
 
+class Plugin(type):
+    """sole class registry"""
+    def __init__(cls, name, bases, nmspc):
+        super(Plugin, cls).__init__(
+            name, bases, nmspc)
+        register_a_plugin(cls)
+
+
+def register_a_plugin(cls):
+    manager = PLUG_IN_MANAGERS.get(cls.plugin_type)
+    if manager:
+        manager.register_a_plugin(cls)
+    else:
+        raise Exception("%s has not register" % cls.plugin_type)
+
+
 def load_me_later(meta, module_name):
     manager = PLUG_IN_MANAGERS.get(meta['plugin_type'])
     if manager:
