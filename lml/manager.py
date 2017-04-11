@@ -33,6 +33,9 @@ class PluginManager(object):
         self._logger.debug("import " + library_import_path[0])
         return do_import(library_import_path[0])
 
+    def register_a_plugin(self, cls):
+        self._logger.debug("register " + cls.__name__)
+
 
 class Plugin(type):
     """sole class registry"""
@@ -47,7 +50,7 @@ def register_a_plugin(cls):
     if manager:
         manager.register_a_plugin(cls)
     else:
-        raise Exception("%s has not register" % cls.plugin_type)
+        raise Exception("%s has no registry" % cls.plugin_type)
 
 
 def load_me_later(meta, module_name):
@@ -55,7 +58,7 @@ def load_me_later(meta, module_name):
     if manager:
         manager.load_me_later(meta, module_name)
     else:
-        raise Exception("%s has not loader" % meta['plugin_type'])
+        raise Exception("%s has no loader" % meta['plugin_type'])
 
 
 def do_import(plugin_module_name):
@@ -65,3 +68,25 @@ def do_import(plugin_module_name):
         for module in modules[1:]:
             plugin_module = getattr(plugin_module, module)
     return plugin_module
+
+
+def with_metaclass(meta, *bases):
+    # This requires a bit of explanation: the basic idea is to make a
+    # dummy metaclass for one level of class instantiation that replaces
+    # itself with the actual metaclass.  Because of internal type checks
+    # we also need to make sure that we downgrade the custom metaclass
+    # for one level to something closer to type (that's why __call__ and
+    # __init__ comes back from type etc.).
+    #
+    # This has the advantage over six.with_metaclass in that it does not
+    # introduce dummy classes into the final MRO.
+    # :copyright: (c) 2014 by Armin Ronacher.
+    # :license: BSD, see LICENSE for more details.
+    class metaclass(meta):
+        __call__ = type.__call__
+        __init__ = type.__init__
+        def __new__(cls, name, this_bases, d):
+            if this_bases is None:
+                return type.__new__(cls, name, (), d)
+            return meta(name, bases, d)
+    return metaclass('temporary_class', None, {})
