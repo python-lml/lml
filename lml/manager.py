@@ -58,7 +58,9 @@ def load_me_later(meta, module_name):
     if manager:
         manager.load_me_later(meta, module_name)
     else:
-        raise Exception("%s has no loader" % meta['plugin_type'])
+        raise Exception(
+            "%s:%s has no loader" % (module_name,
+                                     meta['plugin_type']))
 
 
 def do_import(plugin_module_name):
