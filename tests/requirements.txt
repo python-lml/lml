@@ -1,5 +1,6 @@
+mock
 nose
 codecov
 coverage
 flake8
-https://github.com/pyexcel/pyexcel-xls/archive/v0.4.x.zip
+

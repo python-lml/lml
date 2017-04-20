@@ -1,6 +1,8 @@
 from mock import patch
 from nose.tools import eq_
 
+MARKER = '__test_plugins__'
+
 
 @patch('pkgutil.get_importer')
 def test_load_from_pyinstaller(pkgutil_get_importer):
@@ -20,17 +22,12 @@ def test_load_plugins(pre_register,
                       pkgutil_get_importer):
     sample_toc = set(['pyexcel_io'])
     pkgutil_get_importer.return_value.toc = sample_toc
-    pkgutil_iter_modules.return_value = [('not used', 'pyexcel_xls', True)]
+    pkgutil_iter_modules.return_value = [('not used', 'pyexcel_test', True)]
     from lml.plugin import scan_plugins
-    scan_plugins('pyexcel_', '__pyexcel_io_plugins__', '.', ['pyexcel_io'])
-    plugin_meta = {
-        'plugin_type': 'pyexcel io plugin',
-        'file_types': ['xls', 'xlsx', 'xlsm'],
-        'submodule': 'xls',
-        'stream_type': 'binary'
-    }
-    module_name = 'pyexcel_xls'
-    pre_register.assert_called_with(plugin_meta, module_name)
+    scan_plugins('pyexcel_', MARKER, '.', ['pyexcel_io'])
+    (info, module_name), _ = pre_register.call_args
+    eq_(info.plugin_type, 'test_io')
+    eq_(info.submodule, 'x')
 
 
 @patch('pkgutil.get_importer')
@@ -39,19 +36,17 @@ def test_load_plugins(pre_register,
 def test_load_plugins_without_pyinstaller(pre_register,
                                           pkgutil_iter_modules,
                                           pkgutil_get_importer):
+    test_module_name = 'pyexcel_test'
     sample_toc = set()
     pkgutil_get_importer.return_value.toc = sample_toc
-    pkgutil_iter_modules.return_value = [('not used', 'pyexcel_xls', True)]
+    # mock iter modules
+    pkgutil_iter_modules.return_value = [('not used', test_module_name, True)]
     from lml.plugin import scan_plugins
-    scan_plugins('pyexcel_', '__pyexcel_io_plugins__', '.', ['pyexcel_io'])
-    plugin_meta = {
-        'plugin_type': 'pyexcel io plugin',
-        'file_types': ['xls', 'xlsx', 'xlsm'],
-        'submodule': 'xls',
-        'stream_type': 'binary'
-    }
-    module_name = 'pyexcel_xls'
-    pre_register.assert_called_with(plugin_meta, module_name)
+    scan_plugins('pyexcel_', MARKER, '.', ['pyexcel_io'])
+    (info, module_name), _ = pre_register.call_args
+    eq_(module_name, test_module_name)
+    eq_(info.plugin_type, 'test_io')
+    eq_(info.submodule, 'x')
 
 
 @patch('pkgutil.get_importer')
@@ -64,7 +59,7 @@ def test_load_plugins_without_any_plugins(pre_register,
     pkgutil_get_importer.return_value.toc = sample_toc
     pkgutil_iter_modules.return_value = []
     from lml.plugin import scan_plugins
-    scan_plugins('pyexcel_', '__pyexcel_io_plugins__', '.', ['pyexcel_io'])
+    scan_plugins('pyexcel_', MARKER, '.', ['pyexcel_io'])
     assert pre_register.called is False
 
 
@@ -78,5 +73,5 @@ def test_load_plugins_import_error(pre_register,
     pkgutil_get_importer.return_value.toc = sample_toc
     pkgutil_iter_modules.return_value = [('not used', 'pyexcel_xls', False)]
     from lml.plugin import scan_plugins
-    scan_plugins('test_', '__pyexcel_io_plugins__',  '.', ['pyexcel_io'])
+    scan_plugins('test_', MARKER,  '.', ['pyexcel_io'])
     assert pre_register.called is False

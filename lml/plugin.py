@@ -1,12 +1,14 @@
 import pkgutil
 import logging
 from itertools import chain
-from lml.manager import load_me_later, do_import
+from lml.manager import do_import, load_me_later
 
 log = logging.getLogger(__name__)
 
 
 def scan_plugins(prefix, marker, path, black_list=None, white_list=None):
+    log.debug("black list is " + '.'.join(black_list))
+
     if black_list is None:
         black_list = []
 
@@ -27,6 +29,7 @@ def scan_plugins(prefix, marker, path, black_list=None, white_list=None):
     for module_name in all_modules:
 
         if module_name in black_list:
+            log.debug("ignored " + module_name)
             continue
 
         try:
@@ -57,5 +60,6 @@ def scan_from_pyinstaller(prefix, path):
 def load_plugins(plugin_module_name, marker):
     plugin_module = do_import(plugin_module_name)
     if hasattr(plugin_module, marker):
+        log.debug("loading %s" % plugin_module_name)
         for plugin_meta in getattr(plugin_module, marker):
             load_me_later(plugin_meta, plugin_module_name)

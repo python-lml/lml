@@ -1,14 +1,52 @@
 import logging
+from json import dumps, JSONEncoder
 from collections import defaultdict
 
 PLUG_IN_MANAGERS = {}
+CACHED_PLUGIN_INFO = defaultdict(list)
 
 log = logging.getLogger(__name__)
 
 
-def register_class(cls):
-    log.debug("register " + cls.name)
-    PLUG_IN_MANAGERS[cls.name] = cls
+class PythonObjectEncoder(JSONEncoder):
+    def default(self, obj):
+        a_list_of_types = (list, dict, str, unicode,
+                           int, float, bool, type(None))
+        if isinstance(obj, a_list_of_types):
+            return JSONEncoder.default(self, obj)
+        return {'_python_object': str(obj)}
+
+
+class PluginInfo(object):
+    def __init__(self, **keywords):
+        self.__dict__ = keywords
+
+    def __repr__(self):
+        return dumps(self.__dict__, cls=PythonObjectEncoder)
+
+
+class PluginList(object):
+
+    def __init__(self, path):
+        self.module_name = path
+        self.plugins = []
+
+    def add_a_plugin(self, plugin_type, submodule,
+                     file_types, stream_type=None):
+        self._add_a_plugin(
+            PluginInfo(plugin_type=plugin_type,
+                       submodule=submodule,
+                       file_types=file_types,
+                       stream_type=stream_type))
+        return self
+
+    def _add_a_plugin(self, plugin_info):
+        self.plugins.append(plugin_info)
+        return self
+
+    def __iter__(self):
+        for plugin_info in self.plugins:
+            yield plugin_info
 
 
 class PluginManager(object):
@@ -37,6 +75,17 @@ class PluginManager(object):
         self._logger.debug("register " + cls.__name__)
 
 
+def register_class(cls):
+    log.debug("register " + cls.name)
+    PLUG_IN_MANAGERS[cls.name] = cls
+    if cls.name in CACHED_PLUGIN_INFO:
+        # check if there is early registrations or not
+        for plugin_info, module_name in CACHED_PLUGIN_INFO[cls.name]:
+            cls.load_me_later(plugin_info, module_name)
+
+        del CACHED_PLUGIN_INFO[cls.name]
+
+
 class Plugin(type):
     """sole class registry"""
     def __init__(cls, name, bases, nmspc):
@@ -54,22 +103,26 @@ def register_a_plugin(cls):
 
 
 def load_me_later(meta, module_name):
-    manager = PLUG_IN_MANAGERS.get(meta['plugin_type'])
+    log.debug(meta)
+    manager = PLUG_IN_MANAGERS.get(meta.plugin_type)
     if manager:
         manager.load_me_later(meta, module_name)
     else:
-        raise Exception(
-            "%s:%s has no loader" % (module_name,
-                                     meta['plugin_type']))
+        # let's cache it and wait the manager to be registered
+        CACHED_PLUGIN_INFO[meta.plugin_type].append((meta, module_name))
 
 
 def do_import(plugin_module_name):
-    plugin_module = __import__(plugin_module_name)
-    if '.' in plugin_module_name:
-        modules = plugin_module_name.split('.')
-        for module in modules[1:]:
-            plugin_module = getattr(plugin_module, module)
-    return plugin_module
+    try:
+        plugin_module = __import__(plugin_module_name)
+        if '.' in plugin_module_name:
+            modules = plugin_module_name.split('.')
+            for module in modules[1:]:
+                plugin_module = getattr(plugin_module, module)
+        return plugin_module
+    except ImportError:
+        log.debug("Failed to import %s" % plugin_module_name)
+        raise
 
 
 def with_metaclass(meta, *bases):
