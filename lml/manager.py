@@ -12,10 +12,10 @@ log = logging.getLogger(__name__)
 
 class PythonObjectEncoder(JSONEncoder):
     def default(self, obj):
-        a_list_of_types = [list, dict, str,
-                           int, float, bool, type(None)]
+        a_list_of_types = (list, dict, str,
+                           int, float, bool, type(None))
         if PY2:
-            a_list_of_types.append(unicode)
+            a_list_of_types += (unicode,)
         if isinstance(obj, a_list_of_types):
             return JSONEncoder.default(self, obj)
         return {'_python_object': str(obj)}
