@@ -1,6 +1,8 @@
 import logging
 from json import dumps, JSONEncoder
 from collections import defaultdict
+from lml._compact import PY2
+
 
 PLUG_IN_MANAGERS = {}
 CACHED_PLUGIN_INFO = defaultdict(list)
@@ -10,8 +12,10 @@ log = logging.getLogger(__name__)
 
 class PythonObjectEncoder(JSONEncoder):
     def default(self, obj):
-        a_list_of_types = (list, dict, str, unicode,
-                           int, float, bool, type(None))
+        a_list_of_types = [list, dict, str,
+                           int, float, bool, type(None)]
+        if PY2:
+            a_list_of_types.append(unicode)
         if isinstance(obj, a_list_of_types):
             return JSONEncoder.default(self, obj)
         return {'_python_object': str(obj)}
