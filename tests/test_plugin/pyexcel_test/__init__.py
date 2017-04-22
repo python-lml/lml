@@ -1,9 +1,5 @@
-from lml.manager import PluginList, PluginInfo
+from lml.registry import PluginList
 
 
-__test_plugins__ = PluginList(__name__)._add_a_plugin(
-    PluginInfo(
-        plugin_type='test_io',
-        submodule='x'
-    )
-)
+__test_plugins__ = PluginList(__name__).add_a_plugin(
+    'test_io', 'x')

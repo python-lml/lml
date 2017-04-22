@@ -1,65 +1,106 @@
-import pkgutil
 import logging
-from itertools import chain
-from lml.manager import do_import, load_me_later
+from collections import defaultdict
+
+PLUG_IN_MANAGERS = {}
+CACHED_PLUGIN_INFO = defaultdict(list)
 
 log = logging.getLogger(__name__)
 
 
-def scan_plugins(prefix, marker, path, black_list=None, white_list=None):
-    log.debug("black list is " + '.'.join(black_list))
+class PluginManager(object):
 
-    if black_list is None:
-        black_list = []
+    def __init__(self, plugin_type):
+        self.name = plugin_type
+        self.registry = defaultdict(list)
+        self._logger = logging.getLogger(
+            self.__class__.__module__ + '.' + self.__class__.__name__)
+        register_class(self)
 
-    if white_list is None:
-        white_list = []
+    def load_me_later(self, meta, module_name):
+        self._logger.debug('load me later: ' + module_name)
+        self._logger.debug(meta)
 
-    # scan pkgutil.iter_modules
-    module_names = (module_info[1] for module_info in pkgutil.iter_modules()
-                    if module_info[2] and module_info[1].startswith(prefix))
+    def load_me_now(self, key, **keywords):
+        self._logger.debug("load me now:" + key)
+        if keywords:
+            self._logger.debug(keywords)
 
-    # scan pyinstaller
-    module_names_from_pyinstaller = scan_from_pyinstaller(prefix, path)
+    def dynamic_load_library(self, library_import_path):
+        self._logger.debug("import " + library_import_path[0])
+        return do_import(library_import_path[0])
 
-    all_modules = chain(module_names,
-                        module_names_from_pyinstaller,
-                        white_list)
-    # loop through modules and find our plug ins
-    for module_name in all_modules:
-
-        if module_name in black_list:
-            log.debug("ignored " + module_name)
-            continue
-
-        try:
-            load_plugins(module_name, marker)
-        except ImportError as e:
-            log.debug(module_name)
-            log.debug(e)
-            continue
+    def register_a_plugin(self, cls):
+        self._logger.debug("register " + cls.__name__)
 
 
-# load modules to work based with and without pyinstaller
-# from: https://github.com/webcomics/dosage/blob/master/dosagelib/loader.py
-# see: https://github.com/pyinstaller/pyinstaller/issues/1905
-# load modules using iter_modules()
-# (should find all plug ins in normal build, but not pyinstaller)
-def scan_from_pyinstaller(prefix, path):
-    # special handling for PyInstaller
-    table_of_content = set()
-    for a_toc in (importer.toc for importer in map(pkgutil.get_importer, path)
-                  if hasattr(importer, 'toc')):
-        table_of_content |= a_toc
+def register_class(cls):
+    log.debug("register " + cls.name)
+    PLUG_IN_MANAGERS[cls.name] = cls
+    if cls.name in CACHED_PLUGIN_INFO:
+        # check if there is early registrations or not
+        for plugin_info, module_name in CACHED_PLUGIN_INFO[cls.name]:
+            cls.load_me_later(plugin_info, module_name)
 
-    for module_name in table_of_content:
-        if module_name.startswith(prefix) and '.' not in module_name:
-            yield module_name
+        del CACHED_PLUGIN_INFO[cls.name]
 
 
-def load_plugins(plugin_module_name, marker):
-    plugin_module = do_import(plugin_module_name)
-    if hasattr(plugin_module, marker):
-        log.debug("loading %s" % plugin_module_name)
-        for plugin_meta in getattr(plugin_module, marker):
-            load_me_later(plugin_meta, plugin_module_name)
+class Plugin(type):
+    """sole class registry"""
+    def __init__(cls, name, bases, nmspc):
+        super(Plugin, cls).__init__(
+            name, bases, nmspc)
+        register_a_plugin(cls)
+
+
+def register_a_plugin(cls):
+    manager = PLUG_IN_MANAGERS.get(cls.name)
+    if manager:
+        manager.register_a_plugin(cls)
+    else:
+        raise Exception("%s has no registry" % cls.name)
+
+
+def load_me_later(plugin_info):
+    log.debug(plugin_info)
+    manager = PLUG_IN_MANAGERS.get(plugin_info.name)
+    if manager:
+        manager.load_me_later(plugin_info)
+    else:
+        # let's cache it and wait the manager to be registered
+        CACHED_PLUGIN_INFO[plugin_info.name].append(plugin_info)
+
+
+def do_import(plugin_module_name):
+    try:
+        plugin_module = __import__(plugin_module_name)
+        if '.' in plugin_module_name:
+            modules = plugin_module_name.split('.')
+            for module in modules[1:]:
+                plugin_module = getattr(plugin_module, module)
+        return plugin_module
+    except ImportError:
+        log.debug("Failed to import %s" % plugin_module_name)
+        raise
+
+
+def with_metaclass(meta, *bases):
+    # This requires a bit of explanation: the basic idea is to make a
+    # dummy metaclass for one level of class instantiation that replaces
+    # itself with the actual metaclass.  Because of internal type checks
+    # we also need to make sure that we downgrade the custom metaclass
+    # for one level to something closer to type (that's why __call__ and
+    # __init__ comes back from type etc.).
+    #
+    # This has the advantage over six.with_metaclass in that it does not
+    # introduce dummy classes into the final MRO.
+    # :copyright: (c) 2014 by Armin Ronacher.
+    # :license: BSD, see LICENSE for more details.
+    class metaclass(meta):
+        __call__ = type.__call__
+        __init__ = type.__init__
+
+        def __new__(cls, name, this_bases, d):
+            if this_bases is None:
+                return type.__new__(cls, name, (), d)
+            return meta(name, bases, d)
+    return metaclass('temporary_class', None, {})
