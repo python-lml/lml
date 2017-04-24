@@ -9,39 +9,53 @@ log = logging.getLogger(__name__)
 
 class PluginManager(object):
 
-    def __init__(self, plugin_type):
-        self.name = plugin_type
+    def __init__(self, plugin_name):
+        self.plugin_name = plugin_name
         self.registry = defaultdict(list)
+        self.loaded_registry = defaultdict(list)
         self._logger = logging.getLogger(
             self.__class__.__module__ + '.' + self.__class__.__name__)
         register_class(self)
 
-    def load_me_later(self, meta, module_name):
-        self._logger.debug('load me later: ' + module_name)
-        self._logger.debug(meta)
+    def load_me_later(self, plugin_info):
+        self._logger.debug('load me later: ' + plugin_info.module_name)
+        self._logger.debug(plugin_info)
+        for file_type in plugin_info.keywords():
+            self._logger.debug('======>'+file_type)
+            self.registry[file_type].append(plugin_info)
 
     def load_me_now(self, key, **keywords):
         self._logger.debug("load me now:" + key)
         if keywords:
             self._logger.debug(keywords)
+        __key = key.lower()
+        if __key in self.registry:
+            for plugin_info in self.registry[__key]:
+                cls = self.dynamic_load_library(plugin_info)
+                self.register_a_plugin(cls, plugin_info)
+            # once loaded, forgot it
+            self.registry.pop(__key)
 
-    def dynamic_load_library(self, library_import_path):
-        self._logger.debug("import " + library_import_path[0])
-        return do_import(library_import_path[0])
+    def dynamic_load_library(self, a_plugin_info):
+        self._logger.debug("import " + a_plugin_info.absolute_import_path)
+        return do_import_class(a_plugin_info.absolute_import_path)
 
     def register_a_plugin(self, cls):
         self._logger.debug("register " + cls.__name__)
 
+    def get_a_plugin(self, **keywords):
+        self._logger.debug("get a plugin: ")
+
 
 def register_class(cls):
-    log.debug("register " + cls.name)
-    PLUG_IN_MANAGERS[cls.name] = cls
-    if cls.name in CACHED_PLUGIN_INFO:
+    log.debug("register " + cls.plugin_name)
+    PLUG_IN_MANAGERS[cls.plugin_name] = cls
+    if cls.plugin_name in CACHED_PLUGIN_INFO:
         # check if there is early registrations or not
-        for plugin_info, module_name in CACHED_PLUGIN_INFO[cls.name]:
-            cls.load_me_later(plugin_info, module_name)
+        for plugin_info in CACHED_PLUGIN_INFO[cls.plugin_name]:
+            cls.load_me_later(plugin_info)
 
-        del CACHED_PLUGIN_INFO[cls.name]
+        del CACHED_PLUGIN_INFO[cls.plugin_name]
 
 
 class Plugin(type):
@@ -53,11 +67,11 @@ class Plugin(type):
 
 
 def register_a_plugin(cls):
-    manager = PLUG_IN_MANAGERS.get(cls.name)
+    manager = PLUG_IN_MANAGERS.get(cls.plugin_name)
     if manager:
-        manager.register_a_plugin(cls)
+        manager.register_a_plugin(cls, cls)
     else:
-        raise Exception("%s has no registry" % cls.name)
+        raise Exception("%s has no registry" % cls.plugin_name)
 
 
 def load_me_later(plugin_info):
@@ -77,6 +91,19 @@ def do_import(plugin_module_name):
             modules = plugin_module_name.split('.')
             for module in modules[1:]:
                 plugin_module = getattr(plugin_module, module)
+        return plugin_module
+    except ImportError:
+        log.debug("Failed to import %s" % plugin_module_name)
+        raise
+
+
+def do_import_class(plugin_class):
+    try:
+        plugin_module_name = plugin_class.rsplit('.', 1)[0]
+        plugin_module = __import__(plugin_module_name)
+        modules = plugin_class.split('.')
+        for module in modules[1:]:
+            plugin_module = getattr(plugin_module, module)
         return plugin_module
     except ImportError:
         log.debug("Failed to import %s" % plugin_module_name)
