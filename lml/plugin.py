@@ -12,7 +12,6 @@ class PluginManager(object):
     def __init__(self, plugin_name):
         self.plugin_name = plugin_name
         self.registry = defaultdict(list)
-        self.loaded_registry = defaultdict(list)
         self._logger = logging.getLogger(
             self.__class__.__module__ + '.' + self.__class__.__name__)
         register_class(self)
@@ -24,7 +23,7 @@ class PluginManager(object):
             self._logger.debug('======>'+file_type)
             self.registry[file_type].append(plugin_info)
 
-    def load_me_now(self, key, **keywords):
+    def load_me_now(self, key, library=None, **keywords):
         self._logger.debug("load me now:" + key)
         if keywords:
             self._logger.debug(keywords)
@@ -32,9 +31,23 @@ class PluginManager(object):
         if __key in self.registry:
             for plugin_info in self.registry[__key]:
                 cls = self.dynamic_load_library(plugin_info)
-                self.register_a_plugin(cls, plugin_info)
-            # once loaded, forgot it
-            self.registry.pop(__key)
+                module_name = _get_me_pypi_package_name(cls.__module__)
+                if library and module_name != library:
+                    continue
+                else:
+                    break
+            else:
+                if library:
+                    raise Exception("%s is not installed" % library)
+                else:
+                    self.raise_exception(key)
+            return cls
+        else:
+            self.raise_exception(key)
+
+    def raise_exception(self, key):
+        raise Exception(
+            "No %s is found for %s" % (self.name, key))
 
     def dynamic_load_library(self, a_plugin_info):
         self._logger.debug("import " + a_plugin_info.absolute_import_path)
@@ -44,6 +57,7 @@ class PluginManager(object):
         return a_plugin_info.cls
 
     def register_a_plugin(self, cls):
+        """ for dynamically loaded plugin """
         self._logger.debug("register " + cls.__name__)
 
     def get_a_plugin(self, **keywords):
@@ -134,3 +148,8 @@ def with_metaclass(meta, *bases):
                 return type.__new__(cls, name, (), d)
             return meta(name, bases, d)
     return metaclass('temporary_class', None, {})
+
+
+def _get_me_pypi_package_name(module_name):
+    root_module_name = module_name.split('.')[0]
+    return root_module_name.replace('_', '-')
