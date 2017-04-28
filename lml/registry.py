@@ -22,6 +22,7 @@ class PluginInfo(object):
     def __init__(self, name, absolute_import_path, **keywords):
         self.name = name
         self.absolute_import_path = absolute_import_path
+        self.cls = None
         self.properties = keywords
 
     def __getattr__(self, name):

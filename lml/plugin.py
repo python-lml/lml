@@ -38,7 +38,10 @@ class PluginManager(object):
 
     def dynamic_load_library(self, a_plugin_info):
         self._logger.debug("import " + a_plugin_info.absolute_import_path)
-        return do_import_class(a_plugin_info.absolute_import_path)
+        if a_plugin_info.cls is None:
+            cls = do_import_class(a_plugin_info.absolute_import_path)
+            a_plugin_info.cls = cls
+        return a_plugin_info.cls
 
     def register_a_plugin(self, cls):
         self._logger.debug("register " + cls.__name__)
