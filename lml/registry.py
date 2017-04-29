@@ -55,6 +55,7 @@ class PluginList(object):
         return self
 
     def _add_a_plugin(self, plugin_info_instance):
+        log.debug(plugin_info_instance)
         load_me_later(plugin_info_instance)
         return self
 

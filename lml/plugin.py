@@ -1,3 +1,4 @@
+import sys
 import logging
 from collections import defaultdict
 
@@ -56,9 +57,11 @@ class PluginManager(object):
             a_plugin_info.cls = cls
         return a_plugin_info.cls
 
-    def register_a_plugin(self, cls):
+    def register_a_plugin(self, cls, plugin_info):
         """ for dynamically loaded plugin """
         self._logger.debug("register " + cls.__name__)
+        for key in plugin_info.keywords():
+            self.registry[key.lower()].append(cls)
 
     def get_a_plugin(self, **keywords):
         self._logger.debug("get a plugin: ")
@@ -70,6 +73,7 @@ def register_class(cls):
     if cls.plugin_name in CACHED_PLUGIN_INFO:
         # check if there is early registrations or not
         for plugin_info in CACHED_PLUGIN_INFO[cls.plugin_name]:
+            log.debug("load cached values " + plugin_info.absolute_import_path)
             cls.load_me_later(plugin_info)
 
         del CACHED_PLUGIN_INFO[cls.plugin_name]
@@ -92,17 +96,20 @@ def register_a_plugin(cls):
 
 
 def load_me_later(plugin_info):
+    log.debug("load me later")
     log.debug(plugin_info)
     manager = PLUG_IN_MANAGERS.get(plugin_info.name)
     if manager:
         manager.load_me_later(plugin_info)
     else:
         # let's cache it and wait the manager to be registered
+        log.debug("caching " + plugin_info.absolute_import_path)
         CACHED_PLUGIN_INFO[plugin_info.name].append(plugin_info)
 
 
 def do_import(plugin_module_name):
     try:
+        log.debug("do import " + plugin_module_name)
         plugin_module = __import__(plugin_module_name)
         if '.' in plugin_module_name:
             modules = plugin_module_name.split('.')
