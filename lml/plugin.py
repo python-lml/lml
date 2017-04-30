@@ -1,3 +1,4 @@
+import json
 import logging
 from collections import defaultdict
 
@@ -19,9 +20,8 @@ class PluginManager(object):
     def load_me_later(self, plugin_info):
         self._logger.debug('load me later: ' + plugin_info.module_name)
         self._logger.debug(plugin_info)
-        for file_type in plugin_info.keywords():
-            self._logger.debug('======>'+file_type)
-            self.registry[file_type].append(plugin_info)
+        for key in plugin_info.keywords():
+            self.registry[key].append(plugin_info)
 
     def load_me_now(self, key, library=None, **keywords):
         self._logger.debug("load me now:" + key)
@@ -63,7 +63,7 @@ class PluginManager(object):
             self.registry[key.lower()].append(cls)
 
     def get_a_plugin(self, **keywords):
-        self._logger.debug("get a plugin: ")
+        self._logger.debug("get a plugin: " + json.dumps(keywords))
 
 
 def register_class(cls):
