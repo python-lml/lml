@@ -1,6 +1,6 @@
-import json
 import logging
 from collections import defaultdict
+
 
 PLUG_IN_MANAGERS = {}
 CACHED_PLUGIN_INFO = defaultdict(list)
@@ -21,7 +21,7 @@ class PluginManager(object):
         self._logger.debug('load me later: ' + plugin_info.module_name)
         self._logger.debug(plugin_info)
         for key in plugin_info.keywords():
-            self.registry[key].append(plugin_info)
+            self.registry[key.lower()].append(plugin_info)
 
     def load_me_now(self, key, library=None, **keywords):
         self._logger.debug("load me now:" + key)
@@ -60,10 +60,11 @@ class PluginManager(object):
         """ for dynamically loaded plugin """
         self._logger.debug("register " + cls.__name__)
         for key in plugin_info.keywords():
-            self.registry[key.lower()].append(cls)
+            plugin_info.cls = cls
+            self.registry[key.lower()].append(plugin_info)
 
     def get_a_plugin(self, **keywords):
-        self._logger.debug("get a plugin: " + json.dumps(keywords))
+        self._logger.debug("get a plugin")
 
 
 def register_class(cls):

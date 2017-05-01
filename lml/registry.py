@@ -1,21 +1,9 @@
 import logging
-from json import dumps, JSONEncoder
 
 from lml.plugin import load_me_later
-from lml._compact import PY2
+from lml.utils import json_dumps
 
 log = logging.getLogger(__name__)
-
-
-class PythonObjectEncoder(JSONEncoder):
-    def default(self, obj):
-        a_list_of_types = (list, dict, str,
-                           int, float, bool, type(None))
-        if PY2:
-            a_list_of_types += (unicode,)
-        if isinstance(obj, a_list_of_types):
-            return JSONEncoder.default(self, obj)
-        return {'_python_object': str(obj)}
 
 
 class PluginInfo(object):
@@ -37,7 +25,7 @@ class PluginInfo(object):
     def __repr__(self):
         rep = {"name": self.name, "path": self.absolute_import_path}
         rep.update(self.properties)
-        return dumps(rep, cls=PythonObjectEncoder)
+        return json_dumps(rep)
 
 
 class PluginList(object):
