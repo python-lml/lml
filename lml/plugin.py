@@ -37,10 +37,8 @@ class PluginManager(object):
                 else:
                     break
             else:
-                if library:
-                    raise Exception("%s is not installed" % library)
-                else:
-                    self.raise_exception(key)
+                # only library condition coud raise an exception
+                raise Exception("%s is not installed" % library)
             return cls
         else:
             self.raise_exception(key)
