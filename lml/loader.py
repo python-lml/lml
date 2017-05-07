@@ -1,3 +1,12 @@
+"""
+    lml.loader
+    ~~~~~~~~~~~~~~~~~~~
+
+    Auto discover avaiable plugins
+
+    :copyright: (c) 2017 by Onni Software Ltd.
+    :license: New BSD License, see LICENSE for more details
+"""
 import pkgutil
 import logging
 from itertools import chain
@@ -7,6 +16,9 @@ log = logging.getLogger(__name__)
 
 
 def scan_plugins(prefix, path, black_list=None, white_list=None):
+    """
+    Discover plugins via pkgutil and pyinstaller path
+    """
     log.debug("black list is " + '.'.join(black_list))
 
     if black_list is None:
@@ -46,7 +58,9 @@ def scan_plugins(prefix, path, black_list=None, white_list=None):
 # load modules using iter_modules()
 # (should find all plug ins in normal build, but not pyinstaller)
 def scan_from_pyinstaller(prefix, path):
-    # special handling for PyInstaller
+    """
+    Discover plugins from pyinstaller
+    """
     table_of_content = set()
     for a_toc in (importer.toc for importer in map(pkgutil.get_importer, path)
                   if hasattr(importer, 'toc')):

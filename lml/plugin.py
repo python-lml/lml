@@ -1,3 +1,12 @@
+"""
+    lml.plugin
+    ~~~~~~~~~~~~~~~~~~~
+
+    Plugin management system
+
+    :copyright: (c) 2017 by Onni Software Ltd.
+    :license: New BSD License, see LICENSE for more details
+"""
 import logging
 from collections import defaultdict
 
@@ -9,7 +18,9 @@ log = logging.getLogger(__name__)
 
 
 class PluginManager(object):
-
+    """
+    Load plugin info into in-memory dictionary for later import
+    """
     def __init__(self, plugin_name):
         self.plugin_name = plugin_name
         self.registry = defaultdict(list)
@@ -18,12 +29,18 @@ class PluginManager(object):
         register_class(self)
 
     def load_me_later(self, plugin_info):
+        """
+        Register a plugin info for later loading
+        """
         self._logger.debug('load me later: ' + plugin_info.module_name)
         self._logger.debug(plugin_info)
         for key in plugin_info.keywords():
             self.registry[key.lower()].append(plugin_info)
 
     def load_me_now(self, key, library=None, **keywords):
+        """
+        Import a plugin from plugin registry
+        """
         self._logger.debug("load me now:" + key)
         if keywords:
             self._logger.debug(keywords)
@@ -44,10 +61,12 @@ class PluginManager(object):
             self.raise_exception(key)
 
     def raise_exception(self, key):
+        """Raise plugin not found exception"""
         raise Exception(
             "No %s is found for %s" % (self.name, key))
 
     def dynamic_load_library(self, a_plugin_info):
+        """Dynamically load the plugin info if not loaded"""
         self._logger.debug("import " + a_plugin_info.absolute_import_path)
         if a_plugin_info.cls is None:
             cls = do_import_class(a_plugin_info.absolute_import_path)
@@ -55,17 +74,19 @@ class PluginManager(object):
         return a_plugin_info.cls
 
     def register_a_plugin(self, cls, plugin_info):
-        """ for dynamically loaded plugin """
+        """ for dynamically loaded plugin during runtime"""
         self._logger.debug("register " + cls.__name__)
         for key in plugin_info.keywords():
             plugin_info.cls = cls
             self.registry[key.lower()].append(plugin_info)
 
     def get_a_plugin(self, **keywords):
+        """ Get a plugin """
         self._logger.debug("get a plugin")
 
 
 def register_class(cls):
+    """Reigister a newly created plugin manager"""
     log.debug("register " + cls.plugin_name)
     PLUG_IN_MANAGERS[cls.plugin_name] = cls
     if cls.plugin_name in CACHED_PLUGIN_INFO:
@@ -86,6 +107,7 @@ class Plugin(type):
 
 
 def register_a_plugin(cls):
+    """module level function to register a plugin"""
     manager = PLUG_IN_MANAGERS.get(cls.plugin_name)
     if manager:
         manager.register_a_plugin(cls, cls)
@@ -94,6 +116,7 @@ def register_a_plugin(cls):
 
 
 def load_me_later(plugin_info):
+    """ module level function to load a plugi later"""
     log.debug("load me later")
     log.debug(plugin_info)
     manager = PLUG_IN_MANAGERS.get(plugin_info.name)
@@ -106,6 +129,7 @@ def load_me_later(plugin_info):
 
 
 def do_import(plugin_module_name):
+    """dynamically import a module"""
     try:
         log.debug("do import " + plugin_module_name)
         plugin_module = __import__(plugin_module_name)
@@ -120,6 +144,7 @@ def do_import(plugin_module_name):
 
 
 def do_import_class(plugin_class):
+    """dynamically import a class"""
     try:
         plugin_module_name = plugin_class.rsplit('.', 1)[0]
         plugin_module = __import__(plugin_module_name)
