@@ -29,6 +29,6 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/{{organisation}}/{{name}}.git
+    $ git clone https://github.com/{{organisation}}/{{name}}.git
     $ cd {{name}}
     $ python setup.py install

@@ -12,11 +12,11 @@
 Introduction
 -------------
 
-**lml** automatically load plugins that extend the main component from your
-python environment, which could be your virtual environment, PyInstaller
-environment. Its main feature is lazy loading. There could be hundreds of
-plugins in your python environment but only a handful of plugins are loaded
-when they are really needed. 
+**lml** automatically loads plugins that extend the main component from your
+current python environment. Its main feature is lazy loading. There could be
+hundreds of plugins in your python environment. You may want to load
+a handful of plugins are loaded when they are really needed. Or your plugins may
+bring in a memory consuming dependency, so you may load it when necessary.
 
 
 Documentation

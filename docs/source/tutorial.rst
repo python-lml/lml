@@ -58,7 +58,6 @@ Let us look at the main code(main.py) of robotchef:
 .. code-block:: python
    :linenos:
 
-
    from robotchef.plugin import CuisineManager
 
 
@@ -73,7 +72,6 @@ Let us look at the main code(main.py) of robotchef:
           print(knowledged_chef.make(food=food_name))
       except Exception:
           print("I do not know how to cook " + food_name)
-
 
 CuisineManager is instantiated in the code and implements the factory method
 to return a chef depending on the food name. The returned chef then make
@@ -94,7 +92,6 @@ Now let us visit plugin.py to examine CuisineManger:
    
        def get_a_plugin(self, food_name=None, **keywords):
            return PluginManager.get_a_plugin(self, key=food_name, **keywords)
-
 
 Line 8 shows the factory method that looks up a food name for plugin. In the
 conventional construction method, I meant without thinking of loosely coupled
@@ -127,7 +124,6 @@ it is __init__.py file, where the plugins were discovered:
    
    scan_plugins("robotchef_", __path__, white_list=BUILTINS)
 
- 
 Three lines of code here. scan_plugins would look up the installed modules that starts
 with the prefix 'robotchef_'. The second parameter is to inform pyinstall about the
 package path if your package is to be packaged up. `white_list` lists the built-ins

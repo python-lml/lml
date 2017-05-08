@@ -13,3 +13,13 @@ Introduction
 -------------
 
 {% include "description.rst.jj2" %}
+
+
+Documentation
+----------------
+
+.. toctree::
+
+   design
+   tutorial
+   api

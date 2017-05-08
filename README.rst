@@ -11,11 +11,11 @@ lml - Load me later. A lazy loading plugin management system.
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
    :target: http://lml.readthedocs.org/en/latest/
 
-**lml** automatically load plugins that extend the main component from your
-python environment, which could be your virtual environment, PyInstaller
-environment. Its main feature is lazy loading. There could be hundreds of
-plugins in your python environment but only a handful of plugins are loaded
-when they are really needed. 
+**lml** automatically loads plugins that extend the main component from your
+current python environment. Its main feature is lazy loading. There could be
+hundreds of plugins in your python environment. You may want to load
+a handful of plugins are loaded when they are really needed. Or your plugins may
+bring in a memory consuming dependency, so you may load it when necessary.
 
 Installation
 ================================================================================
@@ -31,6 +31,6 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/chfw/lml.git
+    $ git clone https://github.com/chfw/lml.git
     $ cd lml
     $ python setup.py install
