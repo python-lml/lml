@@ -1,0 +1,11 @@
+name: "robotchef_britishcuisine"
+organisation: "chfw"
+author: "C.W."
+contact: "wangc_2011 (c) hotmail.com"
+company: "Onni Software Ltd."
+version: "0.0.1"
+release: "0.0.1"
+copyright_year: 2017
+license: MIT
+dependencies: []
+description: "Cook food in british cuisine."
