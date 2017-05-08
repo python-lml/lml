@@ -16,5 +16,8 @@ def main():
 
     manager = CuisineManager()
     food_name = sys.argv[1]
-    knowledged_chef = manager.get_a_plugin(food_name)
-    print(knowledged_chef.make(food=food_name))
+    try:
+        knowledged_chef = manager.get_a_plugin(food_name)
+        print(knowledged_chef.make(food=food_name))
+    except Exception:
+        print("I do not know how to cook " + food_name)

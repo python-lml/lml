@@ -17,8 +17,6 @@ environment. Its main feature is lazy loading. There could be hundreds of
 plugins in your python environment but only a handful of plugins are loaded
 when they are really needed. 
 
-More documentation to follow.
-
 Installation
 ================================================================================
 

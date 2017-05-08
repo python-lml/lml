@@ -62,6 +62,7 @@ class PluginManager(object):
 
     def raise_exception(self, key):
         """Raise plugin not found exception"""
+        self._logger.debug(self.registry.keys())
         raise Exception(
             "No %s is found for %s" % (self.plugin_name, key))
 

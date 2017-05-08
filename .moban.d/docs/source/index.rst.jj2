@@ -1,0 +1,15 @@
+`{{name}}` - {{description}}
+================================================================================
+
+:Author: C.W.
+:Source code: http://github.com/{{name}}/{{name}}.git
+:Issues: http://github.com/{{name}}/{{name}}/issues
+:License: New BSD License
+:Development: |release|
+:Released: |version|
+:Generated: |today|
+
+Introduction
+-------------
+
+{% include "description.rst.jj2" %}
