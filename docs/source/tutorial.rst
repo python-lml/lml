@@ -112,10 +112,12 @@ Are you with still with me so far? I have explained how a custom plugin manager
 is used and how to inherit from `:class:lml.PluginManager`. If you would like
 to get started with lml, these are pretty much the code you need to write in
 your main component. Is that all? No, I have yet one more file to explain and
-it is __init__.py file, where the plugins were discovered.
+it is __init__.py file, where the plugins were discovered:
+
 
 .. code-block:: python
    :linenos:
+
 
    from lml.loader import scan_plugins
    
@@ -125,12 +127,13 @@ it is __init__.py file, where the plugins were discovered.
    
    scan_plugins("robotchef_", __path__, white_list=BUILTINS)
 
- Three lines of code here. scan_plugins would look up the installed modules that starts
- with the prefix 'robotchef_'. The second parameter is to inform pyinstall about the
- package path if your package is to be packaged up. `white_list` lists the built-ins
- packages. 'robotchef.robot_cuisine' is the only bulit-in cusine plugin.
+ 
+Three lines of code here. scan_plugins would look up the installed modules that starts
+with the prefix 'robotchef_'. The second parameter is to inform pyinstall about the
+package path if your package is to be packaged up. `white_list` lists the built-ins
+packages. 'robotchef.robot_cuisine' is the only bulit-in cusine plugin.
 
- Once scan_plugins is executed, all 'cuisine' plugins in your python path, inlucding
- the built-in ones will be discovered and will be collected in a dictionary for
- `:meth:lml.PluginManager.get_a_plugin` to look up.
+Once scan_plugins is executed, all 'cuisine' plugins in your python path, inlucding
+the built-in ones will be discovered and will be collected in a dictionary for
+`:meth:lml.PluginManager.get_a_plugin` to look up.
 
