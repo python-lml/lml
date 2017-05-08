@@ -7,11 +7,12 @@ log = logging.getLogger(__name__)
 
 
 class PluginInfo(object):
-    def __init__(self, name, absolute_import_path, **keywords):
+    def __init__(self, name, absolute_import_path, tags=None, **keywords):
         self.name = name
         self.absolute_import_path = absolute_import_path
         self.cls = None
         self.properties = keywords
+        self.tags = tags
 
     def __getattr__(self, name):
         if name == 'module_name':
@@ -20,7 +21,11 @@ class PluginInfo(object):
         return self.properties.get(name)
 
     def keywords(self):
-        yield self.name
+        if self.tags is None:
+            yield self.name
+        else:
+            for tag in self.tags:
+                yield tag
 
     def __repr__(self):
         rep = {"name": self.name, "path": self.absolute_import_path}
@@ -35,9 +40,10 @@ class PluginList(object):
 
     def add_a_plugin(self, name, submodule=None,
                      **keywords):
-        a_plugin_info = PluginInfo(name,
-                                   self._get_abs_path(submodule),
-                                   **keywords)
+        a_plugin_info = PluginInfo(
+            name,
+            self._get_abs_path(submodule),
+            **keywords)
 
         self._add_a_plugin(a_plugin_info)
         return self

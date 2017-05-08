@@ -80,9 +80,11 @@ class PluginManager(object):
             plugin_info.cls = cls
             self.registry[key.lower()].append(plugin_info)
 
-    def get_a_plugin(self, **keywords):
+    def get_a_plugin(self, key, **keywords):
         """ Get a plugin """
         self._logger.debug("get a plugin")
+        plugin = self.load_me_now(key)
+        return plugin()
 
 
 def register_class(cls):

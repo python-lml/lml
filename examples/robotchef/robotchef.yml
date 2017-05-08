@@ -1,0 +1,13 @@
+name: "robotchef"
+organisation: "chfw"
+author: "C.W."
+contact: "wangc (c) hotmail.com"
+company: "Onni Software Ltd."
+version: "0.0.1"
+release: "0.0.1"
+copyright_year: 2017
+command_line_interface: "robotchef"
+entry_point: "robotchef.main:main"
+license: MIT
+dependencies: []
+description: "Sample project to demonstrate load me later plugin system"

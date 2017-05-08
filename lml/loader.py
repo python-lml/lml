@@ -19,8 +19,6 @@ def scan_plugins(prefix, path, black_list=None, white_list=None):
     """
     Discover plugins via pkgutil and pyinstaller path
     """
-    log.debug("black list is " + '.'.join(black_list))
-
     if black_list is None:
         black_list = []
 
