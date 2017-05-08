@@ -63,7 +63,7 @@ class PluginManager(object):
     def raise_exception(self, key):
         """Raise plugin not found exception"""
         raise Exception(
-            "No %s is found for %s" % (self.name, key))
+            "No %s is found for %s" % (self.plugin_name, key))
 
     def dynamic_load_library(self, a_plugin_info):
         """Dynamically load the plugin info if not loaded"""
