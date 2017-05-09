@@ -44,12 +44,6 @@ And then type in the following::
 You would notice it replies positively.
 
 
-.. note::
-
-   To help you understand the internals of lml, the log were left on. We will
-   come back to the log in the end.
-
-
 How lml was used to write up the robotchef
 ----------------------------------------------------------
 
@@ -110,7 +104,6 @@ is used and how to inherit from `:class:lml.PluginManager`. If you would like
 to get started with lml, these are pretty much the code you need to write in
 your main component. Is that all? No, I have yet one more file to explain and
 it is __init__.py file, where the plugins were discovered:
-
 
 .. code-block:: python
    :linenos:
