@@ -1,7 +1,7 @@
-from robotchef.plugin import Menu
+from robotchef.plugin import Chef
 
 
-class Bake(Menu):
+class Bake(Chef):
 
     def make(self, food=None):
         print("I can bake " + food)

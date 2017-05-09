@@ -9,7 +9,7 @@ class CuisineManager(PluginManager):
         return PluginManager.get_a_plugin(self, key=food_name, **keywords)
 
 
-class Menu(object):
+class Chef(object):
 
     def make(self, **params):
         print(self.name)

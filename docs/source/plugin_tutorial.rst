@@ -21,10 +21,10 @@ The response comes from a built-in plugin. Here is
 .. code-block:: python
    :linenos:
 
-   from robotchef.plugin import Menu
+   from robotchef.plugin import Chef
    
    
-   class Boost(Menu):
+   class Boost(Chef):
    
        def make(self, food=None, **keywords):
            print("I can cook %s for robots" % food)
@@ -34,25 +34,25 @@ the food parameter was passed to the instance of Boost. `make` method was called
 prints 'I can cook Portable Battery for robots'.
 
 It is a no stranger. class `Boost` inherits robotchef's plugin interface and overrides
-the make method. That is what you would write without lml. Where is class `Menu`?
+the make method. That is what you would write without lml. Where is class `Chef`?
 Let's look at in `robotchef.plugin <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/plugin.py>`_ :
 
 .. code-block:: python
    :linenos:
 
-   class Menu(object):
+   class Chef(object):
    
        def make(self, **params):
            print(self.name)
 
-class `Menu` defines the plugin class interface. For robotchef, `make` is defined to
+class `Chef` defines the plugin class interface. For robotchef, `make` is defined to
 illustrate the functionality. Naturally you will be deciding the inteface for your
 plugins.
 
-Some of you might suggest that class `Menu` is unnecessary because Python uses
+Some of you might suggest that class `Chef` is unnecessary because Python uses
 duck-typing, meaning as long as the plugin has `make` method, it should work. Yes,
 it would work but it is a short term solution. Look at the long term, you could
-pass on additional functionalities through class `Menu` without touching the
+pass on additional functionalities through class `Chef` without touching the
 plugins. What's more, for plugin developers, a clear defined interface is better
 than no class at all. And I believe the functions of a real plugin are more than
 just one here.

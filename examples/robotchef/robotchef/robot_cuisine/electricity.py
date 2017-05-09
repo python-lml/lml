@@ -1,7 +1,7 @@
-from robotchef.plugin import Menu
+from robotchef.plugin import Chef
 
 
-class Boost(Menu):
+class Boost(Chef):
 
     def make(self, food=None, **keywords):
         print("I can cook %s for robots" % food)
