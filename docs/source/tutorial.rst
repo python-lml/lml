@@ -124,12 +124,35 @@ it is __init__.py file, where the plugins were discovered:
    
    scan_plugins("robotchef_", __path__, white_list=BUILTINS)
 
-Three lines of code here. scan_plugins would look up the installed modules that starts
-with the prefix 'robotchef_'. The second parameter is to inform pyinstall about the
+Three lines of code here. `:meth:lml.loader.scan_plugins` loads plugin modules
+and register the plugin classes with `:class:lml.PluginManager`. Please note that
+**the actual class is not imported until it is used**. This is the selling point of
+lml.
+
+Line 3 lists all builtin plugins. As you can see, 'robotchef.robot_cuisine' is the
+only bulit-in cuisine plugin.
+
+At line 5, scan_plugins would look up the installed modules that starts
+with the prefix 'robotchef_'. The second parameter is to inform pyinstaller about the
 package path if your package is to be packaged up. `white_list` lists the built-ins
-packages. 'robotchef.robot_cuisine' is the only bulit-in cusine plugin.
+packages. 
 
 Once scan_plugins is executed, all 'cuisine' plugins in your python path, inlucding
 the built-in ones will be discovered and will be collected in a dictionary for
 `:meth:lml.PluginManager.get_a_plugin` to look up.
 
+That is all you need to make your main component to start using component based approach
+to expand its functionalities. Here is the takeaway for you:
+
+#. `:class:lml.PluginManager` is just another factory pattern that hides the
+   complexity away. 
+#. You will need to call `:meth:lml.scan_plugins` in your __init__.py or where
+   appropriate but make sure it is called.
+
+
+What is coming up next?
+--------------------------
+
+.. toctree::
+
+   plugin_tutorial
