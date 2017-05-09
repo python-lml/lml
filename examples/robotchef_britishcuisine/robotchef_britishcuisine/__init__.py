@@ -8,5 +8,5 @@ PluginList(__name__).add_a_plugin(
 ).add_a_plugin(
     'cuisine',
     'bake.Bake',
-    tags=['Cornish Scone']
+    tags=['Cornish Scone', 'Jacket Potato']
 )
