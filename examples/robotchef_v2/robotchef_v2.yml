@@ -1,0 +1,13 @@
+name: "robotchef_v2"
+organisation: "chfw"
+author: "C.W."
+contact: "wangc_2011 (at) hotmail.com"
+company: "Onni Software Ltd."
+version: "0.0.1"
+release: "0.0.1"
+copyright_year: 2017
+command_line_interface: "robotchef_v2"
+entry_point: "robotchef_v2.main:main"
+license: MIT
+dependencies: []
+description: "It understands world cuisine"

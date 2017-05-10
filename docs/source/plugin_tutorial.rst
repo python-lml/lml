@@ -162,7 +162,7 @@ Let's try it now::
     $ robotchef "Jacket Potato"
     I can bake Jacket Potato
 
-Here is the code in `bake.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef_britishcuisine/robotchef_britishcuisine/bake.py>`_:
+Here is the code in `bake.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/bake.py>`_:
 
 .. code-block:: python
    :linenos:
@@ -175,11 +175,10 @@ Here is the code in `bake.py <https://github.com/chfw/lml/blob/master/examples/r
        def make(self, food=None):
            print("I can bake " + food)
 
-Nothing is special about `fry.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef_britishcuisine/robotchef_britishcuisine/fry.py>`_ either, so you can have a look at it by yourself.
+Nothing is special about `fry.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/fry.py>`_ either, so you can have a look at it by yourself.
 
 Let me wrap up this section. All you will need to do, in order to make a standalone
-plugin, is to provide a package installer(setup.py and other related package files)
- for a built-in plugin.
+plugin, is to provide a package installer(setup.py and other related package files) for a built-in plugin.
 
 More standaline plugins
 -------------------------
