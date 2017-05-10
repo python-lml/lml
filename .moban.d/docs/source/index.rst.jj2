@@ -1,6 +1,12 @@
 `{{name}}` - {{description}}
 ================================================================================
 
+
+.. note::
+
+   It is still under writing
+ 
+
 :Author: C.W.
 :Source code: http://github.com/{{name}}/{{name}}.git
 :Issues: http://github.com/{{name}}/{{name}}/issues
@@ -8,6 +14,7 @@
 :Development: |release|
 :Released: |version|
 :Generated: |today|
+
 
 Introduction
 -------------

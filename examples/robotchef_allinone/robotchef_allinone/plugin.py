@@ -1,3 +1,7 @@
+class NoChefException(Exception):
+    pass
+
+
 class Chef(object):
 
     def make(self, **params):
@@ -32,5 +36,7 @@ PLUGINS = {
 
 def get_a_plugin(food_name=None, **keywords):
     plugin = PLUGINS.get(food_name)
+    if plugin is None:
+        raise NoChefException("Cannot find a chef")
     plugin_cls = plugin()
     return plugin_cls

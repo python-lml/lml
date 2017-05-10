@@ -1,6 +1,12 @@
 `lml` - Load me later. A lazy loading plugin management system.
 ================================================================================
 
+
+.. note::
+
+   It is still under writing
+ 
+
 :Author: C.W.
 :Source code: http://github.com/lml/lml.git
 :Issues: http://github.com/lml/lml/issues
@@ -8,6 +14,7 @@
 :Development: |release|
 :Released: |version|
 :Generated: |today|
+
 
 Introduction
 -------------

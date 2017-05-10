@@ -2,7 +2,7 @@ import sys
 
 from lml.loader import scan_plugins
 
-from robotchef.plugin import CuisineManager
+from robotchef.plugin import CuisineManager, NoChefException
 
 
 BUILTINS = ['robotchef.robot_cuisine']

@@ -1,6 +1,6 @@
 import sys
 
-from robotchef_allinone.plugin import get_a_plugin
+import robotchef_allinone.plugin as cuisine_manager
 
 
 def main():
@@ -9,7 +9,7 @@ def main():
 
     food_name = sys.argv[1]
     try:
-        knowledged_chef = get_a_plugin(food_name)
+        knowledged_chef = cuisine_manager.get_a_plugin(food_name)
         knowledged_chef.make(food=food_name)
-    except Exception:
+    except cuisine_manager.NoChefException:
         print("I do not know how to cook " + food_name)

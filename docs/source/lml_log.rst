@@ -12,7 +12,7 @@ Let us open robotchef's `main.py <https://github.com/chfw/lml/blob/master/exampl
 
 .. code-block:: python
     :linenos:
-    :emphasize-lines: 5-10
+    :emphasize-lines: 13-14
    
     import sys
     

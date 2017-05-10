@@ -6,7 +6,6 @@ how to use lml to load plugins. Let us look at the plugin and see
 how the plugin should be written.
 
 
-
 Built-in plugin
 -----------------
 
@@ -34,28 +33,7 @@ the food parameter was passed to the instance of Boost. `make` method was called
 prints 'I can cook Portable Battery for robots'.
 
 It is a no stranger. class `Boost` inherits robotchef's plugin interface and overrides
-the make method. That is what you would write without lml. Where is class `Chef`?
-Let's look at in `robotchef.plugin <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/plugin.py>`_ :
-
-.. code-block:: python
-   :linenos:
-
-   class Chef(object):
-
-       def make(self, **params):
-           print(self.name)
-
-class `Chef` defines the plugin class interface. For robotchef, `make` is defined to
-illustrate the functionality. Naturally you will be deciding the inteface for your
-plugins.
-
-Some of you might suggest that class `Chef` is unnecessary because Python uses
-duck-typing, meaning as long as the plugin has `make` method, it should work. Yes,
-it would work but it is a short term solution. Look at the long term, you could
-pass on additional functionalities through class `Chef` without touching the
-plugins. What's more, for plugin developers, a clear defined interface is better
-than no class at all. And I believe the functions of a real plugin are more than
-just one here.
+the make method.
 
 Till now, you have not seen lml yet. Let us look at robot_cuisine module's
 `__init__.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/robot_cuisine/__init__.py>`_:
@@ -82,9 +60,9 @@ implemeneted, like CuisineManager. Let us recall that CuisineMananger has initia
 as 'cuisine'.
 
 What's more important is what you do not see here. To avoid heavy duty loading, in
-other words, to achieve lazy loading as promised by **lml**, you are expected to
-respect this principle: not to import any un-necessary modules in your plugin
-module's __init__.py.
+other words, to achieve lazy loading as promised by **lml**, you shall follow
+this design principle: **not to import any un-necessary modules in your plugin
+module's __init__.py**.
 
 .. code-block:: python
    :linenos:
@@ -104,18 +82,6 @@ That's all you need to write a built-in plugin. Before I end this sub section, l
 emphasize that 'robotchef.robot_cusisine' was loaded by the call to `scan_plugins`
 method, which we discussed in previous section. At the line 3 in `robotchef.__init__.py`
 declared 'robotchef.robot_cuisine' as white listed package.
-
-.. code-block:: python
-   :linenos:
-
-
-   from lml.loader import scan_plugins
-
-
-   BUILTINS = ['robotchef.robot_cuisine']
-
-
-   scan_plugins("robotchef_", __path__, white_list=BUILTINS)
 
 
 Standalone plugin
@@ -194,10 +160,3 @@ robotchef from finding British cuisine, you can use pip to uninstall it, like th
 
     $ pip uninstall robotchef_britishcuisine
 
-
-What is coming up next?
---------------------------
-
-.. toctree::
-
-   lml_log
