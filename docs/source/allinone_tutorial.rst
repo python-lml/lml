@@ -78,8 +78,8 @@ Now let us move to plugin.py. Some of non-relevant lines were omitted here.
        plugin_cls = plugin()
        return plugin_cls
 
+
 The PLUGINS is a dictionary that has food name as key and Chef descendants
 as values. `get_a_plugin` method returns a Chef or raises NoChefException.
 
 That is all about the all in one **Robot Chef**.
-

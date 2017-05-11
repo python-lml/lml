@@ -129,10 +129,10 @@ conventional construction method, I meant without thinking of loosely coupled
 software components, you would expected to see a dictionary in `get_a_plugin`
 method. `food_name` is the key and the return value would be the class that
 understands the food. With lml, CuisineManager inherits `:class:lml.PluginManager`
-which hides the dictionaryy lookup, and just needs tell PluginManager what is the
+which hides the dictionary lookup, and just needs tell PluginManager what is the
 key.
 
-Line 6, CuisineManager declars that it is a manager for plugins that has then name
+Line 6, CuisineManager declares that it is a manager for plugins that has then name
 'cuisine'. You will see in the later section that the plugins all says it belongs
 to 'cuisine'.
 

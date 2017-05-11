@@ -76,7 +76,7 @@ module's __init__.py**.
 
 Line 6 tells the plugin class can be found at this relative path 'electricity.Boost'.
 Together with line 4, an absolute import path
-'robotchef.robot_cuisine.electricity.Boost'was formed behind the scenes.
+'robotchef.robot_cuisine.electricity.Boost' was formed behind the scenes.
 
 Line 7 tell lml that here are the dictionary keys to look up class 'Boost'.
 

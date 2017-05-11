@@ -83,7 +83,7 @@ Built-in plugin and Standalone plugin
 You may have noticed that a copy of robotchef_britishcuisine is placed in v2 directory.
 Why not using the same one above v2 directory? although they are almost identical,
 there is minor difference. robotchef_britishcuisine in v2 directory depends on
-robotchef_api but the other british cuisine package depends on robotchef. Hence, if you
+robotchef_api but the other British cuisine package depends on robotchef. Hence, if you
 look at the fry.py in v2 directory, you will notice a slight difference:
 
 .. code-block:: python

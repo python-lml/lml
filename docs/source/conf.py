@@ -10,8 +10,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinxcontrib.spelling'
 ]
-spelling_lang = 'en_GB'
-spelling_word_list_filename = 'spelling_wordlist.txt'
+
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
@@ -43,3 +42,5 @@ texinfo_documents = [
      DESCRIPTION,
      'Miscellaneous'),
 ]
+spelling_lang = 'en_GB'
+spelling_word_list_filename = 'spelling_wordlist.txt'

@@ -67,5 +67,5 @@ time when a plugin is imported.
 
 The mysterious log is "load cached values ... ". This is because scan_plugins are called
 before CuisineManager is instantiated. In other words, without an instance of
-CuisineManager, lml would cache the plugin declaratio info until the instantiation
+CuisineManager, lml would cache the plugin info until the instantiation
 happens.

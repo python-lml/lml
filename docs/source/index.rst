@@ -19,11 +19,18 @@
 Introduction
 -------------
 
-**lml** automatically loads plugins that extend the main component from your
-current python environment. Its main feature is lazy loading. There could be
-hundreds of plugins in your python environment. You may want to load
-a handful of plugins when they are really needed. Or your plugins may
-bring in a memory consuming dependency, so you may load it when necessary.
+**lml** automatically but lazily loads plugins for your application from
+current python environment. It aims to flatten the complexity and to shrink the
+size of your bulky python library by distributing the similar functionalities across
+its plugins. However, you as the developer need to do the code refactoring by
+yourself and lml would lend you a hand.
+
+**lml** enabled applications helps your developer in two ways:
+
+#. There could be hundreds of plugins on pypi. Your developer could cherry-pick the
+plugins they would use
+#. There could be many plugins installed in your developer's python environment.
+Only the plugins used at runtime enter into computer memory.
 
 
 Documentation

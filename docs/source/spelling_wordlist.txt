@@ -9,4 +9,8 @@ uninstall
 api
 britishcuisine
 init
+allinone
+pypi
+pyinstaller
+pyexcel
 

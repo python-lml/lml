@@ -1,0 +1,10 @@
+{%extends "docs/source/conf.py.jj2"%}
+
+{%block SPHINX_EXTENSIONS%}
+    'sphinxcontrib.spelling'
+{%endblock%}
+
+{%block additional_config%}
+spelling_lang = 'en_GB'
+spelling_word_list_filename = 'spelling_wordlist.txt'
+{%endblock%}

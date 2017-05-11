@@ -49,3 +49,5 @@ texinfo_documents = [
      DESCRIPTION,
      'Miscellaneous'),
 ]
+{%block additional_config%}
+{%endblock%}
