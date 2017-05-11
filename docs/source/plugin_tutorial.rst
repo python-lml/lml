@@ -58,7 +58,7 @@ Line 4 initializes an instance of `:class:lml.registry.PluginList`. `__name__` v
 refers to the module name, and in this case it equals 'robotchef.robot_cuisine'.
 
 Line 5 tells lml it is 'cuisine' plugin. Using `:class:lml.registry.PluginList`, you can register any named plugins as long as you have corresponding plugin manager
-implemeneted, like CuisineManager. Let us recall that CuisineMananger has initialized
+implemented, like CuisineManager. Let us recall that CuisineMananger has initialized
 as 'cuisine'.
 
 What's more important is what you do not see here. To avoid heavy duty loading, in
@@ -81,7 +81,7 @@ Together with line 4, an absolute import path
 Line 7 tell lml that here are the dictionary keys to look up class 'Boost'.
 
 That's all you need to write a built-in plugin. Before I end this sub section, let me
-emphasize that 'robotchef.robot_cusisine' was loaded by the call to `scan_plugins`
+emphasize that 'robotchef.robot_cuisine' was loaded by the call to `scan_plugins`
 method, which we discussed in previous section. At the line 3 in `robotchef.__init__.py`
 declared 'robotchef.robot_cuisine' as white listed package.
 
@@ -95,11 +95,11 @@ us look at how to get it implemented.
 
 First of all, the source code directory the plugin package should start with
 'robotchef_'. For British Cuisine, it is named as 'robotchef_britishcuisine'.
-The reason is that robochef is scanning modules with 'robotchef_' as prefix.
+The reason is that robotchef is scanning modules with 'robotchef_' as prefix.
 You can elect your prefix however you need to make it consistent cross all
 standalone plugins.
 
-Secondly in the module's __init__.py, you would the plugin delaration code as
+Secondly in the module's __init__.py, you would the plugin declaration code as
 in the following. But nothing else.
 
 .. code-block:: python
@@ -148,7 +148,7 @@ Nothing is special about `fry.py <https://github.com/chfw/lml/blob/master/exampl
 Let me wrap up this section. All you will need to do, in order to make a standalone
 plugin, is to provide a package installer(setup.py and other related package files) for a built-in plugin.
 
-More standaline plugins
+More standalone plugins
 -------------------------
 
 You are left to install robotchef_chinesecuisine and robotchef_cook yourself and

@@ -5,7 +5,7 @@ Please checkout lml::
 
     $ git clone https://github.com/chfw/lml.git
 
-And nagivate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
+And navigate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
 you would find robotchef_allinone and its packages. Do the following::
 
     $ cd robotchef_allinone
@@ -78,7 +78,7 @@ Now let us move to plugin.py. Some of non-relevant lines were omitted here.
        plugin_cls = plugin()
        return plugin_cls
 
-The PLUGINS is a dictionary that has food name as key and Chef descedents
+The PLUGINS is a dictionary that has food name as key and Chef descendants
 as values. `get_a_plugin` method returns a Chef or raises NoChefException.
 
 That is all about the all in one **Robot Chef**.

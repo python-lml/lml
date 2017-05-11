@@ -17,7 +17,7 @@ When you type "Fish and Chips", it could reports it does not know::
     I do not know how to cook Fish and Chips
 
 For it to understand all the cuisines in the world, there are two ways to
-enlarge its knowledgebase: one is obviously to grow by itself. the other
+enlarge its knowledge base: one is obviously to grow by itself. the other
 is to open the api interface so that others could join your effort.
 
 In this tutorial, we are going to go through two different ways to build

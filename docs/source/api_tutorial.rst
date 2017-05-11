@@ -5,7 +5,7 @@ In previous sections, lml was used write a scalable command line package. In thi
 section, I am going to explain how to use lml to write a shared api library in the
 context of Robot Chef.
 
-Nagivate to `lml/examples/v2 <https://github.com/chfw/lml/tree/master/examples/v2>`_,
+Navigate to `lml/examples/v2 <https://github.com/chfw/lml/tree/master/examples/v2>`_,
 you would find robotchef and its packages. Do the following::
 
     $ virtualenv --no-site-packages robotchefv2
@@ -81,9 +81,9 @@ Built-in plugin and Standalone plugin
 --------------------------------------
 
 You may have noticed that a copy of robotchef_britishcuisine is placed in v2 directory.
-Why not using the same one above v2 directory? Athought they are almost identical,
+Why not using the same one above v2 directory? although they are almost identical,
 there is minor difference. robotchef_britishcuisine in v2 directory depends on
-robotchef_api but the other british cusine package depends on robotchef. Hence, if you
+robotchef_api but the other british cuisine package depends on robotchef. Hence, if you
 look at the fry.py in v2 directory, you will notice a slight difference:
 
 .. code-block:: python

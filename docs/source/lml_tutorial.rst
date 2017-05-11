@@ -9,7 +9,7 @@ Robot Chef built with lml: Part 1
 
 
 Let us have a look at a software component based approach to **Robot Chef**.
-Nagivate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
+Navigate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
 you would find robotchef and its packages. Do the following::
 
     $ cd robotchef
@@ -73,7 +73,7 @@ Let us look at the main code(main.py) of robotchef. The code does these things:
            print("I do not know how to cook " + food_name)
 
 
-The main functions in a similiar way as the all-in-one code: it takes the first argument
+The main functions in a similar way as the all-in-one code: it takes the first argument
 as food and pass it to an instance of CuisineManager, which returns a Chef that
 "make" the food. NoChefException is raised when a chef is not found.
 
@@ -129,7 +129,7 @@ conventional construction method, I meant without thinking of loosely coupled
 software components, you would expected to see a dictionary in `get_a_plugin`
 method. `food_name` is the key and the return value would be the class that
 understands the food. With lml, CuisineManager inherits `:class:lml.PluginManager`
-which hides the dicionary lookup, and just needs tell PluginManager what is the
+which hides the dictionaryy lookup, and just needs tell PluginManager what is the
 key.
 
 Line 6, CuisineManager declars that it is a manager for plugins that has then name
@@ -138,7 +138,7 @@ to 'cuisine'.
 
 Line 13, class `Chef` defines the plugin class interface. For robotchef, `make` is
 defined to illustrate the functionality. Naturally you will be deciding the
-inteface for your plugins.
+interface for your plugins.
 
 Some of you might suggest that class `Chef` is unnecessary because Python uses
 duck-typing, meaning as long as the plugin has `make` method, it should work. Yes,
