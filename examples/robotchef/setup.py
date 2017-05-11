@@ -4,6 +4,7 @@ except ImportError:
     from ez_setup import use_setuptools
     use_setuptools()
     from setuptools import setup, find_packages
+from platform import python_implementation
 import sys
 PY2 = sys.version_info[0] == 2
 PY26 = PY2 and sys.version_info[1] < 7
@@ -36,11 +37,13 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
+    'lml',
 ]
 
 
 PACKAGES = find_packages(exclude=['ez_setup', 'examples', 'tests'])
-EXTRAS_REQUIRE = {}
+EXTRAS_REQUIRE = {
+}
 
 
 def read_files(*files):

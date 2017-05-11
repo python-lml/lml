@@ -7,5 +7,6 @@ version: "0.0.1"
 release: "0.0.1"
 copyright_year: 2017
 license: MIT
-dependencies: []
+dependencies:
+  - lml
 description: "It provide the cusine knowledge to any library"

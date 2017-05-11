@@ -9,5 +9,6 @@ copyright_year: 2017
 command_line_interface: "robotchef"
 entry_point: "robotchef.main:main"
 license: MIT
-dependencies: []
+dependencies:
+  - lml
 description: "Sample project to demonstrate load me later plugin system"
