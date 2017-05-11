@@ -16,20 +16,16 @@ And then you could try::
     $ robotchef_allinone "Fish and Chips"
     I can fry Fish and Chips
 
-Simple, isn't it? Let us glimpse through the main code:
+Let us glimpse through the main code:
 
 .. code-block:: python
   :linenos:
-
-  import sys
 
   import robotchef_allinone.plugin as cuisine_manager
 
 
   def main():
-      if len(sys.argv) < 2:
-          sys.exit(-1)
-
+      ...
       food_name = sys.argv[1]
       try:
           knowledged_chef = cuisine_manager.get_a_plugin(food_name)

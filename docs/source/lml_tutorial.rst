@@ -1,8 +1,15 @@
 Robot Chef built with lml
 ============================
 
+.. note::
+
+   If you have skipped all in one Robot Chef section, you may want to do so::
+
+       $ git clone https://github.com/chfw/lml.git
+
+
 Let us have a look at a software component based approach to **Robot Chef**.
-And nagivate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
+Nagivate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
 you would find robotchef and its packages. Do the following::
 
     $ cd robotchef
@@ -10,7 +17,7 @@ you would find robotchef and its packages. Do the following::
 
 The main command line interface module does simply this::
 
-    $ robotchef "Portal Battery"
+    $ robotchef "Portable Battery"
     I can cook Portable Battery for robots
 
 Although it does not understand all the cuisines in the world as you see
@@ -32,25 +39,18 @@ And then type in the following::
 
 The more cuisine packages you install, the more dishes it understands.
 
-.. note::
-
-   If you have skipped all in one Robot Chef section, you may want to do so::
-
-       $ git clone https://github.com/chfw/lml.git
-
 
 How lml was used to write up the robotchef
 ----------------------------------------------------------
 
-Let us look at the main code(main.py) of robotchef. The code does three things:
+Let us look at the main code(main.py) of robotchef. The code does these things:
 
-#. validate the command line parameters
 #. scan for robotchef plugins
 #. look up a chef and employ it to make the food
 
 .. code-block:: python
    :linenos:
-   :emphasize-lines: 6,13-14
+   :emphasize-lines: 6,11-12
 
    from lml.loader import scan_plugins
 
@@ -61,9 +61,7 @@ Let us look at the main code(main.py) of robotchef. The code does three things:
 
 
    def main():
-       if len(sys.argv) < 2:
-           sys.exit(-1)
-
+       ...
        cuisine_manager = CuisineManager()
        scan_plugins("robotchef_", 'robotchef', white_list=BUILTINS)
 
@@ -82,13 +80,13 @@ as food and pass it to an instance of CuisineManager, which returns a Chef that
 Line 6 lists 'robotchef.robot_cuisine' as the only one built-in plugin. It will return
 a chef that cooks "Portable Battery".
 
-At line 13, CuisineManager is instantiated in the code and implements the factory method
+At line 11, CuisineManager is instantiated in the code and implements the factory method
 to return a chef depending on the food name. 
 
-What's extra here is line 14, where `:meth:lml.loader.scan_plugins` search through all
+What's extra here is line 12, where `:meth:lml.loader.scan_plugins` search through all
 installed python modules and register plugin modules that has prefix "robotchef_".
 
-At line 14, the second parameter of scan_plugins is to inform pyinstaller about the
+At line 12, the second parameter of scan_plugins is to inform pyinstaller about the
 package path if your package is to be packaged up. `white_list` lists the built-ins
 packages.
 
@@ -128,13 +126,13 @@ understands the food. With lml, CuisineManager inherits `:class:lml.PluginManage
 which hides the dicionary lookup, and just needs tell PluginManager what is the
 key.
 
-Line 6, 'cuisine' play a significant role in the lml system. It becomes
-the plugin name and you will see in the later section that the plugins shall
-declare it is a plugin of 'cuisine'.
+Line 6, CuisineManager declars that it is a manager for plugins that has then name
+'cuisine'. You will see in the later section that the plugins all says it belongs
+to 'cuisine'.
 
-class `Chef` defines the plugin class interface. For robotchef, `make` is defined to
-illustrate the functionality. Naturally you will be deciding the inteface for your
-plugins.
+Line 13, class `Chef` defines the plugin class interface. For robotchef, `make` is
+defined to illustrate the functionality. Naturally you will be deciding the
+inteface for your plugins.
 
 Some of you might suggest that class `Chef` is unnecessary because Python uses
 duck-typing, meaning as long as the plugin has `make` method, it should work. Yes,
