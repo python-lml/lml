@@ -1,5 +1,5 @@
-Robot Chef built with lml
-============================
+Robot Chef built with lml: Part 1
+====================================
 
 .. note::
 
@@ -93,6 +93,12 @@ packages.
 Once scan_plugins is executed, all 'cuisine' plugins in your python path, including
 the built-in ones will be discovered and will be collected in a dictionary for
 `:meth:lml.PluginManager.get_a_plugin` to look up.
+
+Plugin management
+-----------------------
+
+.. _plugin:
+
 
 Now let us visit plugin.py to examine CuisineManger:
 

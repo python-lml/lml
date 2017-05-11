@@ -1,4 +1,4 @@
-Plugin Tutorial
+Robot Chef built with lml: Part 2: Plugin Tutorial
 ================================================================================
 
 In previous section, the main component of robotchef has been explained on
@@ -8,6 +8,8 @@ how the plugin should be written.
 
 Built-in plugin
 -----------------
+
+.. _builtin_plugin:
 
 Remember this interaction::
 

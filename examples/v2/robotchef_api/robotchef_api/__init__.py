@@ -6,4 +6,4 @@ BUILTINS = ['robotchef_api.robot_cuisine']
 
 
 scan_plugins("robotchef_", __path__, white_list=BUILTINS)
-CUISINE_MANAGER = CuisineManager()
+cuisine_manager = CuisineManager()
