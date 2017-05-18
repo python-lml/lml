@@ -1,5 +1,8 @@
+import sys
 from json import dumps, JSONEncoder
-from lml._compact import PY2
+
+
+PY2 = sys.version_info[0] == 2
 
 
 class PythonObjectEncoder(JSONEncoder):
