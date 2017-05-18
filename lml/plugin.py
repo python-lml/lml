@@ -10,6 +10,8 @@
 import logging
 from collections import defaultdict
 
+from lml.utils import do_import_class
+
 
 PLUG_IN_MANAGERS = {}
 CACHED_PLUGIN_INFO = defaultdict(list)
@@ -102,7 +104,13 @@ def register_class(cls):
 
 
 class Plugin(type):
-    """sole class registry"""
+    """
+    For ad-hoc plugin classes
+
+    In a situation where the intention is not to redistribute
+    a plugin package, a dynamically written class is written
+    as one off attempt to extend the main package.
+    """
     def __init__(cls, name, bases, nmspc):
         super(Plugin, cls).__init__(
             name, bases, nmspc)
@@ -129,35 +137,6 @@ def load_me_later(plugin_info):
         # let's cache it and wait the manager to be registered
         log.debug("caching " + plugin_info.absolute_import_path)
         CACHED_PLUGIN_INFO[plugin_info.name].append(plugin_info)
-
-
-def do_import(plugin_module_name):
-    """dynamically import a module"""
-    try:
-        log.debug("do import " + plugin_module_name)
-        plugin_module = __import__(plugin_module_name)
-        if '.' in plugin_module_name:
-            modules = plugin_module_name.split('.')
-            for module in modules[1:]:
-                plugin_module = getattr(plugin_module, module)
-        return plugin_module
-    except ImportError:
-        log.debug("Failed to import %s" % plugin_module_name)
-        raise
-
-
-def do_import_class(plugin_class):
-    """dynamically import a class"""
-    try:
-        plugin_module_name = plugin_class.rsplit('.', 1)[0]
-        plugin_module = __import__(plugin_module_name)
-        modules = plugin_class.split('.')
-        for module in modules[1:]:
-            plugin_module = getattr(plugin_module, module)
-        return plugin_module
-    except ImportError:
-        log.debug("Failed to import %s" % plugin_module_name)
-        raise
 
 
 def with_metaclass(meta, *bases):

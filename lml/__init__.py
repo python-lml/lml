@@ -13,6 +13,9 @@ try:
     from logging import NullHandler
 except ImportError:
     class NullHandler(logging.Handler):
+        """
+        Null handler for logging
+        """
         def emit(self, record):
             pass
 

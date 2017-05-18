@@ -3,7 +3,6 @@ from lml.plugin import PluginManager, PLUG_IN_MANAGERS
 from lml.registry import PluginInfo
 from lml.plugin import CACHED_PLUGIN_INFO, Plugin
 from lml.plugin import with_metaclass
-import lml._compact as comp
 from nose.tools import eq_, raises
 
 
@@ -96,9 +95,10 @@ def test_register_class():
 
 
 def test_do_import():
-    from lml.plugin import do_import
-    compact = do_import("lml._compact")
-    eq_(compact, comp)
+    from lml.utils import do_import
+    import pyexcel_test
+    pyexcel_test_package = do_import("pyexcel_test")
+    eq_(pyexcel_test_package, pyexcel_test)
 
 
 @raises(ImportError)

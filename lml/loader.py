@@ -10,7 +10,8 @@
 import pkgutil
 import logging
 from itertools import chain
-from lml.plugin import do_import
+from lml.utils import do_import
+
 
 log = logging.getLogger(__name__)
 
