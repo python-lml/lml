@@ -1,7 +1,7 @@
-from lml.registry import PluginList
+from lml.plugin import PluginInfoList
 
 
-PluginList(__name__).add_a_plugin(
+PluginInfoList(__name__).add_a_plugin(
     'cuisine',
     'fry.Fry',
     tags=['Fish and Chips']

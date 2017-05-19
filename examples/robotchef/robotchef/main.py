@@ -8,7 +8,6 @@ from robotchef.plugin import CuisineManager, NoChefException
 BUILTINS = ['robotchef.robot_cuisine']
 
 
-
 def main():
     if len(sys.argv) < 2:
         sys.exit(-1)
