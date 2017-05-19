@@ -13,5 +13,7 @@ before_install:
   - pip install -r tests/requirements.txt
 script:
   - make test
+  - make -C examples
+  - make -C examples/v2
 after_success:
   codecov
