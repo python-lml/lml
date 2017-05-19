@@ -13,7 +13,7 @@ lml - Load me later. A lazy loading plugin management system.
 
 **lml** seamlessly finds the lml based plugins from your current python
 environment but loads your plugins on demand. It is designed to support
-plugins that have external dependencies, especally when they are bulky. lml
+plugins that have external dependencies, especially when they are bulky. lml
 provides the plugin management system only and the plugin interface is on your
 shoulder, my dear developer. 
 
@@ -22,11 +22,11 @@ shoulder, my dear developer.
 #. Your developer could cherry-pick the plugins from pypi.
 #. Only the plugins used at runtime enter into computer memory.
 
-When you would use lml to refactor your exixsting code, it aims to flatten the
+When you would use lml to refactor your existing code, it aims to flatten the
 complexity and to shrink the size of your bulky python library by
 distributing the similar functionalities across
 its plugins. However, you as the developer need to do the code refactoring by
-yourslef and lml would lend you a hand.
+yourself and lml would lend you a hand.
 
 
 Installation

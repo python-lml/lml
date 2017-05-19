@@ -11,12 +11,133 @@ import logging
 from collections import defaultdict
 
 from lml.utils import do_import_class
+from lml.utils import json_dumps
 
 
 PLUG_IN_MANAGERS = {}
 CACHED_PLUGIN_INFO = defaultdict(list)
 
 log = logging.getLogger(__name__)
+
+
+class Plugin(type):
+    """
+    For ad-hoc plugin classes
+
+    In a situation where the intention is not to redistribute
+    a plugin package, a dynamically written class is written
+    as one off attempt to extend the main package.
+    """
+    def __init__(cls, name, bases, nmspc):
+        super(Plugin, cls).__init__(
+            name, bases, nmspc)
+        _register_a_plugin(cls)
+
+
+def _register_a_plugin(cls):
+    """module level function to register a plugin"""
+    manager = PLUG_IN_MANAGERS.get(cls.plugin_name)
+    if manager:
+        manager.register_a_plugin(cls, cls)
+    else:
+        raise Exception("%s has no registry" % cls.plugin_name)
+
+
+class PluginInfo(object):
+    """
+    Information about the plugin
+
+    Parameters
+    -------------
+    name:
+       plugin name
+
+    absolute_import_path:
+       absolute import path from your plugin name space for your plugin class
+
+    tags:
+       a list of keywords help the plugin manager to retrieve your plugin
+    """
+    def __init__(self, name, absolute_import_path, tags=None, **keywords):
+        self.name = name
+        self.absolute_import_path = absolute_import_path
+        self.cls = None
+        self.properties = keywords
+        self.tags = tags
+
+    def __getattr__(self, name):
+        if name == 'module_name':
+            module_name = self.absolute_import_path.split('.')[0]
+            return module_name
+        return self.properties.get(name)
+
+    def keywords(self):
+        """
+        A list of tags for identifying the plugin class
+
+        The plugin class is described at the absolute_import_path
+        """
+        if self.tags is None:
+            yield self.name
+        else:
+            for tag in self.tags:
+                yield tag
+
+    def __repr__(self):
+        rep = {"name": self.name, "path": self.absolute_import_path}
+        rep.update(self.properties)
+        return json_dumps(rep)
+
+
+class PluginInfoList(object):
+    """
+    Pandas style, chained list declaration
+
+    It is used in the plugin packages to list all plugin classes
+    """
+    def __init__(self, path):
+        self.module_name = path
+
+    def add_a_plugin(self, name, submodule=None,
+                     **keywords):
+        """
+        Add a plain plugin
+
+        Parameters
+        -------------
+
+        name:
+          plugin manager name
+
+        submodule:
+          the relative import path to your plugin class
+        """
+        a_plugin_info = PluginInfo(
+            name,
+            self._get_abs_path(submodule),
+            **keywords)
+
+        self.add_a_plugin_instance(a_plugin_info)
+        return self
+
+    def add_a_plugin_instance(self, plugin_info_instance):
+        """
+        Add a plain plugin
+
+        Parameters
+        -------------
+
+        plugin_info_instance:
+          an instance of PluginInfo
+
+        The developer has to specify the absolute import path
+        """
+        log.debug(plugin_info_instance)
+        _load_me_later(plugin_info_instance)
+        return self
+
+    def _get_abs_path(self, submodule):
+        return "%s.%s" % (self.module_name, submodule)
 
 
 class PluginManager(object):
@@ -28,7 +149,7 @@ class PluginManager(object):
         self.registry = defaultdict(list)
         self._logger = logging.getLogger(
             self.__class__.__module__ + '.' + self.__class__.__name__)
-        register_class(self)
+        _register_class(self)
 
     def load_me_later(self, plugin_info):
         """
@@ -90,7 +211,7 @@ class PluginManager(object):
         return plugin()
 
 
-def register_class(cls):
+def _register_class(cls):
     """Reigister a newly created plugin manager"""
     log.debug("register " + cls.plugin_name)
     PLUG_IN_MANAGERS[cls.plugin_name] = cls
@@ -103,31 +224,8 @@ def register_class(cls):
         del CACHED_PLUGIN_INFO[cls.plugin_name]
 
 
-class Plugin(type):
-    """
-    For ad-hoc plugin classes
-
-    In a situation where the intention is not to redistribute
-    a plugin package, a dynamically written class is written
-    as one off attempt to extend the main package.
-    """
-    def __init__(cls, name, bases, nmspc):
-        super(Plugin, cls).__init__(
-            name, bases, nmspc)
-        register_a_plugin(cls)
-
-
-def register_a_plugin(cls):
-    """module level function to register a plugin"""
-    manager = PLUG_IN_MANAGERS.get(cls.plugin_name)
-    if manager:
-        manager.register_a_plugin(cls, cls)
-    else:
-        raise Exception("%s has no registry" % cls.plugin_name)
-
-
-def load_me_later(plugin_info):
-    """ module level function to load a plugi later"""
+def _load_me_later(plugin_info):
+    """ module level function to load a plugin later"""
     log.debug("load me later")
     log.debug(plugin_info)
     manager = PLUG_IN_MANAGERS.get(plugin_info.name)
@@ -137,29 +235,6 @@ def load_me_later(plugin_info):
         # let's cache it and wait the manager to be registered
         log.debug("caching " + plugin_info.absolute_import_path)
         CACHED_PLUGIN_INFO[plugin_info.name].append(plugin_info)
-
-
-def with_metaclass(meta, *bases):
-    # This requires a bit of explanation: the basic idea is to make a
-    # dummy metaclass for one level of class instantiation that replaces
-    # itself with the actual metaclass.  Because of internal type checks
-    # we also need to make sure that we downgrade the custom metaclass
-    # for one level to something closer to type (that's why __call__ and
-    # __init__ comes back from type etc.).
-    #
-    # This has the advantage over six.with_metaclass in that it does not
-    # introduce dummy classes into the final MRO.
-    # :copyright: (c) 2014 by Armin Ronacher.
-    # :license: BSD, see LICENSE for more details.
-    class metaclass(meta):
-        __call__ = type.__call__
-        __init__ = type.__init__
-
-        def __new__(cls, name, this_bases, d):
-            if this_bases is None:
-                return type.__new__(cls, name, (), d)
-            return meta(name, bases, d)
-    return metaclass('temporary_class', None, {})
 
 
 def _get_me_pypi_package_name(module_name):

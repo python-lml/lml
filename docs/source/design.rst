@@ -6,10 +6,10 @@ the capabilities of the main package. During its code growth, the code to load
 the plugin later becomes a independent library, lml.
 
 Prior to lml, three different ways of loading external plugins have been tried.
-namespace package[#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
+namespace package [#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
 It allows the developer to split a bigger packages into a smaller ones and
 publish them separately. However, namespace package place strict requirements
-on the module's __init__.py: nothing other than name space delaration should
+on the module's __init__.py: nothing other than name space declaration should
 be present. It means no module level functions can be place there. This restriction
 destroy the individuality of the plugin. So namespace package was ruled out.
 
@@ -19,7 +19,7 @@ of your main package. For example, there is a xls plugin called pyexcel-xls. To
 import it, you can use "import pyexcel.ext.xls". The shortcomings are:
 
 #. explicit state "import pyexcel.ext.xls" becomes a useless statement in your code.
-   static code ananlyzer(flake8/pep8/pycharm) would flag it up.
+   static code analyser(flake8/pep8/pycharm) would flag it up.
 #. you have to explicitly import it. Otherwise, your plugin is not imported.
 
 In order to overcome those shortcomings, implicit imports were coded into module's
@@ -45,21 +45,21 @@ developers.
 
 Looking in the community, there are many plugin frameworks:
 
-yapsy[#f2]_ is another simple plugin framework. It tries to emphasize on how simple
+yapsy [#f2]_ is another simple plugin framework. It tries to emphasize on how simple
 plugin interface could be designed. Yet it did not address the distribution of
 the plugins, especially if a third party plugin, released to pypi, how can be
 integrated easily.
 
-GEdit plugin management system[#f3]_ load plugins from file system and show case
+GEdit plugin management system [#f3]_ load plugins from file system and show case
 its plugin interfaces. The installation of its plugins is to do a manual
-copy of the plugin to a desginated plugin directory.
+copy of the plugin to a designated plugin directory.
 
 lml is different from those two systems. It provides functionalities to
 discover, register and load lml based plugins. It cares how the meta data were written
 but it does care how the plugin interface is written.
 
-To use lml, it asks you to avoid importing your "heavy" depdencies
-in __init__.py. lml also respects the independency of individual packages. You can
+To use lml, it asks you to avoid importing your "heavy" dependencies
+in __init__.py. lml also respects the independence of individual packages. You can
 put modular level functions in your __init__.py as long as it does not trigger
 immediate import of your dependency. This is to allow the individual plugin to
 become useful as it is, rather to be integrated with your main package. For example,

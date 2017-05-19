@@ -13,4 +13,10 @@ allinone
 pypi
 pyinstaller
 pyexcel
+xls
+namespace
+GEdit
+yapsy
+sys
+pycharm
 

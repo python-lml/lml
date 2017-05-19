@@ -1,4 +1,4 @@
-from lml.registry import PluginInfo
+from lml.plugin import PluginInfo
 import json
 from nose.tools import eq_
 

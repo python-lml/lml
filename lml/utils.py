@@ -48,7 +48,7 @@ def do_import(plugin_module_name):
                 plugin_module = getattr(plugin_module, module)
         return plugin_module
     except ImportError:
-        log.debug("Failed to import %s", plugin_module_name)
+        log.exception("Failed to import %s", plugin_module_name)
         raise
 
 
@@ -62,5 +62,5 @@ def do_import_class(plugin_class):
             plugin_module = getattr(plugin_module, module)
         return plugin_module
     except ImportError:
-        log.debug("Failed to import %s", plugin_module_name)
+        log.exception("Failed to import %s", plugin_module_name)
         raise

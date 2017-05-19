@@ -2,4 +2,4 @@ API documentation
 ====================
 
 
-It is coming
+.. autoclass:: PluginInfo

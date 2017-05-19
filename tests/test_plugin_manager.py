@@ -1,8 +1,8 @@
 from mock import patch
 from lml.plugin import PluginManager, PLUG_IN_MANAGERS
-from lml.registry import PluginInfo
+from lml.plugin import PluginInfo
 from lml.plugin import CACHED_PLUGIN_INFO, Plugin
-from lml.plugin import with_metaclass
+from six import with_metaclass
 from nose.tools import eq_, raises
 
 
@@ -114,11 +114,11 @@ def test_do_import_cls():
 
 
 def test_load_me_later_function():
-    from lml.plugin import load_me_later
+    from lml.plugin import _load_me_later
     test_plugin = 'my plugin'
     manager = PluginManager(test_plugin)
     plugin_info = make_me_a_plugin_info(test_plugin)
-    load_me_later(plugin_info)
+    _load_me_later(plugin_info)
     assert list(manager.registry.keys()) == [test_plugin]
 
 
