@@ -69,6 +69,7 @@ With lml, as long as your third party developer respect the plugin name prefix,
 they could publish their plugins as they do to any normal pypi packages. And the end
 developer of yours would only need to do pip install.
 
+
 .. [#f1] https://packaging.python.org/namespace_packages/
 .. [#f2] http://yapsy.sourceforge.net/
 .. [#f3] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld

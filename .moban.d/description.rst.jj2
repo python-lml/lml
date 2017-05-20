@@ -1,10 +1,10 @@
 **{{name}}** seamlessly finds the lml based plugins from your current python
 environment but loads your plugins on demand. It is designed to support
-plugins that have external dependencies, especially when they are bulky. {{name}}
-provides the plugin management system only and the plugin interface is on your
-shoulder, my dear developer. 
+plugins that have external dependencies, especially when they are bulky and/or
+memory hungry. {{name}} provides the plugin management system only and the
+plugin interface is on your shoulder, my dear developer. 
 
-**{{name}}** enabled applications helps your developer in two ways:
+**{{name}}** enabled applications helps your customers [#f1]_ in two ways:
 
 #. Your developer could cherry-pick the plugins from pypi.
 #. Only the plugins used at runtime enter into computer memory.
@@ -15,3 +15,5 @@ distributing the similar functionalities across
 its plugins. However, you as the developer need to do the code refactoring by
 yourself and lml would lend you a hand.
 
+.. [#f1] the end developers who uses your library and packages achieve their
+         objectives.

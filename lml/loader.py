@@ -2,7 +2,7 @@
     lml.loader
     ~~~~~~~~~~~~~~~~~~~
 
-    Auto discover avaiable plugins
+    Auto discover available plugins
 
     :copyright: (c) 2017 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
@@ -18,7 +18,36 @@ log = logging.getLogger(__name__)
 
 def scan_plugins(prefix, path, black_list=None, white_list=None):
     """
-    Discover plugins via pkgutil and pyinstaller path
+    Implicitly discover plugins via pkgutil and pyinstaller path
+
+    Parameters
+    -----------------
+
+    prefix:string
+      module prefix. This prefix should become the prefix of the module name
+      of all plugins.
+
+      In the tutorial, robotchef-britishcuisine is a plugin package
+      of robotchef and its module name is 'robotchef_britishcuisine'. When
+      robotchef call scan_plugins to load its cuisine plugins, it specifies
+      its prefix as "robotchef_". All modules that starts with 'robotchef_'
+      will be auto-loaded: robotchef_britishcuisine, robotchef_chinesecuisine,
+      etc.
+
+    path:string
+       used in pyinstaller only. When your end developer would package
+       your main library and its plugins using pyinstaller, this path
+       helps pyinstaller to find the plugins.
+
+    black_list:list
+       a list of module names that should be skipped.
+
+    white_list:list
+       a list of modules that comes with your main module. If you have a
+       built-in module, the module name should be inserted into the list.
+
+       For example, robot_cuisine is a built-in module inside robotchef. It
+       is listed in white_list.
     """
     if black_list is None:
         black_list = []

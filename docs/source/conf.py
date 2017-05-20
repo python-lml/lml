@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 DESCRIPTION = (
     'Load me later. A lazy loading plugin management system.' +
     ''
@@ -8,13 +9,17 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
+    'sphinxcontrib.plantuml',
     'sphinxcontrib.spelling'
 ]
-
+tool = os.path.join(os.path.dirname(__file__), "tools/plantuml.jar")
+plantuml = 'java -Djava.awt.headless=true -jar %s' % tool
+plantuml_output_format = 'svg'
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
-
+imgpath = '_static'
 project = u'lml'
 copyright = u'2017 Onni Software Ltd.'
 version = '0.0.1'

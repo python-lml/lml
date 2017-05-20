@@ -1,5 +1,5 @@
-from lml.registry import PluginInfoList
+from lml.registry import PluginInfoChain
 
 
-__test_plugins__ = PluginInfoList(__name__).add_a_plugin(
+__test_plugins__ = PluginInfoChain(__name__).add_a_plugin(
     'test_io2', 'reader')

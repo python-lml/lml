@@ -6,7 +6,7 @@ from nose.tools import eq_
 def test_plugin_info():
     info = PluginInfo('renderer', 'abs import path', custom='property')
     assert info.custom == 'property'
-    keys = list(info.keywords())
+    keys = list(info.tags())
     assert len(keys) == 1
     assert keys[0] == 'renderer'
     expected = {"path": "abs import path",

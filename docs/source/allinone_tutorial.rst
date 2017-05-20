@@ -39,6 +39,12 @@ If no chef was found, it prints the default string: I do not know.
 
 Now let us move to plugin.py. Some of non-relevant lines were omitted here.
 
+.. uml::
+
+   Chef <|-- Boost
+   Chef <|-- Fry
+   Chef <|-- Bake
+
 .. code-block:: python
    :linenos:
 

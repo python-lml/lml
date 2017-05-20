@@ -135,7 +135,7 @@ def test_register_a_plugin_function_1():
         plugin_name = 'test plugin'
 
         @classmethod
-        def keywords(self):
+        def tags(self):
             yield 'akey'
 
     MyPlugin()
@@ -148,7 +148,7 @@ def test_register_a_plugin_function_2():
         plugin_name = 'I have no plugin manager'
 
         @classmethod
-        def keywords(self):
+        def tags(self):
             yield 'akey'
 
     MyPlugin()
