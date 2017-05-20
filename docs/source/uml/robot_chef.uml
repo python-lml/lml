@@ -1,0 +1,7 @@
+@startuml
+
+Chef <|-- Boost
+Chef <|-- Fry
+Chef <|-- Bake
+
+@enduml

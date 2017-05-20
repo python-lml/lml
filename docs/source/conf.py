@@ -10,11 +10,9 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
-    'sphinxcontrib.plantuml',
     'sphinxcontrib.spelling'
 ]
-tool = os.path.join(os.path.dirname(__file__), "tools/plantuml.jar")
-plantuml = 'java -Djava.awt.headless=true -jar %s' % tool
+
 plantuml_output_format = 'svg'
 templates_path = ['_templates']
 source_suffix = '.rst'

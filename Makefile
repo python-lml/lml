@@ -11,4 +11,4 @@ spelling:
 	sphinx-build -b spelling docs/source/ docs/build/spelling
 
 uml:
-	plantuml -o ../_static/images/ docs/source/uml/*.uml
+	plantuml -tsvg -o ../_static/images/ docs/source/uml/*.uml
