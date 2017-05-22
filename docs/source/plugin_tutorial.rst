@@ -43,10 +43,10 @@ Till now, you have not seen lml yet. Let us look at robot_cuisine module's
 .. code-block:: python
    :linenos:
 
-   from lml.registry import PluginList
+   from lml.registry import PluginInfoChain
 
 
-   PluginList(__name__).add_a_plugin(
+   PluginInfoChain(__name__).add_a_plugin(
        'cuisine',
        'electricity.Boost',
        tags=['Portable Battery']
@@ -54,10 +54,10 @@ Till now, you have not seen lml yet. Let us look at robot_cuisine module's
 
 This is the place class `Boost` gets registered with lml.
 
-Line 4 initializes an instance of `:class:lml.registry.PluginList`. `__name__` variable
+Line 4 initializes an instance of `:class:lml.registry.PluginInfoChain`. `__name__` variable
 refers to the module name, and in this case it equals 'robotchef.robot_cuisine'.
 
-Line 5 tells lml it is 'cuisine' plugin. Using `:class:lml.registry.PluginList`, you can register any named plugins as long as you have corresponding plugin manager
+Line 5 tells lml it is 'cuisine' plugin. Using `:class:lml.registry.PluginInfoChain`, you can register any named plugins as long as you have corresponding plugin manager
 implemented, like CuisineManager. Let us recall that CuisineMananger has initialized
 as 'cuisine'.
 
@@ -105,10 +105,10 @@ in the following. But nothing else.
 .. code-block:: python
    :linenos:
 
-   from lml.registry import PluginList
+   from lml.registry import PluginInfoChain
 
 
-   PluginList(__name__).add_a_plugin(
+   PluginInfoChain(__name__).add_a_plugin(
        'cuisine',
        'fry.Fry',
        tags=['Fish and Chips']
