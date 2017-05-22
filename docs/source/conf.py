@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
 DESCRIPTION = (
     'Load me later. A lazy loading plugin management system.' +
     ''
