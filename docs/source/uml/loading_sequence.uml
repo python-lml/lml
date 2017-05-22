@@ -1,0 +1,19 @@
+@startuml
+
+actor bob
+participant robotchef
+participant lml
+participant robotchef_britishcuisine
+
+bob -> robotchef : > robotchef "Jacket Potato"
+robotchef -> lml : scan for plugins.
+lml -> robotchef_britishcuisine : read plugin chain in the module
+robotchef_britishcuisine -> lml: I can help with "Jacket Potato", etc.
+lml -> robotchef : read the built-in robot_cuisine
+robotchef -> lml : built-in chef knows "Portable Battery"
+lml --> robotchef : scanning done
+robotchef -> lml : get me a plugin that knows "Jacket Potato"
+lml -> robotchef : robotchef_britishcuisine.bake.Bake can do
+robotchef -> robotchef: make the food
+robotchef -> bob : "I can bake Jacket Potato"
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+package lml {
+  PluginManager .. PluginInfoChain : registers plugin info
+  PluginManager o-- PluginInfo
+}
+
+package robotchef {
+  class CuisineManager {
+  + get_a_plugin()
+  + raise_exception()
+  }
+  class Chef {
+  + make()
+  }
+  PluginManager <|--  CuisineManager
+  package robotchef.robot_cuisine {
+    Chef <|-- Boost
+    PluginInfoChain .. Boost
+  }
+}
+
+package robotchef_britishcuisine {
+  Chef <|-- Fry
+  Chef <|-- Bake
+  PluginInfoChain .. Fry
+  PluginInfoChain .. Bake
+}
+
+
+@enduml

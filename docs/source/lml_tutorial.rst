@@ -43,6 +43,9 @@ The more cuisine packages you install, the more dishes it understands.
 How lml was used to write up the robotchef
 ----------------------------------------------------------
 
+.. image:: _static/images/loading_sequence.svg
+
+
 Let us look at the main code(main.py) of robotchef. The code does these things:
 
 #. scan for robotchef plugins

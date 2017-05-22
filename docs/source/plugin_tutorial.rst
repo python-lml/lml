@@ -2,8 +2,9 @@ Robot Chef built with lml: Part 2: Plugin Tutorial
 ================================================================================
 
 In previous section, the main component of robotchef has been explained on
-how to use lml to load plugins. Let us look at the plugin and see
-how the plugin should be written.
+plugin loading. Let us look at how to write plugins using lml.
+
+.. image:: _static/images/robotchef_crd.svg
 
 
 Built-in plugin
