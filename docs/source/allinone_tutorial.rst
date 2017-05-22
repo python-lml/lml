@@ -37,9 +37,9 @@ The code takes the first command option as food name and feeds it to the
 factory method `get_a_plugin`, which returns a Chef to "make" the food.
 If no chef was found, it prints the default string: I do not know.
 
-Now let us move to plugin.py. Some of non-relevant lines were omitted here.
-
 .. image:: _static/images/robot_chef.svg
+
+Now let us move to plugin.py. Some of non-relevant lines were omitted here.
 
 .. code-block:: python
    :linenos:

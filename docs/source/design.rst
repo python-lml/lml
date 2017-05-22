@@ -1,17 +1,21 @@
 Design idea
 =====================
 
-The idea started with pyexcel project which uses loosely coupled plugins to extend
-the capabilities of the main package. During its code growth, the code to load
-the plugin later becomes a independent library, lml.
+The idea, to load the plugins later, started with pyexcel project which uses
+loosely coupled plugins to extend the capabilities of the main package. During
+its code growth, the code to manage the external and internal plugins becomes
+a independent library, lml.
 
 Prior to lml, three different ways of loading external plugins have been tried.
 namespace package [#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
 It allows the developer to split a bigger packages into a smaller ones and
-publish them separately. However, namespace package place strict requirements
+publish them separately. sphinxcontrib uses a typical namespace package based
+method. However, namespace package places a strict requirement
 on the module's __init__.py: nothing other than name space declaration should
 be present. It means no module level functions can be place there. This restriction
-destroy the individuality of the plugin. So namespace package was ruled out.
+forces the plugin to be driven by the main package but the plugin cannot use
+the main package as its own library to do specific things. So namespace package
+was ruled out.
 
 The Flask extension management system was used early versions of pyexcel(=<0.21).
 This system manipulates sys.path so that your plugin package appears in the namespace
@@ -29,14 +33,11 @@ environment, the relevant plugins are imported automatically.
 In terms of plugin registrations, three different approaches have been tried as
 well. monkey-patching was first choice and was easy to implement. When a plugin
 is imported, it load the plugin dictionary from the main package and add itself.
-The registration code exists in plugin code.
-
-another way of doing it is to place the plugin code in the main component and the
-plugin just need to declare a dictionary as the plugin's meta data. The main package
-register the meta data when it is imported.
-
-The third way is to use meta-classes. A meta class can be used to register its
-offsprings on its construction at program run time.
+The registration code exists in plugin code. another way of doing it is to place
+the plugin code in the main component and the plugin just need to declare a
+dictionary as the plugin's meta data. The main package register the meta data
+when it is imported. The third way is to use meta-classes. A meta class can be
+used to register its offsprings on its construction at program run time.
 
 lml uses implicit import to load its plugins and combines meta data and meta class
 for plugin registration. In terms of plugin distribution, like namespace packages and
