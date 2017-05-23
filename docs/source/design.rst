@@ -4,10 +4,15 @@ Design idea
 The idea, to load the plugins later, started with pyexcel project which uses
 loosely coupled plugins to extend the capabilities of the main package. During
 its code growth, the code in pyexcel packages to manage the external and internal
-plugins becomes a independent library, lml.
+plugins becomes a independent library, lml. Zope Component Architecture [#f4]_ has
+documented more plugins based patterns than others.
+lml is similar to **Factories** in ZCA. Lml provides functionalities to
+discover, register and load lml based plugins. It cares how the meta data were written
+but it does care how the plugin interface is written.
 
-Background
---------------
+
+Plugin discovery
+--------------------
 
 Prior to lml, three different ways of loading external plugins have been tried in pyexcel.
 namespace package [#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
@@ -28,36 +33,49 @@ import it, you can use "import pyexcel.ext.xls". The shortcomings are:
 #. explicit statement "import pyexcel.ext.xls" becomes a useless statement in your code.
    static code analyser(flake8/pep8/pycharm) would flag it up.
 #. you have to explicitly import it. Otherwise, your plugin is not imported.
+   `PR 7 <https://github.com/pyexcel/pyexcel-io/pull/7>`_ of pyexcel-io has extended
+   discussion on this topic.
 
 In order to overcome those shortcomings, implicit imports were coded into module's
 __init__.py. By iterating through currently installed modules in your python
 environment, the relevant plugins are imported automatically.
 
-In terms of plugin registrations, three different approaches have been tried as
-well. monkey-patching was first choice and was easy to implement. When a plugin
-is imported, it load the plugin dictionary from the main package and add itself.
-The registration code exists in plugin code. Another way of doing it is to place
+lml uses implicit import. In order to manage the plugins, pip can be used to
+install cherry-picked plugins or to remove unwanted plugins. In the situation
+where two plugins perform the same thing but have to co-exist in your current
+python path, you can nominate one plugin to be picked.
+
+Plugin registration
+---------------------
+
+In terms of plugin registrations, three different approaches have been tried.
+Monkey-patching was easy to implement. When a plugin is imported, it loads
+the plugin dictionary from the main package and add itself.
+But it is genernally perceived as a "bad" idea.
+Another way of doing it is to place
 the plugin code in the main component and the plugin just need to declare a
 dictionary as the plugin's meta data. The main package register the meta data
-when it is imported. The third way is to use meta-classes. A meta class can be
-used to register its offsprings on its construction at program run time.
+when it is imported. tablib [#f2]_ uses such a approach.
+The third way is to use meta-classes. M. Alchin (2008) [#f3]_ explained how meta class can
+be used to register plugin classes in a simpler way.
 
-lml uses implicit import to load its plugins and combines meta data and meta class
-for plugin registration. In terms of plugin distribution, like namespace packages and
-flask extensions, lml plugins can be released to pypi and be installed by your end
-developers.
+lml uses meta data for plugin registration. Since lml load your plugin later,
+the meta data is stored in the module's __init__.py. For example, to load plugins later
+in tablib, the 'exports' variable should be taken out from the actual class file and
+replace the hard refernce to the classes with class path string.
 
-Looking in the community, there are many plugin frameworks:
+Plugin distribution
+---------------------
 
-yapsy [#f2]_ tries to emphasize on how simple plugin interface could be designed in
-python. GEdit plugin management system [#f3]_ load plugins from file system and
-show case its plugin interfaces. Both did not aim for the distribution of
-the plugins through pypi. The way to install a plugin in those systems, is to copy
-and paste the plugin code to a designated directory.
+In terms of plugin distribution, yapsy [#f5]_ and GEdit plugin management
+system [#f6]_ load plugins from file system.
+To install a plugin in those systems, is to copy and paste the plugin code to a
+designated directory. zope components, namespace packages and flask extensions
+can be installed via pypi. lml support the latter approach. lml plugins can be
+released to pypi and be installed by your end developers.
 
-lml is different from those two systems. It provides functionalities to
-discover, register and load lml based plugins. It cares how the meta data were written
-but it does care how the plugin interface is written.
+Design principle
+------------------
 
 To use lml, it asks you to avoid importing your "heavy" dependencies
 in __init__.py. lml also respects the independence of individual packages. You can
@@ -71,7 +89,9 @@ they could publish their plugins as they do to any normal pypi packages. And the
 developer of yours would only need to do pip install.
 
 
-
 .. [#f1] https://packaging.python.org/namespace_packages/
-.. [#f2] http://yapsy.sourceforge.net/
-.. [#f3] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld
+.. [#f2] https://github.com/kennethreitz/tablib
+.. [#f3] M. Alchin, 2008, A Simple Plugin Framework, http://martyalchin.com/2008/jan/10/simple-plugin-framework/
+.. [#f4] http://zopecomponent.readthedocs.io/en/latest/
+.. [#f5] http://yapsy.sourceforge.net/
+.. [#f6] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld

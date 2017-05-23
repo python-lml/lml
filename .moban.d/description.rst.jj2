@@ -6,7 +6,7 @@ plugin interface is on your shoulder, my dear developer.
 
 **{{name}}** enabled applications helps your customers [#f1]_ in two ways:
 
-#. Your developer could cherry-pick the plugins from pypi.
+#. Your developer could cherry-pick the plugins from pypi per python environment.
 #. Only the plugins used at runtime enter into computer memory.
 
 When you would use lml to refactor your existing code, it aims to flatten the

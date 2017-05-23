@@ -17,9 +17,9 @@ plugins that have external dependencies, especially when they are bulky and/or
 memory hungry. lml provides the plugin management system only and the
 plugin interface is on your shoulder, my dear developer. 
 
-**lml** enabled applications helps your customer [#f1]_ in two ways:
+**lml** enabled applications helps your customers [#f1]_ in two ways:
 
-#. Your developer could cherry-pick the plugins from pypi.
+#. Your developer could cherry-pick the plugins from pypi per python environment.
 #. Only the plugins used at runtime enter into computer memory.
 
 When you would use lml to refactor your existing code, it aims to flatten the
