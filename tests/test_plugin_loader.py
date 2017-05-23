@@ -24,7 +24,7 @@ def test_load_plugins(pkgutil_iter_modules,
     scan_plugins('pyexcel_', '.', ['pyexcel_io'])
     from lml.plugin import CACHED_PLUGIN_INFO
     info = CACHED_PLUGIN_INFO['test_io'][0]
-    eq_(info.name, 'test_io')
+    eq_(info.plugin_type, 'test_io')
     eq_(info.absolute_import_path, 'pyexcel_test.x')
 
 
@@ -41,7 +41,7 @@ def test_load_plugins_without_pyinstaller(pkgutil_iter_modules,
     scan_plugins('pyexcel_', '.', ['pyexcel_io'])
     from lml.plugin import CACHED_PLUGIN_INFO
     info = CACHED_PLUGIN_INFO['test_io'][0]
-    eq_(info.name, 'test_io')
+    eq_(info.plugin_type, 'test_io')
     eq_(info.absolute_import_path, 'pyexcel_test.x')
 
 

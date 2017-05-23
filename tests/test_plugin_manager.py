@@ -1,8 +1,7 @@
 from mock import patch
 from lml.plugin import PluginManager, PLUG_IN_MANAGERS
 from lml.plugin import PluginInfo
-from lml.plugin import CACHED_PLUGIN_INFO, Plugin
-from six import with_metaclass
+from lml.plugin import CACHED_PLUGIN_INFO
 from nose.tools import eq_, raises
 
 
@@ -131,12 +130,9 @@ def test_do_import_cls_error():
 def test_register_a_plugin_function_1():
     PluginManager("test plugin")
 
-    class MyPlugin(with_metaclass(Plugin, object)):
-        plugin_name = 'test plugin'
-
-        @classmethod
-        def tags(self):
-            yield 'akey'
+    @PluginInfo('test plugin', tags=['akey'])
+    class MyPlugin(object):
+        pass
 
     MyPlugin()
 
@@ -144,12 +140,9 @@ def test_register_a_plugin_function_1():
 @raises(Exception)
 def test_register_a_plugin_function_2():
 
-    class MyPlugin(with_metaclass(Plugin, object)):
-        plugin_name = 'I have no plugin manager'
-
-        @classmethod
-        def tags(self):
-            yield 'akey'
+    @PluginInfo('I have no plugin manager', tags=['akey'])
+    class MyPlugin(object):
+        pass
 
     MyPlugin()
 

@@ -47,10 +47,11 @@ class PluginInfo(object):
     tags:
        a list of keywords help the plugin manager to retrieve your plugin
     """
-    def __init__(self, plugin_type, absolute_import_path,
+    def __init__(self, plugin_type,
+                 abs_class_path=None,
                  tags=None, **keywords):
-        self.name = plugin_type
-        self.absolute_import_path = absolute_import_path
+        self.plugin_type = plugin_type
+        self.absolute_import_path = abs_class_path
         self.cls = None
         self.properties = keywords
         self.__tags = tags
@@ -68,15 +69,20 @@ class PluginInfo(object):
         The plugin class is described at the absolute_import_path
         """
         if self.__tags is None:
-            yield self.name
+            yield self.plugin_type
         else:
             for tag in self.__tags:
                 yield tag
 
     def __repr__(self):
-        rep = {"name": self.name, "path": self.absolute_import_path}
+        rep = {"plugin_type": self.plugin_type,
+               "path": self.absolute_import_path}
         rep.update(self.properties)
         return json_dumps(rep)
+
+    def __call__(self, cls):
+        _register_a_plugin(self, cls)
+        return cls
 
 
 class PluginInfoChain(object):
@@ -148,7 +154,10 @@ class PluginManager(object):
         return plugin()
 
     def raise_exception(self, key):
-        """Raise plugin not found exception"""
+        """Raise plugin not found exception
+
+        Override this method to raise custom exception
+        """
         self._logger.debug(self.registry.keys())
         raise Exception(
             "No %s is found for %s" % (self.plugin_name, key))
@@ -193,11 +202,11 @@ class PluginManager(object):
             a_plugin_info.cls = cls
         return a_plugin_info.cls
 
-    def register_a_plugin(self, cls, plugin_info):
+    def register_a_plugin(self, plugin_cls, plugin_info):
         """ for dynamically loaded plugin during runtime"""
-        self._logger.debug("register " + cls.__name__)
+        self._logger.debug("register " + plugin_cls.__name__)
         for key in plugin_info.tags():
-            plugin_info.cls = cls
+            plugin_info.cls = plugin_cls
             self.registry[key.lower()].append(plugin_info)
 
 
@@ -214,40 +223,26 @@ def _register_class(cls):
         del CACHED_PLUGIN_INFO[cls.plugin_name]
 
 
-class Plugin(type):
-    """
-    For ad-hoc plugin classes
-
-    In a situation where the intention is not to redistribute
-    a plugin package, a dynamically written class is written
-    as one off attempt to extend the main package.
-    """
-    def __init__(cls, name, bases, nmspc):
-        super(Plugin, cls).__init__(
-            name, bases, nmspc)
-        _register_a_plugin(cls)
-
-
-def _register_a_plugin(cls):
+def _register_a_plugin(plugin_info, plugin_cls):
     """module level function to register a plugin"""
-    manager = PLUG_IN_MANAGERS.get(cls.plugin_name)
+    manager = PLUG_IN_MANAGERS.get(plugin_info.plugin_type)
     if manager:
-        manager.register_a_plugin(cls, cls)
+        manager.register_a_plugin(plugin_cls, plugin_info)
     else:
-        raise Exception("%s has no registry" % cls.plugin_name)
+        raise Exception("%s has no registry" % plugin_info.plugin_type)
 
 
 def _load_me_later(plugin_info):
     """ module level function to load a plugin later"""
     log.debug("load me later")
     log.debug(plugin_info)
-    manager = PLUG_IN_MANAGERS.get(plugin_info.name)
+    manager = PLUG_IN_MANAGERS.get(plugin_info.plugin_type)
     if manager:
         manager.load_me_later(plugin_info)
     else:
         # let's cache it and wait the manager to be registered
         log.debug("caching " + plugin_info.absolute_import_path)
-        CACHED_PLUGIN_INFO[plugin_info.name].append(plugin_info)
+        CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
 def _get_me_pypi_package_name(module_name):
