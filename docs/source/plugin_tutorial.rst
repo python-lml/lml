@@ -20,16 +20,9 @@ Remember this interaction::
 The response comes from a built-in plugin. Here is
 `the code <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/robot_cuisine/electricity.py>`_:
 
-.. code-block:: python
-   :linenos:
-
-   from robotchef.plugin import Chef
-
-
-   class Boost(Chef):
-
-       def make(self, food=None, **keywords):
-           print("I can cook %s for robots" % food)
+.. literalinclude:: ../../examples/robotchef/robotchef/robot_cuisine/electrify.py
+  :language: python
+  :linenos:
 
 class `Boost` was obtained via CuisineManager when user types 'Portable Battery'. And
 the food parameter was passed to the instance of Boost. `make` method was called and it
@@ -41,17 +34,10 @@ the make method.
 Till now, you have not seen lml yet. Let us look at robot_cuisine module's
 `__init__.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/robot_cuisine/__init__.py>`_:
 
-.. code-block:: python
-   :linenos:
+.. literalinclude:: ../../examples/robotchef/robotchef/robot_cuisine/__init__.py
+  :language: python
+  :linenos:
 
-   from lml.registry import PluginInfoChain
-
-
-   PluginInfoChain(__name__).add_a_plugin(
-       'cuisine',
-       'electricity.Boost',
-       tags=['Portable Battery']
-   )
 
 This is the place class `Boost` gets registered with lml.
 
@@ -103,21 +89,9 @@ standalone plugins.
 Secondly in the module's __init__.py, you would the plugin declaration code as
 in the following. But nothing else.
 
-.. code-block:: python
-   :linenos:
-
-   from lml.registry import PluginInfoChain
-
-
-   PluginInfoChain(__name__).add_a_plugin(
-       'cuisine',
-       'fry.Fry',
-       tags=['Fish and Chips']
-   ).add_a_plugin(
-       'cuisine',
-       'bake.Bake',
-       tags=['Cornish Scone', 'Jacket Potato']
-   )
+.. literalinclude:: ../../examples/robotchef_britishcuisine/robotchef_britishcuisine/__init__.py
+  :language: python
+  :linenos:
 
 British cuisine plugin has two 'chef', one does fry and the other does bake.
 
@@ -133,16 +107,10 @@ Let's try it now::
 
 Here is the code in `bake.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/bake.py>`_:
 
-.. code-block:: python
-   :linenos:
+.. literalinclude:: ../../examples/robotchef_britishcuisine/robotchef_britishcuisine/bake.py
+  :language: python
+  :linenos:
 
-   from robotchef.plugin import Chef
-
-
-   class Bake(Chef):
-
-       def make(self, food=None):
-           print("I can bake " + food)
 
 Nothing is special about `fry.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/fry.py>`_ either, so you can have a look at it by yourself.
 

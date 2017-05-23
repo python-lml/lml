@@ -137,14 +137,15 @@ def test_register_a_plugin_function_1():
     MyPlugin()
 
 
-@raises(Exception)
 def test_register_a_plugin_function_2():
+    non_existent_plugin = 'I have no plugin manager'
 
-    @PluginInfo('I have no plugin manager', tags=['akey'])
+    @PluginInfo(non_existent_plugin, tags=['akey'])
     class MyPlugin(object):
         pass
 
     MyPlugin()
+    assert non_existent_plugin in CACHED_PLUGIN_INFO
 
 
 def make_me_a_plugin_info(plugin_name):

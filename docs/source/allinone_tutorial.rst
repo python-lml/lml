@@ -18,20 +18,9 @@ And then you could try::
 
 Let us glimpse through the main code:
 
-.. code-block:: python
+.. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/main.py
+  :language: python
   :linenos:
-
-  import robotchef_allinone.plugin as cuisine_manager
-
-
-  def main():
-      ...
-      food_name = sys.argv[1]
-      try:
-          knowledged_chef = cuisine_manager.get_a_plugin(food_name)
-          knowledged_chef.make(food=food_name)
-      except cuisine_manager.NoChefException:
-          print("I do not know how to cook " + food_name)
 
 The code takes the first command option as food name and feeds it to the
 factory method `get_a_plugin`, which returns a Chef to "make" the food.
@@ -41,45 +30,9 @@ If no chef was found, it prints the default string: I do not know.
 
 Now let us move to plugin.py. Some of non-relevant lines were omitted here.
 
-.. code-block:: python
-   :linenos:
-
-   class NoChefException(Exception):
-   ...
-
-   class Chef(object):
-   ...
-
-   class Boost(Chef):
-   
-       def make(self, food=None, **keywords):
-           print("I can cook %s for robots" % food)
-
-
-   class Fry(Chef):
-
-       def make(self, food=None):
-           print("I can fry " + food)
-
-
-   class Bake(Chef):
-   ...
-
-   PLUGINS = {
-       "Portable Battery": Boost,
-       "Fish and Chips": Fry,
-       "Cornish Scone": Bake,
-       "Jacket Potato": Bake
-   }
-
-
-   def get_a_plugin(food_name=None, **keywords):
-       plugin = PLUGINS.get(food_name)
-       if plugin is None:
-           raise NoChefException("Cannot find a chef")
-       plugin_cls = plugin()
-       return plugin_cls
-
+.. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/plugin.py
+  :language: python
+  :linenos:
 
 The PLUGINS is a dictionary that has food name as key and Chef descendants
 as values. `get_a_plugin` method returns a Chef or raises NoChefException.

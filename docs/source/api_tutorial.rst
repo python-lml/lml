@@ -32,22 +32,9 @@ robotchef_britishcuisine in this folder::
 
 Let us look at main code robotchef_v2:
 
-.. code-block:: python
-   :linenos:
-   :emphasize-lines: 2, 9
-
-   ...
-   from robotchef_api import cuisine_manager
-
-
-   def main():
-       ...
-       food_name = sys.argv[1]
-       try:
-           knowledged_chef = cuisine_manager.get_a_plugin(food_name)
-           knowledged_chef.make(food=food_name)
-       except Exception:
-           print("I do not know how to cook " + food_name)
+.. literalinclude:: ../../examples/v2/robotchef_v2/robotchef_v2/main.py
+  :language: python
+  :linenos:
 
 Comparing with previous version of Robot Chef, line 2 imports cuisine_manager,
 an instance of CuisinManager from robotchef_api. No other changes in the main code.
@@ -61,17 +48,9 @@ and :ref:`robot_cuisine <builtin_plugin>` in robotchef::
 
 Notably, the plugin loader is put in the __init__.py:
 
-.. code-block:: python
-   :linenos:
-
-
-   from lml.loader import scan_plugins
-
-
-   BUILTINS = ['robotchef.robot_cuisine']
-
-
-   scan_plugins("robotchef_", __path__, white_list=BUILTINS)
+.. literalinclude:: ../../examples/v2/robotchef_api/robotchef_api/__init__.py
+  :language: python
+  :linenos:
 
 scan_plugins here load all modules that start with "robotchef_" and as well as
 the modules in the white_list. And that is how you will write the main component as
@@ -86,17 +65,9 @@ there is minor difference. robotchef_britishcuisine in v2 directory depends on
 robotchef_api but the other British cuisine package depends on robotchef. Hence, if you
 look at the fry.py in v2 directory, you will notice a slight difference:
 
-.. code-block:: python
-   :linenos:
-   :emphasize-lines: 1
-
-   from robotchef_api.plugin import Chef
-   
-   
-   class Fry(Chef):
-   
-       def make(self, food=None):
-           print("I can fry " + food)
+.. literalinclude:: ../../examples/v2/robotchef_britishcuisine/robotchef_britishcuisine/fry.py
+  :language: python
+  :linenos:
 
 The package where the Chef was defined is different. So I would like to conclude that
 there are no difference in writing built-in plugins nor standalone plugins. 

@@ -105,27 +105,9 @@ Plugin management
 
 Now let us visit plugin.py to examine CuisineManger:
 
-.. code-block:: python
-   :linenos:
-
-   from lml.plugin import PluginManager
-
-
-   class CuisineManager(PluginManager):
-       def __init__(self):
-           PluginManager.__init__(self, "cuisine")
-
-       def get_a_plugin(self, food_name=None, **keywords):
-           return PluginManager.get_a_plugin(self, key=food_name, **keywords)
-
-       def raise_exception(self, key):
-           raise NoChefException("Cannot find a chef")
-   
-   
-   class Chef(object):
-   
-       def make(self, **params):
-           print("I am a chef")
+.. literalinclude:: ../../examples/robotchef/robotchef/main.py
+  :language: python
+  :linenos:
 
 Line 8 shows the factory method that looks up a food name for plugin. In the
 conventional construction method, I meant without thinking of loosely coupled
