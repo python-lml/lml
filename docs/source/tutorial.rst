@@ -34,3 +34,5 @@ in practice.
    lml_tutorial
    plugin_tutorial
    api_tutorial
+   allinone_lml_tutorial
+

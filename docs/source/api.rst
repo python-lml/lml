@@ -13,6 +13,4 @@ API documentation
 
 .. autoclass:: PluginManager
    :members:
-
-.. autoclass:: Plugin
 		
