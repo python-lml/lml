@@ -58,7 +58,10 @@ class PluginInfo(object):
 
     def __getattr__(self, name):
         if name == 'module_name':
-            module_name = self.absolute_import_path.split('.')[0]
+            if self.absolute_import_path:
+                module_name = self.absolute_import_path.split('.')[0]
+            else:
+                module_name = self.cls.__module__
             return module_name
         return self.properties.get(name)
 
@@ -81,6 +84,7 @@ class PluginInfo(object):
         return json_dumps(rep)
 
     def __call__(self, cls):
+        self.cls = cls
         _register_a_plugin(self, cls)
         return cls
 
@@ -196,8 +200,8 @@ class PluginManager(object):
 
     def dynamic_load_library(self, a_plugin_info):
         """Dynamically load the plugin info if not loaded"""
-        self._logger.debug("import " + a_plugin_info.absolute_import_path)
         if a_plugin_info.cls is None:
+            self._logger.debug("import " + a_plugin_info.absolute_import_path)
             cls = do_import_class(a_plugin_info.absolute_import_path)
             a_plugin_info.cls = cls
         return a_plugin_info.cls
@@ -217,7 +221,12 @@ def _register_class(cls):
     if cls.plugin_name in CACHED_PLUGIN_INFO:
         # check if there is early registrations or not
         for plugin_info in CACHED_PLUGIN_INFO[cls.plugin_name]:
-            log.debug("load cached values " + plugin_info.absolute_import_path)
+            if plugin_info.absolute_import_path:
+                log.debug("load cached plugin info: %s",
+                          plugin_info.absolute_import_path)
+            else:
+                log.debug("load cached plugin info: %s",
+                          plugin_info.cls.__name__)
             cls.load_me_later(plugin_info)
 
         del CACHED_PLUGIN_INFO[cls.plugin_name]
@@ -229,7 +238,9 @@ def _register_a_plugin(plugin_info, plugin_cls):
     if manager:
         manager.register_a_plugin(plugin_cls, plugin_info)
     else:
-        raise Exception("%s has no registry" % plugin_info.plugin_type)
+        # let's cache it and wait the manager to be registered
+        log.debug("caching %s", plugin_cls.__name__)
+        CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
 def _load_me_later(plugin_info):
