@@ -88,33 +88,9 @@ Plugin management
 
 Now let us visit plugin.py to examine CuisineManger:
 
-.. literalinclude:: ../../examples/robotchef/robotchef/main.py
+.. literalinclude:: ../../examples/robotchef/robotchef/plugin.py
   :language: python
   :linenos:
-
-Line 8 shows the factory method that looks up a food name for plugin. In the
-conventional construction method, I meant without thinking of loosely coupled
-software components, you would expected to see a dictionary in `get_a_plugin`
-method. `food_name` is the key and the return value would be the class that
-understands the food. With lml, CuisineManager inherits `:class:lml.PluginManager`
-which hides the dictionary lookup, and just needs tell PluginManager what is the
-key.
-
-Line 6, CuisineManager declares that it is a manager for plugins that has then name
-'cuisine'. You will see in the later section that the plugins all says it belongs
-to 'cuisine'.
-
-Line 13, class `Chef` defines the plugin class interface. For robotchef, `make` is
-defined to illustrate the functionality. Naturally you will be deciding the
-interface for your plugins.
-
-Some of you might suggest that class `Chef` is unnecessary because Python uses
-duck-typing, meaning as long as the plugin has `make` method, it should work. Yes,
-it would work but it is a short term solution. Look at the long term, you could
-pass on additional functionalities through class `Chef` without touching the
-plugins. What's more, for plugin developers, a clear defined interface is better
-than no class at all. And I believe the functions of a real plugin are more than
-just one here.
 
 Are you with still with me so far? I have explained how a custom plugin manager
 is used and how to inherit from `:class:lml.PluginManager`. If you would like

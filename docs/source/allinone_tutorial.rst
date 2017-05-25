@@ -20,14 +20,16 @@ And then you could try::
 Conventional plugin and plugin factory
 ---------------------------------------
 
-Robot Chef has `Chef` as plugin interface that makes food. Boost, Bake and Fry
-are the actual implementations. Boost are for "robots". Bake and Fry are for human.
+Robot Chef has `Chef` as plugin interface that makes food.
+Boost, Bake and Fry are the actual implementations. Boost
+are for "robots". Bake and Fry are for human.
 
 .. image:: _static/images/robot_chef.svg
 
-Here is the implementation details. The PLUGINS at line 29 is a dictionary that has food name
-as key and Chef descendants as values. `get_a_plugin` method at line 37 returns a Chef or
-raises NoChefException.
+Here is the implementation details. The PLUGINS at line
+29 is a dictionary that has food name as key and Chef
+descendants as values. `get_a_plugin` method at line 37
+returns a Chef or raises NoChefException.
 
 .. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/plugin.py
   :language: python
