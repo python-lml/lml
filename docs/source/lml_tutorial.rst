@@ -1,15 +1,16 @@
 Robot Chef distributed in multiple packages: Part 1 main package
-=================================================================
+================================================================================
 
-.. note::
+In previous section, **Robot Chef** was written using lml but in a single
+package and its plugins are loaded immediately. In this section, we will
+decouple the plugin and the main package using lml. In Part 2, we will
+demonstrates the changes needed to plugin them back with the main package.
 
-   If you have skipped all in one Robot Chef section, you may want to do so::
+Demo
+--------------------------------------------------------------------------------
 
-       $ git clone https://github.com/chfw/lml.git
-
-
-Let us have a look at a software component based approach to **Robot Chef**.
-Navigate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
+Please navigate to
+`lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
 you would find robotchef and its packages. Do the following::
 
     $ cd robotchef
@@ -37,47 +38,39 @@ And then type in the following::
      $ robotchef "Fish and Chips"
      I can fry Fish and Chips
 
-The more cuisine packages you install, the more dishes it understands.
-
-
-How lml was used to write up the robotchef
-----------------------------------------------------------
+The more cuisine packages you install, the more dishes it understands. Here
+is the loading sequence:
 
 .. image:: _static/images/loading_sequence.svg
 
 
-Let us look at the main code(main.py) of robotchef. The code does these things:
+Decoupling the plugins with the main package
+--------------------------------------------------------------------------------
 
-#. scan for robotchef plugins
-#. look up a chef and employ it to make the food
+.. image:: _static/images/robotchef_crd.svg
 
-.. literalinclude:: ../../examples/robotchef/robotchef/main.py
-   :language: python
-   :linenos:
 
-Line 8 lists 'robotchef.robot_cuisine' as the only one built-in plugin. It will return
-a chef that cooks "Portable Battery".
+In order to demonstrate the capabilities of lml, `Boost` class is singled out and
+placed into an internal module **robotchef.robot_cuisine**. `Fry` and `Bake` are
+relocated to **robotchef_britishcuisine** package, which is separately installable.
 
-What's extra here is line 16, where `:meth:lml.loader.scan_plugins` search through all
-installed python modules and register plugin modules that has prefix "robotchef_".
-
-At line 16, the second parameter of scan_plugins is to inform pyinstaller about the
-package path if your package is to be packaged up. `white_list` lists the built-ins
-packages.
-
-Once scan_plugins is executed, all 'cuisine' plugins in your python path, including
-the built-in ones will be discovered and will be collected in a dictionary for
-`:meth:lml.PluginManager.get_a_plugin` to look up.
-
-So let's read the code difference against lml version of Robot Chef, you will find that
-except the plugin scanning code, both main.py are idential. The main functions in
-a similar way as the all-in-one code: it takes the first argument
-as food and pass it to an instance of CuisineManager, which returns a Chef that
-"make" the food. NoChefException is raised when a chef is not found.
-
+After the separation, in order to piece all togother, a special function
+:meth:`lml.loader.scan_plugins` needs to be called before the plugins are used.
 
 .. literalinclude:: ../../examples/robotchef/robotchef/main.py
    :diff: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/main.py
+
+What's more, `:meth:lml.loader.scan_plugins` search through all
+installed python modules and register plugin modules that has prefix "robotchef_".
+
+The second parameter of scan_plugins is to inform pyinstaller about the
+package path if your package is to be packaged up using pyinstaller.
+`white_list` lists the built-ins  packages.
+
+Once scan_plugins is executed, all 'cuisine' plugins in your python path, including
+the built-in ones will be discovered and will be collected by
+:class:`~lml.plugin.PluginInfoChain` in a dictionary for
+:meth:`~lml.PluginManager.get_a_plugin` to look up.
 
 
 Plugin management
@@ -106,3 +99,4 @@ to expand its functionalities. Here is the takeaway for you:
    complexity away.
 #. You will need to call `:meth:lml.scan_plugins` in your __init__.py or where
    appropriate but make sure it is called.
+

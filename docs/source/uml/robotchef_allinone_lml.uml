@@ -1,0 +1,25 @@
+@startuml
+
+package lml {
+  PluginManager o-- PluginInfo
+}
+
+package robotchef_allinone_lml {
+  class CuisineManager {
+  + get_a_plugin()
+  + raise_exception()
+  }
+  interface Chef {
+  + make()
+  }
+  PluginManager <|--  CuisineManager : cuisine
+  Chef <|-- Boost
+  Chef <|-- Fry
+  Chef <|-- Bake
+  PluginInfo .. Fry
+  PluginInfo .. Bake
+  PluginInfo .. Boost
+}
+
+
+@enduml

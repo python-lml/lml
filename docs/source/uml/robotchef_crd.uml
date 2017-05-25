@@ -3,6 +3,7 @@
 package lml {
   PluginManager .. PluginInfoChain : registers plugin info
   PluginManager o-- PluginInfo
+  PluginInfoChain -right- PluginInfo
 }
 
 package robotchef {
@@ -10,10 +11,10 @@ package robotchef {
   + get_a_plugin()
   + raise_exception()
   }
-  class Chef {
+  interface Chef {
   + make()
   }
-  PluginManager <|--  CuisineManager
+  PluginManager <|--  CuisineManager : cuisine
   package robotchef.robot_cuisine {
     Chef <|-- Boost
     PluginInfoChain .. Boost

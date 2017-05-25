@@ -1,12 +1,15 @@
 Robot Chef all in one package with lml
-=============================================================
+================================================================================
 
-Let us re-write the Robot Chef all in one package using lml.
+Let us go through robotchef_allinone_lml and see how the lml package can be used
+to implement a conventional factory pattern, as we did in previous section.
+This section demonstrates that the lml based plugins can be made to load
+immediately and in a single package. And this sections helps you to understand
+the next section where we will make the plugins to be loaded later.
 
 Please navigate to
 `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
-you would find robotchef_allinone_lml and its packages. Do
-the following::
+you would find robotchef_allinone_lml and its packages. Do the following::
 
     $ cd robotchef_allinone_lml
     $ python setup.py install
@@ -19,48 +22,37 @@ And then you could try::
 Lml plugins and plugin manager
 -------------------------------
 
-Here is the :ref:`rb3-diff-rb0-plugin`.  In order to use lml, a custom
-:class:`~lml.plugin.PluginManager` class should be created to manage 'cuisine' plugins.
-So `CuisineManager` replaces the static registry `PLUGINS` and
-the modular function `get_a_plugin`. With lml, CuisineManager inherits `:class:lml.PluginManager`
-which hides the dictionary lookup, and just needs tell PluginManager what is the key.
+.. image:: _static/images/robotchef_allinone_lml.svg
+
+plugin.py
+++++++++++
+
+`CuisineManager` inherits from :class:`~lml.plugin.PluginManager` class and
+replaces the static registry `PLUGINS` and the modular function `get_a_plugin`.
+Please note that `CuisineManager` declares that it is a manager for plugin_type named
+**cuisine**. 
 
 
 .. literalinclude:: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/plugin.py
    :language: python
-   :linenos:
+   :lines: 7-17
 
-Line 6, CuisineManager declares that it is a manager for plugins that has then name
-'cuisine'. You will see in the later section that the plugins all says it belongs
-to 'cuisine'.
+Next, the :class:`~lml.plugin.PluginInfo` decorates all Chef's subclasses as
+**cuisine** plugins and register the decorated classes with the manager class
+for **cuisine**, `CuisineManager`. The food names become the tags which will
+be used to look up the classes.
 
+.. literalinclude:: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/plugin.py
+   :language: python
+   :lines: 1, 18-
 
-Line 13, class `Chef` defines the plugin class interface. For robotchef, `make` is
-defined to illustrate the functionality. Naturally you will be deciding the
-interface for your plugins.
+Here is the :ref:`rb3-diff-rb0-plugin`.  
 
-Some of you might suggest that class `Chef` is unnecessary because
-Python uses duck-typing, meaning as long as the plugin has `make` method,
-it should work. Yes, it would work but it is a short term solution.
-Look at the long term, you could pass on additional functionalities
-through class `Chef` without touching the plugins. What's more, for
-plugin developers, a clear defined interface is better than no class
-at all. And I believe the functions of a real plugin are more than
-just one here.
+main.py
++++++++++
 
-:class:`~lml.plugin.PluginInfo` as a decorator
-establishes the relationship between the decorated class and `CuisineManager`.
-					 
-Here is the main code for the re-written Robot Chef. CuisineManager is instantiated
-in the code and implements the factory method to return a chef depending on the food name.
-Looking at :ref:`rb3-diff-rb0-main`, the changes are natural as plugin factory
-has been rewritten in plugin.py. The newly implemented classes should be imported.
-What's more, it reads similar to Robot Chef's main.py.
+The main code has been updated to reflect the changes in plugin.py. `CuisineManager`
+has to be instantiated to be the a factory manager.
 
 .. literalinclude:: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/main.py
-   :language: python
-
-			
-
-
-
+   :diff: ../../examples/robotchef_allinone/robotchef_allinone/main.py

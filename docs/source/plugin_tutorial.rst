@@ -4,8 +4,6 @@ Robot Chef distributed in multiple packages: Part 2 plugin module and packages
 In previous section, the main component of robotchef has been explained on
 plugin loading. Let us look at how to write plugins using lml.
 
-.. image:: _static/images/robotchef_crd.svg
-
 
 Built-in plugin
 -----------------
