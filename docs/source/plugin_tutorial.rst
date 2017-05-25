@@ -1,4 +1,4 @@
-Robot Chef built with lml: Part 2: Plugin Tutorial
+Robot Chef distributed in multiple packages: Part 2 plugin module and packages
 ================================================================================
 
 In previous section, the main component of robotchef has been explained on
@@ -17,8 +17,7 @@ Remember this interaction::
     $ robotchef "Portable Battery"
     I can cook Portable Battery for robots
 
-The response comes from a built-in plugin. Here is
-`the code <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/robot_cuisine/electricity.py>`_:
+The response comes from a built-in plugin. Here is the code:
 
 .. literalinclude:: ../../examples/robotchef/robotchef/robot_cuisine/electrify.py
   :language: python
@@ -32,7 +31,7 @@ It is a no stranger. class `Boost` inherits robotchef's plugin interface and ove
 the make method.
 
 Till now, you have not seen lml yet. Let us look at robot_cuisine module's
-`__init__.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/robot_cuisine/__init__.py>`_:
+__init__.py
 
 .. literalinclude:: ../../examples/robotchef/robotchef/robot_cuisine/__init__.py
   :language: python
@@ -105,14 +104,14 @@ Let's try it now::
     $ robotchef "Jacket Potato"
     I can bake Jacket Potato
 
-Here is the code in `bake.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/bake.py>`_:
+Here is the code in bake.py:
 
 .. literalinclude:: ../../examples/robotchef_britishcuisine/robotchef_britishcuisine/bake.py
   :language: python
   :linenos:
 
 
-Nothing is special about `fry.py <https://github.com/chfw/lml/blob/master/examples/robotchef_britishcuisine/robotchef_britishcuisine/fry.py>`_ either, so you can have a look at it by yourself.
+Nothing is special about fry.py either, so you can have a look at it by yourself.
 
 Let me wrap up this section. All you will need to do, in order to make a standalone
 plugin, is to provide a package installer(setup.py and other related package files) for a built-in plugin.

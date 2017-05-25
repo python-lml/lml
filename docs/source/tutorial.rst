@@ -31,8 +31,8 @@ in practice.
 .. toctree::
 
    allinone_tutorial
+   allinone_lml_tutorial
    lml_tutorial
    plugin_tutorial
    api_tutorial
-   allinone_lml_tutorial
 

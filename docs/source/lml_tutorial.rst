@@ -1,5 +1,5 @@
-Robot Chef built with lml: Part 1
-====================================
+Robot Chef distributed in multiple packages: Part 1 main package
+=================================================================
 
 .. note::
 
@@ -51,51 +51,34 @@ Let us look at the main code(main.py) of robotchef. The code does these things:
 #. scan for robotchef plugins
 #. look up a chef and employ it to make the food
 
-.. code-block:: python
+.. literalinclude:: ../../examples/robotchef/robotchef/main.py
+   :language: python
    :linenos:
-   :emphasize-lines: 6,11-12
 
-   from lml.loader import scan_plugins
-
-   from robotchef.plugin import CuisineManager, NoChefException
-
-
-   BUILTINS = ['robotchef.robot_cuisine']
-
-
-   def main():
-       ...
-       cuisine_manager = CuisineManager()
-       scan_plugins("robotchef_", 'robotchef', white_list=BUILTINS)
-
-       food_name = sys.argv[1]
-       try:
-           knowledged_chef = cuisine_manager.get_a_plugin(food_name)
-           knowledged_chef.make(food=food_name)
-       except NoChefException:
-           print("I do not know how to cook " + food_name)
-
-
-The main functions in a similar way as the all-in-one code: it takes the first argument
-as food and pass it to an instance of CuisineManager, which returns a Chef that
-"make" the food. NoChefException is raised when a chef is not found.
-
-Line 6 lists 'robotchef.robot_cuisine' as the only one built-in plugin. It will return
+Line 8 lists 'robotchef.robot_cuisine' as the only one built-in plugin. It will return
 a chef that cooks "Portable Battery".
 
-At line 11, CuisineManager is instantiated in the code and implements the factory method
-to return a chef depending on the food name. 
-
-What's extra here is line 12, where `:meth:lml.loader.scan_plugins` search through all
+What's extra here is line 16, where `:meth:lml.loader.scan_plugins` search through all
 installed python modules and register plugin modules that has prefix "robotchef_".
 
-At line 12, the second parameter of scan_plugins is to inform pyinstaller about the
+At line 16, the second parameter of scan_plugins is to inform pyinstaller about the
 package path if your package is to be packaged up. `white_list` lists the built-ins
 packages.
 
 Once scan_plugins is executed, all 'cuisine' plugins in your python path, including
 the built-in ones will be discovered and will be collected in a dictionary for
 `:meth:lml.PluginManager.get_a_plugin` to look up.
+
+So let's read the code difference against lml version of Robot Chef, you will find that
+except the plugin scanning code, both main.py are idential. The main functions in
+a similar way as the all-in-one code: it takes the first argument
+as food and pass it to an instance of CuisineManager, which returns a Chef that
+"make" the food. NoChefException is raised when a chef is not found.
+
+
+.. literalinclude:: ../../examples/robotchef/robotchef/main.py
+   :diff: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/main.py
+
 
 Plugin management
 -----------------------
