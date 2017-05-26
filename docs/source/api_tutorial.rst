@@ -1,9 +1,16 @@
 Robot Chef version 2: Use lml to write a shared library
-=============================================================
+================================================================================
 
-In previous sections, lml was used write a scalable command line package. In this
-section, I am going to explain how to use lml to write a shared api library in the
+In previous chapter, lml was used to split all in one Robot Chef into
+one core package and several plugins module and packages. In this
+chapter, we are going to go one step further to split the core package into
+two so as to demonstrate how to use lml to write a shared api library in the
 context of Robot Chef.
+
+.. image:: _static/images/robotchef_api_crd.svg
+
+Demo
+--------------------------------------------------------------------------------
 
 Navigate to `lml/examples/v2 <https://github.com/chfw/lml/tree/master/examples/v2>`_,
 you would find robotchef and its packages. Do the following::
@@ -30,15 +37,22 @@ robotchef_britishcuisine in this folder::
     $ robotchef_v2 "Jacket Potato"
     I can bake Jacket Potato
 
+Robot Chef v2 code
+-----------------------
+
 Let us look at main code robotchef_v2:
 
 .. literalinclude:: ../../examples/v2/robotchef_v2/robotchef_v2/main.py
-  :language: python
-  :linenos:
+  :diff: ../../examples/robotchef/robotchef/main.py
 
-Comparing with previous version of Robot Chef, line 2 imports cuisine_manager,
-an instance of CuisinManager from robotchef_api. No other changes in the main code.
-And that is all in robotchef_v2.
+
+The code highlighted in red are removed from main.py because the main code becomes
+the consumer of the robotchef api.
+
+And plugin.py and robot_cuisine has been moved to **robotchef_api** package.
+
+Robot Chef API
+--------------------
 
 Now let us look at robotchef_api. In the following director listing, the plugin.py
 and robot_cuisine is exactly the same as the :ref:`plugin.py <plugin>`

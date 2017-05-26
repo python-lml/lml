@@ -1,6 +1,15 @@
 Appendix
 ===============
 
+.. _rb-plugin:
+
+Robot Chef plugin.py
+----------------
+
+.. literalinclude:: ../../examples/robotchef/robotchef/plugin.py
+  :language: python
+
+
 Robot Chef Version 3
 ------------------------
 

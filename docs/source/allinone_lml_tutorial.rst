@@ -24,6 +24,8 @@ Lml plugins and plugin manager
 
 .. image:: _static/images/robotchef_allinone_lml.svg
 
+.. _cuisine_manager:
+
 plugin.py
 ++++++++++
 
@@ -56,3 +58,12 @@ has to be instantiated to be the a factory manager.
 
 .. literalinclude:: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/main.py
    :diff: ../../examples/robotchef_allinone/robotchef_allinone/main.py
+
+Remember this interaction::
+
+    $ robotchef "Portable Battery"
+    I can cook Portable Battery for robots
+
+The response comes from class `Boost`. It is obtained via CuisineManager when user types
+'Portable Battery'. And the food parameter was passed to the instance of Boost.
+`make` method was called and it prints 'I can cook Portable Battery for robots'.

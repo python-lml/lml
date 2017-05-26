@@ -1,6 +1,6 @@
 import sys
 
-from robotchef_api import cuisine_manager
+from robotchef_api import cuisine_manager, NoChefException
 
 
 def main():
@@ -11,5 +11,5 @@ def main():
     try:
         knowledged_chef = cuisine_manager.get_a_plugin(food_name)
         knowledged_chef.make(food=food_name)
-    except Exception:
+    except NoChefException:
         print("I do not know how to cook " + food_name)
