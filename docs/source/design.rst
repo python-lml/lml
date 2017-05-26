@@ -1,10 +1,12 @@
 Design idea
 ================================================================================
 
-The idea, to load the plugins later, started with pyexcel project which uses
-loosely coupled plugins to extend the capabilities of the main package. During
+The idea, to load the plugins later, originated from pyexcel project [#f9]_ which uses
+loosely coupled plugins to extend the main package to read more file formats. During
 its code growth, the code in pyexcel packages to manage the external and internal
-plugins becomes a independent library, lml.lml is similar to **Factories** in
+plugins becomes a independent library, lml.
+
+lml is similar to **Factories** in
 Zope Component Architecture [#f4]_. Lml provides functionalities to
 discover, register and load lml based plugins. It cares how the meta data were
 written but it does care how the plugin interface is written.
@@ -34,6 +36,8 @@ import it, you can use "import pyexcel.ext.xls". The shortcomings are:
 #. you have to explicitly import it. Otherwise, your plugin is not imported.
    `PR 7 <https://github.com/pyexcel/pyexcel-io/pull/7>`_ of pyexcel-io has extended
    discussion on this topic.
+#. flask extension management system become deprecated by itself in Flask's recent
+   development since 2016.
 
 In order to overcome those shortcomings, implicit imports were coded into module's
 __init__.py. By iterating through currently installed modules in your python
@@ -94,4 +98,5 @@ developer of yours would only need to do pip install.
 .. [#f4] http://zopecomponent.readthedocs.io/en/latest/
 .. [#f5] http://yapsy.sourceforge.net/
 .. [#f6] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld
+.. [#f9] https://github.com/pyexcel/pyexcel
 .. [#f10] https://bitbucket.org/birkenfeld/sphinx-contrib/
