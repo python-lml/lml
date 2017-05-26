@@ -1,14 +1,13 @@
 Design idea
-=====================
+================================================================================
 
 The idea, to load the plugins later, started with pyexcel project which uses
 loosely coupled plugins to extend the capabilities of the main package. During
 its code growth, the code in pyexcel packages to manage the external and internal
-plugins becomes a independent library, lml. Zope Component Architecture [#f4]_ has
-documented more plugins based patterns than others.
-lml is similar to **Factories** in ZCA. Lml provides functionalities to
-discover, register and load lml based plugins. It cares how the meta data were written
-but it does care how the plugin interface is written.
+plugins becomes a independent library, lml.lml is similar to **Factories** in
+Zope Component Architecture [#f4]_. Lml provides functionalities to
+discover, register and load lml based plugins. It cares how the meta data were
+written but it does care how the plugin interface is written.
 
 
 Plugin discovery
@@ -17,7 +16,7 @@ Plugin discovery
 Prior to lml, three different ways of loading external plugins have been tried in pyexcel.
 namespace package [#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
 It allows the developer to split a bigger packages into a smaller ones and
-publish them separately. sphinxcontrib uses a typical namespace package based
+publish them separately. sphinxcontrib [#f10]_ uses a typical namespace package based
 method. However, namespace package places a strict requirement
 on the module's __init__.py: nothing other than name space declaration should
 be present. It means no module level functions can be place there. This restriction
@@ -95,3 +94,4 @@ developer of yours would only need to do pip install.
 .. [#f4] http://zopecomponent.readthedocs.io/en/latest/
 .. [#f5] http://yapsy.sourceforge.net/
 .. [#f6] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld
+.. [#f10] https://bitbucket.org/birkenfeld/sphinx-contrib/
