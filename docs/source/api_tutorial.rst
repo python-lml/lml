@@ -4,8 +4,7 @@ Robot Chef version 2: Use lml to write a shared library
 In previous chapter, lml was used to split all in one Robot Chef into
 one core package and several plugins module and packages. In this
 chapter, we are going to go one step further to split the core package into
-two so as to demonstrate how to use lml to write a shared api library in the
-context of Robot Chef.
+two so as to showcase how to use lml to write a shared api library.
 
 .. image:: _static/images/robotchef_api_crd.svg
 
@@ -46,16 +45,17 @@ Let us look at main code robotchef_v2:
   :diff: ../../examples/robotchef/robotchef/main.py
 
 
-The code highlighted in red are removed from main.py because the main code becomes
-the consumer of the robotchef api.
+The code highlighted in red are removed from main.py and are placed into
+**robotchef_api** package. And robotchef_v2 becomes the consumer of
+the robotchef api.
 
 And plugin.py and robot_cuisine has been moved to **robotchef_api** package.
 
 Robot Chef API
 --------------------
 
-Now let us look at robotchef_api. In the following director listing, the plugin.py
-and robot_cuisine is exactly the same as the :ref:`plugin.py <plugin>`
+Now let us look at robotchef_api. In the following directory listing, the
+plugin.py And robot_cuisine is exactly the same as the :ref:`plugin.py <plugin>`
 and :ref:`robot_cuisine <builtin_plugin>` in robotchef::
 
     __init__.py    plugin.py       robot_cuisine
@@ -64,24 +64,20 @@ Notably, the plugin loader is put in the __init__.py:
 
 .. literalinclude:: ../../examples/v2/robotchef_api/robotchef_api/__init__.py
   :language: python
-  :linenos:
 
-scan_plugins here load all modules that start with "robotchef_" and as well as
-the modules in the white_list. And that is how you will write the main component as
-a library.
+scan_plugins here loads all modules that start with "robotchef_" and as well as
+the module `robotchef_api.robot_cuisine` in the white_list.
+
+This is how you will write the main component as a library.
 
 Built-in plugin and Standalone plugin
 --------------------------------------
 
 You may have noticed that a copy of robotchef_britishcuisine is placed in v2 directory.
 Why not using the same one above v2 directory? although they are almost identical,
-there is minor difference. robotchef_britishcuisine in v2 directory depends on
+there is a minor difference. robotchef_britishcuisine in v2 directory depends on
 robotchef_api but the other British cuisine package depends on robotchef. Hence, if you
 look at the fry.py in v2 directory, you will notice a slight difference:
 
 .. literalinclude:: ../../examples/v2/robotchef_britishcuisine/robotchef_britishcuisine/fry.py
-  :language: python
-  :linenos:
-
-The package where the Chef was defined is different. So I would like to conclude that
-there are no difference in writing built-in plugins nor standalone plugins. 
+  :diff: ../../examples/robotchef_britishcuisine/robotchef_britishcuisine/fry.py

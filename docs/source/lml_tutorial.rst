@@ -3,7 +3,7 @@ Robot Chef distributed in multiple packages
 
 In previous chapter, **Robot Chef** was written using lml but in a single
 package and its plugins are loaded immediately. In this chapter, we will
-decouple the plugin and the main package using lml. In Part 2, we will
+decouple the plugin and the main package using lml. And we will
 demonstrates the changes needed to plugin them back with the main package.
 
 Demo
@@ -130,7 +130,7 @@ plugin declaration code as in the following. But nothing else.
   :language: python
   :linenos:
 
-Because we have reloated `Fry` and `Bake` in this package,
+Because we have relocated `Fry` and `Bake` in this package,
 the instance of :class:`~lml.plugin.PluginInfoChain` issues two chained call
 :meth:`~lml.plugin.PluginInfoChain.add_a_plugin` but with corresponding
 parameters.

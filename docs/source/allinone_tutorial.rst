@@ -1,6 +1,12 @@
 Robot Chef all in one package without lml
 ================================================================================
 
+In this chapter, we are going to see how **Robot Chef** could be implemented
+without lml. In later on chapters, we will bring in **lml** step by step.
+
+Demo
+--------------------------------------------------------------------------------
+
 Please checkout lml::
 
     $ git clone https://github.com/chfw/lml.git
@@ -28,6 +34,10 @@ plugin.py
 `Chef` is the plugin interface that makes food. Boost, Bake and Fry are the
 actual implementations. Boost are for "robots". Bake and Fry are for human.
 
+.. note::
+
+   The plugin interface is your responsibility. **lml** gives the freedom to you.
+
 .. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/plugin.py
   :language: python
   :lines: 5-26
@@ -45,7 +55,7 @@ plugin developers, a clear defined interface is better than no class
 at all. And I believe the functions of a real plugin are more than
 just one here.
 
-Next in the plug.py file, PLUGINS is the dictionary that has food name as
+Next in the plugin.py file, PLUGINS is the dictionary that has food name as
 key and Chef descendants as values. `get_a_plugin` method returns a Chef or
 raises NoChefException.
 

@@ -1,11 +1,16 @@
 Robot Chef all in one package with lml
 ================================================================================
 
-Let us go through robotchef_allinone_lml and see how the lml package can be used
-to implement a conventional factory pattern, as we did in previous section.
-This section demonstrates that the lml based plugins can be made to load
+Now let us bring in lml and see see how the lml package can be used
+to rewrite **Robot Chef** but in a single package. This chapter introduces
+two classes: :class:`lml.plugin.PluginManager` and :class:`lml.plugin.PluginInfo`.
+And show how those classes can be used to make factory pattern.
+Meanwhile, it demonstrates that the lml based plugins can be made to load
 immediately and in a single package. And this sections helps you to understand
 the next section where we will make the plugins to be loaded later.
+
+Demo
+--------------------------------------------------------------------------------
 
 Please navigate to
 `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
@@ -37,7 +42,7 @@ Please note that `CuisineManager` declares that it is a manager for plugin_type 
 
 .. literalinclude:: ../../examples/robotchef_allinone_lml/robotchef_allinone_lml/plugin.py
    :language: python
-   :lines: 7-17
+   :lines: 8-17
 
 Next, the :class:`~lml.plugin.PluginInfo` decorates all Chef's subclasses as
 **cuisine** plugins and register the decorated classes with the manager class

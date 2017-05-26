@@ -1,9 +1,12 @@
 Tutorial
 ================================================================================
 
-.. note::
-
-   It is still under writing
+In this tutorial, we are going to go through various ways to build
+the command line application: **Robot Chef**. One is to build it as a single
+package. Another is to build it using lml: one main component
+with many plugins which are separately installable. By comparing the
+different approaches to build Robot Chef, we could see how lml can be used
+in practice.
 
 **Robot Chef** would report what it knows about the food in the world. For
 example::
@@ -19,14 +22,6 @@ When you type "Fish and Chips", it could reports it does not know::
 For it to understand all the cuisines in the world, there are two ways to
 enlarge its knowledge base: one is obviously to grow by itself. the other
 is to open the api interface so that others could join your effort.
-
-In this tutorial, we are going to go through two different ways to build
-the command line application: **Robot Chef**. One is to build it as a single
-package. The other is to build it using lml: one main component
-with many plugins which are separately installable. By comparing the
-different approaches to build Robot Chef, we could see how lml can be used
-in practice.
-
 
 .. toctree::
 

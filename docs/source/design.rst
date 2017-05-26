@@ -51,7 +51,7 @@ Plugin registration
 In terms of plugin registrations, three different approaches have been tried.
 Monkey-patching was easy to implement. When a plugin is imported, it loads
 the plugin dictionary from the main package and add itself.
-But it is genernally perceived as a "bad" idea.
+But it is generally perceived as a "bad" idea.
 Another way of doing it is to place
 the plugin code in the main component and the plugin just need to declare a
 dictionary as the plugin's meta data. The main package register the meta data
@@ -62,7 +62,7 @@ be used to register plugin classes in a simpler way.
 lml uses meta data for plugin registration. Since lml load your plugin later,
 the meta data is stored in the module's __init__.py. For example, to load plugins later
 in tablib, the 'exports' variable should be taken out from the actual class file and
-replace the hard refernce to the classes with class path string.
+replace the hard reference to the classes with class path string.
 
 Plugin distribution
 ---------------------

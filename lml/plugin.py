@@ -6,10 +6,10 @@
 
     :class:`~lml.plugin.PluginManager` should be inherited to form new
     plugin manager class. If you have more than one plugins in your
-    architcture, it is advisable to have one class per plugin type.
+    architecture, it is advisable to have one class per plugin type.
 
     :class:`~lml.plugin.PluginInfoChain` helps the plugin module to
-    declare the avialable plugins in the module.
+    declare the available plugins in the module.
 
     :class:`~lml.plugin.PluginInfo` can be subclassed to describe
     your plugin. Its method :meth:`~lml.plugin.PluginInfo.tags`

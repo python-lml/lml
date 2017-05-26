@@ -19,4 +19,8 @@ GEdit
 yapsy
 sys
 pycharm
+sphinxcontrib
+zope
+tablib
+Alchin
 
