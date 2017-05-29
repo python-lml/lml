@@ -13,9 +13,9 @@ before_install:
   - pip install -r tests/requirements.txt
 script:
   - make test
-  - make -C examples
   - make -C examples/robotchef_allinone
   - make -C examples/robotchef_allinone_lml
+  - make -C examples
   - make -C examples/v2
 after_success:
   codecov

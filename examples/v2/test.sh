@@ -14,5 +14,6 @@ cd robotchef_v2
 pip install -r tests/requirements.txt
 nosetests tests
 status=$?
+deactivate
 rm -rf /tmp/v2-robot
 exit $status
