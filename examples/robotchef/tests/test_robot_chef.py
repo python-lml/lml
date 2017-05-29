@@ -1,7 +1,12 @@
 import sys
 from mock import patch
 from nose.tools import eq_
-from io import StringIO
+PY2 = sys.version_info[0] == 2
+
+if PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 
 
 @patch('sys.stdout', new_callable=StringIO)

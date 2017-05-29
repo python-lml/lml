@@ -12,4 +12,6 @@ python setup.py install
 cd ../robotchef
 pip install -r tests/requirements.txt
 nosetests tests
+status=$?
 rm -rf /tmp/v1-robot
+exit status
