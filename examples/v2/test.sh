@@ -1,3 +1,5 @@
+#!/bin/bash
+
 virtualenv --no-site-packages /tmp/v2-robot
 source /tmp/v2-robot/bin/activate
 cd ../../
@@ -13,4 +15,4 @@ pip install -r tests/requirements.txt
 nosetests tests
 status=$?
 rm -rf /tmp/v2-robot
-exit status
+exit $status
