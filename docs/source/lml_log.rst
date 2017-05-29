@@ -11,7 +11,6 @@ Enable the logging
 Let us open robotchef's `main.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/main.py>`_. Insert the highlighted codes.
 
 .. code-block:: python
-    :linenos:
     :emphasize-lines: 5-10
    
     import sys
