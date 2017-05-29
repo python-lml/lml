@@ -93,25 +93,6 @@ def test_register_class():
     assert list(manager.registry.keys()) == ['my']
 
 
-def test_do_import():
-    from lml.utils import do_import
-    import pyexcel_test
-    pyexcel_test_package = do_import("pyexcel_test")
-    eq_(pyexcel_test_package, pyexcel_test)
-
-
-@raises(ImportError)
-def test_do_import_error():
-    from lml.plugin import do_import
-    do_import("non.exist")
-
-
-def test_do_import_cls():
-    from lml.plugin import do_import_class
-    manager = do_import_class("lml.plugin.PluginManager")
-    eq_(manager, PluginManager)
-
-
 def test_load_me_later_function():
     from lml.plugin import _load_me_later
     test_plugin = 'my plugin'
