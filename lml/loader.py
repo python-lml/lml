@@ -49,6 +49,7 @@ def scan_plugins(prefix, path, black_list=None, white_list=None):
        For example, robot_cuisine is a built-in module inside robotchef. It
        is listed in white_list.
     """
+    log.debug("scanning for plugins...")
     if black_list is None:
         black_list = []
 
@@ -78,6 +79,7 @@ def scan_plugins(prefix, path, black_list=None, white_list=None):
             log.debug(module_name)
             log.debug(e)
             continue
+    log.debug("scanning done")
 
 
 # load modules to work based with and without pyinstaller

@@ -3,7 +3,12 @@ import sys
 from lml.loader import scan_plugins
 
 from robotchef.plugin import CuisineManager, NoChefException
+import logging
+import logging.config
 
+logging.basicConfig(
+    format='%(name)s:%(lineno)d - %(levelname)s - %(message)s',
+    level=logging.DEBUG)
 
 BUILTINS = ['robotchef.robot_cuisine']
 

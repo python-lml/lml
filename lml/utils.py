@@ -40,15 +40,15 @@ def json_dumps(keywords):
 def do_import(plugin_module_name):
     """dynamically import a module"""
     try:
-        log.debug("do import " + plugin_module_name)
         plugin_module = __import__(plugin_module_name)
         if '.' in plugin_module_name:
             modules = plugin_module_name.split('.')
             for module in modules[1:]:
                 plugin_module = getattr(plugin_module, module)
+        log.debug("found " + plugin_module_name)
         return plugin_module
     except ImportError:
-        log.exception("Failed to import %s", plugin_module_name)
+        log.exception("failed to import %s", plugin_module_name)
         raise
 
 

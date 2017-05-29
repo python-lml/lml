@@ -96,6 +96,8 @@ class PluginInfoChain(object):
     It is used in the plugin packages to list all plugin classes
     """
     def __init__(self, path):
+        self._logger = logging.getLogger(
+            self.__class__.__module__ + '.' + self.__class__.__name__)
         self.module_name = path
 
     def add_a_plugin(self, plugin_type, submodule=None,
@@ -132,7 +134,9 @@ class PluginInfoChain(object):
 
         The developer has to specify the absolute import path
         """
-        log.debug(plugin_info_instance)
+        self._logger.debug("add %s as '%s' plugin",
+                           plugin_info_instance.absolute_import_path,
+                           plugin_info_instance.plugin_type)
         _load_me_later(plugin_info_instance)
         return self
 
@@ -153,7 +157,7 @@ class PluginManager(object):
 
     def get_a_plugin(self, key, **keywords):
         """ Get a plugin """
-        self._logger.debug("get a plugin")
+        self._logger.debug("get a plugin called")
         plugin = self.load_me_now(key)
         return plugin()
 
@@ -170,8 +174,8 @@ class PluginManager(object):
         """
         Register a plugin info for later loading
         """
-        self._logger.debug('load me later: ' + plugin_info.module_name)
-        self._logger.debug(plugin_info)
+        self._logger.debug('load %s later',
+                           plugin_info.absolute_import_path)
         for key in plugin_info.tags():
             self.registry[key.lower()].append(plugin_info)
 
@@ -179,7 +183,6 @@ class PluginManager(object):
         """
         Import a plugin from plugin registry
         """
-        self._logger.debug("load me now:" + key)
         if keywords:
             self._logger.debug(keywords)
         __key = key.lower()
@@ -194,6 +197,9 @@ class PluginManager(object):
             else:
                 # only library condition coud raise an exception
                 raise Exception("%s is not installed" % library)
+            self._logger.debug("load %s now for '%s'",
+                               cls,
+                               key)
             return cls
         else:
             self.raise_exception(key)
@@ -216,7 +222,8 @@ class PluginManager(object):
 
 def _register_class(cls):
     """Reigister a newly created plugin manager"""
-    log.debug("register " + cls.plugin_name)
+    log.debug("declare '%s' plugin manager",
+              cls.plugin_name)
     PLUG_IN_MANAGERS[cls.plugin_name] = cls
     if cls.plugin_name in CACHED_PLUGIN_INFO:
         # check if there is early registrations or not
@@ -245,14 +252,14 @@ def _register_a_plugin(plugin_info, plugin_cls):
 
 def _load_me_later(plugin_info):
     """ module level function to load a plugin later"""
-    log.debug("load me later")
-    log.debug(plugin_info)
     manager = PLUG_IN_MANAGERS.get(plugin_info.plugin_type)
     if manager:
         manager.load_me_later(plugin_info)
     else:
         # let's cache it and wait the manager to be registered
-        log.debug("caching " + plugin_info.absolute_import_path)
+        log.debug("caching %s for %s",
+                  plugin_info.absolute_import_path,
+                  plugin_info.plugin_type)
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 

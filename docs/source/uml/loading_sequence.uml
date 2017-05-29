@@ -8,7 +8,7 @@ participant robotchef_britishcuisine
 bob -> robotchef : > robotchef "Jacket Potato"
 robotchef -> lml : scan for plugins.
 lml -> robotchef_britishcuisine : read plugin chain in the module
-robotchef_britishcuisine -> lml: I can help with "Jacket Potato", etc.
+robotchef_britishcuisine -> lml: I can help with "Jacket Potato" and others.
 lml -> robotchef : read the built-in robot_cuisine
 robotchef -> lml : built-in chef knows "Portable Battery"
 lml --> robotchef : scanning done
