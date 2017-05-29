@@ -47,4 +47,6 @@ Documentation
 
    design
    tutorial
+   lml_log
    api
+
