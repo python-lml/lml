@@ -1,4 +1,4 @@
 all: test
 
 test:
-	sh test.sh
+	bash test.sh
