@@ -5,7 +5,7 @@
 .. note::
 
    It is still under writing
- 
+
 
 :Author: C.W.
 :Source code: http://github.com/lml/lml.git
@@ -44,9 +44,9 @@ Documentation
 ----------------
 
 .. toctree::
+   :maxdepth: 2
 
    design
    tutorial
    lml_log
    api
-
