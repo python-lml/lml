@@ -26,8 +26,7 @@ plugin interface is on your shoulder.
 When you would use **lml** to refactor your existing code, it aims to flatten the
 complexity and to shrink the size of your bulky python library by
 distributing the similar functionalities across its plugins. However, you as
-the developer need to do the code refactoring by
-yourself and lml would lend you a hand.
+the developer need to do the code refactoring by yourself and lml would lend you a hand.
 
 .. [#f1] the end developers who uses your library and packages achieve their
          objectives.
@@ -48,3 +47,8 @@ or clone it and install it:
     $ git clone https://github.com/chfw/lml.git
     $ cd lml
     $ python setup.py install
+
+License
+================================================================================
+
+New BSD

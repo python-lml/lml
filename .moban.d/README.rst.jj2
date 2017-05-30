@@ -32,3 +32,8 @@ or clone it and install it:
     $ git clone https://github.com/{{organisation}}/{{name}}.git
     $ cd {{name}}
     $ python setup.py install
+
+License
+================================================================================
+
+New BSD
