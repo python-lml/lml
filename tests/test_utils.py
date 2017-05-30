@@ -9,7 +9,8 @@ def test_json_dumps():
     class TestClass:
         pass
 
-    adict = dict(test=TestClass, normal='string')
+    float_value = 1.3
+    adict = dict(test=TestClass, normal=float_value)
     json_dumps(adict)
 
 

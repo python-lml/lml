@@ -2,7 +2,13 @@
     lml.plugin
     ~~~~~~~~~~~~~~~~~~~
 
-    Plugin management system
+    lml divides the plugins into two category: load-me-later plugins and
+    load-me-now ones. load-me-later plugins refer to the plugins were
+    loaded when needed due its bulky and/or memory hungry dependencies.
+    Those plugins has to use lml and respect lml's design principle.
+
+    load-me-now plugins refer to the plugins are immediately imported. All
+    conventional Python classes are by default immediately imported.
 
     :class:`~lml.plugin.PluginManager` should be inherited to form new
     plugin manager class. If you have more than one plugins in your
@@ -34,7 +40,12 @@ log = logging.getLogger(__name__)
 
 class PluginInfo(object):
     """
-    Information about the plugin
+    Information about the plugin.
+
+    It is used together with PluginInfoChain to describe the plugins.
+    Meanwhile, it is a class decorator and can be used to register a plugin
+    immediately for use, in other words, the PluginInfo decorated plugin
+    class is not loaded later.
 
     Parameters
     -------------
@@ -46,6 +57,41 @@ class PluginInfo(object):
 
     tags:
        a list of keywords help the plugin manager to retrieve your plugin
+
+    keywords:
+       Another custom properties.
+
+    Examples
+    -------------
+
+    For load-me-later plugins:
+
+        >>> info = PluginInfo("sample",
+        ...      abs_class_path='lml.plugin.PluginInfo', # demonstration only.
+        ...      tags=['load-me-later'],
+        ...      custom_property = 'I am a custom property')
+        >>> print(info.module_name)
+        lml
+        >>> print(info.custom_property)
+        I am a custom property
+
+    For load-me-now plugins:
+
+        >>> @PluginInfo("sample", tags=['load-me-now'])
+        ... class TestPlugin:
+        ...     def echo(self, words):
+        ...         print("echoing %s" % words)
+
+    Now let's retrive the second plugin back:
+
+        >>> class SamplePluginManager(PluginManager):
+        ...     def __init__(self):
+        ...         PluginManager.__init__(self, "sample")
+        >>> sample_manager = SamplePluginManager()
+        >>> test_plugin=sample_manager.get_a_plugin("load-me-now")
+        >>> test_plugin.echo("heyy")
+        echoing heyy
+
     """
     def __init__(self, plugin_type,
                  abs_class_path=None,
@@ -147,6 +193,13 @@ class PluginInfoChain(object):
 class PluginManager(object):
     """
     Load plugin info into in-memory dictionary for later import
+
+    Parameters
+    --------------
+
+    plugin_type:
+        the plugin type. All plugins of this plugin type will be
+        registered to it.
     """
     def __init__(self, plugin_type):
         self.plugin_name = plugin_type
@@ -156,7 +209,17 @@ class PluginManager(object):
         _register_class(self)
 
     def get_a_plugin(self, key, **keywords):
-        """ Get a plugin """
+        """ Get a plugin
+
+        Parameters
+        ---------------
+
+        key:
+             the key to find the plugins
+
+        keywords:
+             additional parameters for help the retrieval of the plugins
+        """
         self._logger.debug("get a plugin called")
         plugin = self.load_me_now(key)
         return plugin()
@@ -165,6 +228,12 @@ class PluginManager(object):
         """Raise plugin not found exception
 
         Override this method to raise custom exception
+
+        Parameters
+        -----------------
+
+        key:
+            the key to find the plugin
         """
         self._logger.debug(self.registry.keys())
         raise Exception(
@@ -173,6 +242,12 @@ class PluginManager(object):
     def load_me_later(self, plugin_info):
         """
         Register a plugin info for later loading
+
+        Parameters
+        --------------
+
+        plugin_info:
+            a instance of plugin info
         """
         self._logger.debug('load %s later',
                            plugin_info.absolute_import_path)
@@ -182,6 +257,15 @@ class PluginManager(object):
     def load_me_now(self, key, library=None, **keywords):
         """
         Import a plugin from plugin registry
+
+        Parameters
+        -----------------
+
+        key:
+            the key to find the plugin
+
+        library:
+            to use a specific plugin module
         """
         if keywords:
             self._logger.debug(keywords)
@@ -205,7 +289,15 @@ class PluginManager(object):
             self.raise_exception(key)
 
     def dynamic_load_library(self, a_plugin_info):
-        """Dynamically load the plugin info if not loaded"""
+        """Dynamically load the plugin info if not loaded
+
+
+        Parameters
+        --------------
+
+        a_plugin_info:
+            a instance of plugin info
+        """
         if a_plugin_info.cls is None:
             self._logger.debug("import " + a_plugin_info.absolute_import_path)
             cls = do_import_class(a_plugin_info.absolute_import_path)
@@ -213,7 +305,17 @@ class PluginManager(object):
         return a_plugin_info.cls
 
     def register_a_plugin(self, plugin_cls, plugin_info):
-        """ for dynamically loaded plugin during runtime"""
+        """ for dynamically loaded plugin during runtime
+
+        Parameters
+        --------------
+
+        plugin_cls:
+            the actual plugin class refered to by the second parameter
+
+        plugin_info:
+            a instance of plugin info
+        """
         self._logger.debug("register " + plugin_cls.__name__)
         for key in plugin_info.tags():
             plugin_info.cls = plugin_cls

@@ -62,6 +62,20 @@ def test_load_plugins_without_any_plugins(mocked_load_me_later,
 @patch('pkgutil.get_importer')
 @patch('pkgutil.iter_modules')
 @patch('lml.plugin._load_me_later')
+def test_load_plugins_without_black_list(mocked_load_me_later,
+                                         pkgutil_iter_modules,
+                                         pkgutil_get_importer):
+    sample_toc = set()
+    pkgutil_get_importer.return_value.toc = sample_toc
+    pkgutil_iter_modules.return_value = []
+    from lml.loader import scan_plugins
+    scan_plugins('pyexcel_', '.')
+    assert mocked_load_me_later.called is False
+
+
+@patch('pkgutil.get_importer')
+@patch('pkgutil.iter_modules')
+@patch('lml.plugin._load_me_later')
 def test_load_plugins_import_error(mocked_load_me_later,
                                    pkgutil_iter_modules,
                                    pkgutil_get_importer):

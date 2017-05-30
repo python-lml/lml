@@ -1,13 +1,13 @@
 Design idea
 ================================================================================
 
-The idea, to load the plugins later, originated from pyexcel project [#f9]_ which uses
+The idea, to load the plugins later, originated from pyexcel project [#f1]_ which uses
 loosely coupled plugins to extend the main package to read more file formats. During
 its code growth, the code in pyexcel packages to manage the external and internal
 plugins becomes a independent library, lml.
 
 lml is similar to **Factories** in
-Zope Component Architecture [#f4]_. Lml provides functionalities to
+Zope Component Architecture [#f2]_. Lml provides functionalities to
 discover, register and load lml based plugins. It cares how the meta data were
 written but it does care how the plugin interface is written.
 
@@ -16,9 +16,9 @@ Plugin discovery
 --------------------
 
 Prior to lml, three different ways of loading external plugins have been tried in pyexcel.
-namespace package [#f1]_ comes from Python 3 or pkgutil style in Python 2 and 3.
+namespace package [#f3]_ comes from Python 3 or pkgutil style in Python 2 and 3.
 It allows the developer to split a bigger packages into a smaller ones and
-publish them separately. sphinxcontrib [#f10]_ uses a typical namespace package based
+publish them separately. sphinxcontrib [#f4]_ uses a typical namespace package based
 method. However, namespace package places a strict requirement
 on the module's __init__.py: nothing other than name space declaration should
 be present. It means no module level functions can be place there. This restriction
@@ -58,8 +58,8 @@ But it is generally perceived as a "bad" idea.
 Another way of doing it is to place
 the plugin code in the main component and the plugin just need to declare a
 dictionary as the plugin's meta data. The main package register the meta data
-when it is imported. tablib [#f2]_ uses such a approach.
-The third way is to use meta-classes. M. Alchin (2008) [#f3]_ explained how meta class can
+when it is imported. tablib [#f5]_ uses such a approach.
+The third way is to use meta-classes. M. Alchin (2008) [#f6]_ explained how meta class can
 be used to register plugin classes in a simpler way.
 
 lml uses meta data for plugin registration. Since lml load your plugin later,
@@ -70,8 +70,8 @@ replace the hard reference to the classes with class path string.
 Plugin distribution
 ---------------------
 
-In terms of plugin distribution, yapsy [#f5]_ and GEdit plugin management
-system [#f6]_ load plugins from file system.
+In terms of plugin distribution, yapsy [#f7]_ and GEdit plugin management
+system [#f8]_ load plugins from file system.
 To install a plugin in those systems, is to copy and paste the plugin code to a
 designated directory. zope components, namespace packages and flask extensions
 can be installed via pypi. lml support the latter approach. lml plugins can be
@@ -92,11 +92,14 @@ they could publish their plugins as they do to any normal pypi packages. And the
 developer of yours would only need to do pip install.
 
 
-.. [#f1] https://packaging.python.org/namespace_packages/
-.. [#f2] https://github.com/kennethreitz/tablib
-.. [#f3] M. Alchin, 2008, A Simple Plugin Framework, http://martyalchin.com/2008/jan/10/simple-plugin-framework/
-.. [#f4] http://zopecomponent.readthedocs.io/en/latest/
-.. [#f5] http://yapsy.sourceforge.net/
-.. [#f6] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld
-.. [#f9] https://github.com/pyexcel/pyexcel
-.. [#f10] https://bitbucket.org/birkenfeld/sphinx-contrib/
+References
+-------------
+
+.. [#f1] https://github.com/pyexcel/pyexcel
+.. [#f2] http://zopecomponent.readthedocs.io/en/latest/
+.. [#f3] https://packaging.python.org/namespace_packages/
+.. [#f4] https://bitbucket.org/birkenfeld/sphinx-contrib/
+.. [#f5] https://github.com/kennethreitz/tablib
+.. [#f6] M. Alchin, 2008, A Simple Plugin Framework, http://martyalchin.com/2008/jan/10/simple-plugin-framework/
+.. [#f7] http://yapsy.sourceforge.net/
+.. [#f8] https://wiki.gnome.org/Apps/Gedit/PythonPluginHowToOld

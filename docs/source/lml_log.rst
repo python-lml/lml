@@ -61,7 +61,7 @@ Reading the log with the loading sequence,
 
 .. image:: _static/images/loading_sequence.svg
 
-three Chef instances were discovered: robotchef_britishcuisine.fry.Fry,
+Three Chef plugins were discovered: robotchef_britishcuisine.fry.Fry,
 robotchef_britishcuisine.bake.Bake and robotchef.robot_cuisine.electricity.Boost.
 However, they are not imported yet. When the robotchef try to look up a plugin,
 it logs "get a plugin called". And it is actual time when a plugin is imported. 

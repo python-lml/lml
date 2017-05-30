@@ -2,7 +2,9 @@
     lml.loader
     ~~~~~~~~~~~~~~~~~~~
 
-    Auto discover available plugins
+    Plugin discovery module. It supports plugins installed via pip tools
+    and pyinstaller. :func:`~lml.loader.scan_plugins` is expected to be
+    called in the main package at an earliest time of convenience.
 
     :copyright: (c) 2017 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
