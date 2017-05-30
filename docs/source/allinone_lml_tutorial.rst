@@ -72,3 +72,10 @@ Remember this interaction::
 The response comes from class `Boost`. It is obtained via CuisineManager when user types
 'Portable Battery'. And the food parameter was passed to the instance of Boost.
 `make` method was called and it prints 'I can cook Portable Battery for robots'.
+
+
+See also
+-------------
+
+#. pyexcel-chart: `use lml to refactor existing plugins <https://github.com/pyexcel/pyexcel-chart/commit/ca307f49b10f00cd080a3321490acc7b89ca0a41>`_
+

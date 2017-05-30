@@ -89,8 +89,8 @@ class PluginInfo(object):
         ...         PluginManager.__init__(self, "sample")
         >>> sample_manager = SamplePluginManager()
         >>> test_plugin=sample_manager.get_a_plugin("load-me-now")
-        >>> test_plugin.echo("heyy")
-        echoing heyy
+        >>> test_plugin.echo("hey..")
+        echoing hey..
 
     """
     def __init__(self, plugin_type,

@@ -44,3 +44,9 @@ Documentation
    tutorial
    lml_log
    api
+
+Beyond the documentation above, here is a list of projects using lml:
+
+#. `pyexcel <https://github.com/pyexcel.pyexcel>`_
+#. `pyexcel-io <https://github.com/pyexcel.pyexcel-io>`_
+#. `pyexcel-chart <https://github.com/pyexcel.pyexcel-chart>`_

@@ -30,3 +30,7 @@ is to open the api interface so that others could join your effort.
    lml_tutorial
    api_tutorial
 
+Additional references
+----------------------
+
+#. pyexcel-chart: `use lml to refactor existing plugins <https://github.com/pyexcel/pyexcel-chart/commit/ca307f49b10f00cd080a3321490acc7b89ca0a41>`_
