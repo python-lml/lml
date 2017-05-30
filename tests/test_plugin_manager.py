@@ -85,6 +85,17 @@ def test_register_a_plugin():
     eq_(manager.registry['my'][0], plugin_info)
 
 
+def test_get_a_plugin():
+    test_plugin = 'test plugin'
+
+    manager = PluginManager(test_plugin)
+    plugin_info = make_me_a_plugin_info('my')
+    plugin_info.cls = TestClass
+    manager.register_a_plugin(TestClass, plugin_info)
+    the_plugin = manager.get_a_plugin('my')
+    assert isinstance(the_plugin, TestClass)
+
+
 def test_register_class():
     test_plugin = 'test_plugin'
     plugin_info = make_me_a_plugin_info('my')
