@@ -6,7 +6,6 @@
 :Source code: http://github.com/lml/lml.git
 :Issues: http://github.com/lml/lml/issues
 :License: New BSD License
-:Development: |release|
 :Released: |version|
 :Generated: |today|
 
