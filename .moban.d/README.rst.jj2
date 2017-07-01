@@ -13,6 +13,9 @@
    :target: http://{{name|lower}}.readthedocs.org/en/latest/
 {%endblock%}
 
+.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+   :target: https://gitter.im/chfw_lml/Lobby
+
 {%include "description.rst.jj2" %}
 
 Installation

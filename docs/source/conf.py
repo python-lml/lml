@@ -7,16 +7,15 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
+	'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
     'sphinxcontrib.spelling'
 ]
 
-plantuml_output_format = 'svg'
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
-imgpath = '_static'
+
 project = u'lml'
 copyright = u'2017 Onni Software Ltd.'
 version = '0.0.1'

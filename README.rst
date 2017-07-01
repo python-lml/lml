@@ -11,6 +11,9 @@ lml - Load me later. A lazy loading plugin management system.
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
    :target: http://lml.readthedocs.org/en/latest/
 
+.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
+   :target: https://gitter.im/chfw_lml/Lobby
+
 **lml** seamlessly finds the lml based plugins from your current python
 environment but loads your plugins on demand. It is designed to support
 plugins that have external dependencies, especially bulky and/or

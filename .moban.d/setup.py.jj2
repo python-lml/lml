@@ -8,9 +8,6 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 {%endif%}
-{%block platform_block%}
-from platform import python_implementation
-{%endblock%}
 {%block compat_block%}
 import sys
 PY2 = sys.version_info[0] == 2
