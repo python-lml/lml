@@ -13,8 +13,9 @@
    :target: http://{{name|lower}}.readthedocs.org/en/latest/
 {%endblock%}
 
-.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
-   :target: https://gitter.im/chfw_lml/Lobby
+.. image:: https://badges.gitter.im/chfw_lml/Lobby.svg
+   :alt: Join the chat at https://gitter.im/chfw_lml/Lobby
+   :target: https://gitter.im/chfw_lml/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 {%include "description.rst.jj2" %}
 

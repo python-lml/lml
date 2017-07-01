@@ -2,10 +2,6 @@
 lml - Load me later. A lazy loading plugin management system.
 ================================================================================
 
-.. image:: https://badges.gitter.im/chfw_lml/Lobby.svg
-   :alt: Join the chat at https://gitter.im/chfw_lml/Lobby
-   :target: https://gitter.im/chfw_lml/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-
 .. image:: https://api.travis-ci.org/chfw/lml.svg?branch=master
    :target: http://travis-ci.org/chfw/lml
 
@@ -15,8 +11,9 @@ lml - Load me later. A lazy loading plugin management system.
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
    :target: http://lml.readthedocs.org/en/latest/
 
-.. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
-   :target: https://gitter.im/chfw_lml/Lobby
+.. image:: https://badges.gitter.im/chfw_lml/Lobby.svg
+   :alt: Join the chat at https://gitter.im/chfw_lml/Lobby
+   :target: https://gitter.im/chfw_lml/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 **lml** seamlessly finds the lml based plugins from your current python
 environment but loads your plugins on demand. It is designed to support
