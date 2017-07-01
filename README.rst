@@ -2,6 +2,10 @@
 lml - Load me later. A lazy loading plugin management system.
 ================================================================================
 
+.. image:: https://badges.gitter.im/chfw_lml/Lobby.svg
+   :alt: Join the chat at https://gitter.im/chfw_lml/Lobby
+   :target: https://gitter.im/chfw_lml/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 .. image:: https://api.travis-ci.org/chfw/lml.svg?branch=master
    :target: http://travis-ci.org/chfw/lml
 
