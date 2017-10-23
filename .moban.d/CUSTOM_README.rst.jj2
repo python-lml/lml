@@ -1,0 +1,13 @@
+{% extends "README.rst.jj2" %}
+
+{%block features%}
+{%include "description.rst.jj2" %}
+{%endblock%}
+
+{%block bottom_block%}
+License
+================================================================================
+
+New BSD
+
+{%endblock%}

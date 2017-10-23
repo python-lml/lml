@@ -1,12 +1,12 @@
 configuration:
-  configuration_dir: "commons/config"
   template_dir:
-  - "commons/templates"
+  - "setupmobans/templates"
   - ".moban.d"
   configuration: lml.yml
 targets:
-  - README.rst: README.rst.jj2
-  - setup.py: setup.py.jj2
+  - README.rst: CUSTOM_README.rst.jj2
+  - setup.py: custom_setup.py.jj2
+  - MANIFEST.in: MANIFEST.in.jj2
   - requirements.txt: requirements.txt.jj2
   - "docs/source/conf.py": "docs/source/myconf.py.jj2"
   - "docs/source/index.rst": "docs/source/index.rst.jj2"

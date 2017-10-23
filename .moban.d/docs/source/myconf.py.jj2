@@ -1,6 +1,7 @@
 {%extends "docs/source/conf.py.jj2"%}
 
 {%block SPHINX_EXTENSIONS%}
+    'sphinx.ext.napoleon',
     'sphinxcontrib.spelling'
 {%endblock%}
 

@@ -5,15 +5,11 @@ lml - Load me later. A lazy loading plugin management system.
 .. image:: https://api.travis-ci.org/chfw/lml.svg?branch=master
    :target: http://travis-ci.org/chfw/lml
 
-.. image:: https://codecov.io/github/chfw/lml/coverage.png
-    :target: https://codecov.io/github/chfw/lml
+.. image:: https://codecov.io/gh/chfw/lml/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/chfw/lml
 
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
    :target: http://lml.readthedocs.org/en/latest/
-
-.. image:: https://badges.gitter.im/chfw_lml/Lobby.svg
-   :alt: Join the chat at https://gitter.im/chfw_lml/Lobby
-   :target: https://gitter.im/chfw_lml/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 **lml** seamlessly finds the lml based plugins from your current python
 environment but loads your plugins on demand. It is designed to support
@@ -38,7 +34,8 @@ the developer need to do the code refactoring by yourself and lml would lend you
 Installation
 ================================================================================
 
-You can install it via pip:
+
+You can install lml via pip:
 
 .. code-block:: bash
 

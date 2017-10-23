@@ -7,8 +7,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
+    'sphinx.ext.napoleon',
     'sphinxcontrib.spelling'
 ]
 
@@ -19,7 +19,7 @@ master_doc = 'index'
 project = u'lml'
 copyright = u'2017 Onni Software Ltd.'
 version = '0.0.1'
-release = '0.0.1'
+release = '0.0.2'
 exclude_patterns = []
 pygments_style = 'sphinx'
 html_theme = 'default'
@@ -43,5 +43,3 @@ texinfo_documents = [
      DESCRIPTION,
      'Miscellaneous'),
 ]
-spelling_lang = 'en_GB'
-spelling_word_list_filename = 'spelling_wordlist.txt'
