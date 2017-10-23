@@ -10,7 +10,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 NAME = 'lml'
 AUTHOR = 'C.W.'
 VERSION = '0.0.2'
-EMAIL = 'wangc_2011(@)hotmail.com'
+EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'Load me later. A lazy loading plugin management system.' +
