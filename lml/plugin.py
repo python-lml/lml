@@ -204,6 +204,7 @@ class PluginManager(object):
     def __init__(self, plugin_type):
         self.plugin_name = plugin_type
         self.registry = defaultdict(list)
+        self.tag_groups = dict()
         self._logger = logging.getLogger(
             self.__class__.__module__ + '.' + self.__class__.__name__)
         _register_class(self)
@@ -317,9 +318,17 @@ class PluginManager(object):
             a instance of plugin info
         """
         self._logger.debug("register " + plugin_cls.__name__)
-        for key in plugin_info.tags():
+        primary_tag = None
+        for index, key in enumerate(plugin_info.tags()):
             plugin_info.cls = plugin_cls
             self.registry[key.lower()].append(plugin_info)
+            if index == 0:
+                primary_tag = key.lower()
+            self.tag_groups[key.lower()] = primary_tag
+
+    def get_primary_key(self, key):
+        __key = key.lower()
+        return self.tag_groups.get(__key, None)
 
 
 def _register_class(cls):

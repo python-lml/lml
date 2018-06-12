@@ -140,5 +140,16 @@ def test_register_a_plugin_function_2():
     assert non_existent_plugin in CACHED_PLUGIN_INFO
 
 
+def test_primary_key():
+    manager = PluginManager("test plugin2")
+
+    @PluginInfo('test plugin2', tags=['primary key', 'key 1', 'key 2'])
+    class MyPlugin(object):
+        pass
+
+    pk = manager.get_primary_key('key 1')
+    eq_(pk, 'primary key')
+
+
 def make_me_a_plugin_info(plugin_name):
     return PluginInfo(plugin_name, 'abs_path', custom='property')
