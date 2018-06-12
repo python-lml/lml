@@ -17,8 +17,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'lml'
-copyright = u'2017 Onni Software Ltd.'
-version = '0.0.2'
+copyright = u'2017-2018 Onni Software Ltd.'
+version = '0.0.3'
 release = '0.0.3'
 exclude_patterns = []
 pygments_style = 'sphinx'

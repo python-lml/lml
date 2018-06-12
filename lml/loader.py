@@ -6,7 +6,7 @@
     and pyinstaller. :func:`~lml.loader.scan_plugins` is expected to be
     called in the main package of yours at an earliest time of convenience.
 
-    :copyright: (c) 2017 by Onni Software Ltd.
+    :copyright: (c) 2017-2018 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
 """
 import pkgutil

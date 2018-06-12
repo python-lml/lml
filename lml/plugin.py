@@ -22,7 +22,7 @@
     can be overridden to help its matching :class:`~lml.plugin.PluginManager`
     to look itself up.
 
-    :copyright: (c) 2017 by Onni Software Ltd.
+    :copyright: (c) 2017-2018 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
 """
 import logging

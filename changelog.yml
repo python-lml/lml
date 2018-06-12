@@ -6,7 +6,7 @@ releases:
     details:
     - "`dict` can be a pluggable type in addition to `function`, `class`"
     - get primary tag of your tag, helping you find out which category of plugins your tag points to
-  date: unreleased
+  date: 12/06/2018
   version: 0.0.3
 - changes:
   - action: Updated

@@ -6,8 +6,8 @@ contact: "wangc_2011@hotmail.com"
 company: "Onni Software Ltd."
 version: "0.0.3"
 current_version: "0.0.3"
-release: "0.0.2"
-copyright_year: 2017
+release: "0.0.3"
+copyright_year: 2017-2018
 license: New BSD
 dependencies: []
 description: "Load me later. A loading plugin management system."
