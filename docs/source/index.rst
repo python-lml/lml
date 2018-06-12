@@ -1,4 +1,4 @@
-`lml` - Load me later. A loading plugin management system.
+`lml` - Load me later. A lazy plugin management system.
 ================================================================================
 
 
