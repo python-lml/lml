@@ -170,7 +170,7 @@ def test_show_me_your_name():
     eq_(name, 'Test')
 
     name2 = _show_me_your_name(dict(A=1))
-    eq_(name2, "<type 'dict'>")
+    assert 'dict' in name2
 
 
 def make_me_a_plugin_info(plugin_name):
