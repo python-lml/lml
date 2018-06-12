@@ -2,11 +2,12 @@
 lml - Load me later. A lazy loading plugin management system.
 ================================================================================
 
-.. image:: https://api.travis-ci.org/chfw/lml.svg?branch=master
+.. image:: https://api.travis-ci.org/chfw/lml.svg
    :target: http://travis-ci.org/chfw/lml
 
-.. image:: https://codecov.io/gh/chfw/lml/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/chfw/lml
+.. image:: https://codecov.io/github/chfw/lml/coverage.png
+   :target: https://codecov.io/github/chfw/lml
+
 
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
    :target: http://lml.readthedocs.org/en/latest/
@@ -54,4 +55,3 @@ License
 ================================================================================
 
 New BSD
-
