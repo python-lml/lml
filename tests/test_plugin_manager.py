@@ -1,6 +1,6 @@
 from mock import patch
 from lml.plugin import PluginManager, PLUG_IN_MANAGERS
-from lml.plugin import PluginInfo
+from lml.plugin import PluginInfo, _show_me_your_name
 from lml.plugin import CACHED_PLUGIN_INFO
 from nose.tools import eq_, raises
 
@@ -149,6 +149,28 @@ def test_primary_key():
 
     pk = manager.get_primary_key('key 1')
     eq_(pk, 'primary key')
+
+
+def test_dict_as_plugin_payload():
+    manager = PluginManager("test plugin3")
+
+    plugin = PluginInfo('test plugin3', tags=['primary key', 'key 1', 'key 2'])
+    plugin(dict(B=1))
+
+    instance = manager.load_me_now('key 1')
+    eq_(instance, dict(B=1))
+
+
+def test_show_me_your_name():
+
+    class Test(object):
+        pass
+
+    name = _show_me_your_name(Test)
+    eq_(name, 'Test')
+
+    name2 = _show_me_your_name(dict(A=1))
+    eq_(name2, "<type 'dict'>")
 
 
 def make_me_a_plugin_info(plugin_name):

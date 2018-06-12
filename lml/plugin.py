@@ -274,7 +274,7 @@ class PluginManager(object):
         if __key in self.registry:
             for plugin_info in self.registry[__key]:
                 cls = self.dynamic_load_library(plugin_info)
-                module_name = _get_me_pypi_package_name(cls.__module__)
+                module_name = _get_me_pypi_package_name(cls)
                 if library and module_name != library:
                     continue
                 else:
@@ -317,7 +317,8 @@ class PluginManager(object):
         plugin_info:
             a instance of plugin info
         """
-        self._logger.debug("register " + plugin_cls.__name__)
+        self._logger.debug("register %s",
+                           _show_me_your_name(plugin_cls))
         primary_tag = None
         for index, key in enumerate(plugin_info.tags()):
             plugin_info.cls = plugin_cls
@@ -344,7 +345,7 @@ def _register_class(cls):
                           plugin_info.absolute_import_path)
             else:
                 log.debug("load cached plugin info: %s",
-                          plugin_info.cls.__name__)
+                          _show_me_your_name(plugin_info.cls))
             cls.load_me_later(plugin_info)
 
         del CACHED_PLUGIN_INFO[cls.plugin_name]
@@ -357,7 +358,8 @@ def _register_a_plugin(plugin_info, plugin_cls):
         manager.register_a_plugin(plugin_cls, plugin_info)
     else:
         # let's cache it and wait the manager to be registered
-        log.debug("caching %s", plugin_cls.__name__)
+        log.debug("caching %s",
+                  _show_me_your_name(plugin_cls.__name__))
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
@@ -374,6 +376,17 @@ def _load_me_later(plugin_info):
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
-def _get_me_pypi_package_name(module_name):
-    root_module_name = module_name.split('.')[0]
-    return root_module_name.replace('_', '-')
+def _get_me_pypi_package_name(module):
+    try:
+        module_name = module.__module__
+        root_module_name = module_name.split('.')[0]
+        return root_module_name.replace('_', '-')
+    except AttributeError:
+        return None
+
+
+def _show_me_your_name(cls_func_or_data_type):
+    try:
+        return cls_func_or_data_type.__name__
+    except AttributeError:
+        return str(type(cls_func_or_data_type))
