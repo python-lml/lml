@@ -1,5 +1,5 @@
 ================================================================================
-lml - Load me later. A lazy loading plugin management system.
+lml - Load me later. A lazy plugin management system.
 ================================================================================
 
 .. image:: https://api.travis-ci.org/chfw/lml.svg

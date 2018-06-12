@@ -15,7 +15,7 @@ VERSION = '0.0.3'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
-    'Load me later. A lazy loading plugin management system.'
+    'Load me later. A loading plugin management system.'
 )
 URL = 'https://github.com/chfw/lml'
 DOWNLOAD_URL = '%s/archive/0.0.2.tar.gz' % URL
