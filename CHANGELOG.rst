@@ -17,7 +17,7 @@ Added
 Updated
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. `pyexcel#103 <https://github.com/pyecharts/pyexcel/issues/103>`_: include
+#. `pyexcel#103 <https://github.com/pyexcel/pyexcel/issues/103>`_: include
    LICENSE in tar ball
 
 0.0.1 - 30/05/2017

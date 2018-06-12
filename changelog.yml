@@ -1,5 +1,5 @@
-name: jupyter-echarts-pypkg
-organisation: pyecharts
+name: lml
+organisation: chfw
 releases:
 - changes:
   - action: Added
@@ -11,7 +11,7 @@ releases:
 - changes:
   - action: Updated
     details:
-    - "`pyexcel#103`: include LICENSE in tar ball"
+    - "`pyexcel#103 <https://github.com/pyexcel/pyexcel/issues/103>`_: include LICENSE in tar ball"
   date: 23/10/2017
   version: 0.0.2
 - changes:
