@@ -8,6 +8,8 @@
     :license: New BSD License, see LICENSE for more details
 """
 import logging
+from lml._version import __version__
+from lml._version import __author__
 
 try:
     from logging import NullHandler
