@@ -1,13 +1,13 @@
 name: "lml"
-full_name: "Load me later. A lazy loading plugin management system."
+full_name: "Load me later. A lazy plugin management system."
 organisation: "chfw"
 author: "C.W."
 contact: "wangc_2011@hotmail.com"
 company: "Onni Software Ltd."
-version: "0.0.2"
-current_version: "0.0.2"
-release: "0.0.2"
-copyright_year: 2017
+version: "0.0.3"
+current_version: "0.0.3"
+release: "0.0.3"
+copyright_year: 2017-2018
 license: New BSD
 dependencies: []
-description: "Load me later. A lazy loading plugin management system."
+description: "Load me later. A loading plugin management system."

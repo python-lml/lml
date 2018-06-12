@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 DESCRIPTION = (
-    'Load me later. A lazy loading plugin management system.' +
+    'Load me later. A loading plugin management system.' +
     ''
 )
 extensions = [
@@ -17,9 +17,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'lml'
-copyright = u'2017 Onni Software Ltd.'
-version = '0.0.2'
-release = '0.0.2'
+copyright = u'2017-2018 Onni Software Ltd.'
+version = '0.0.3'
+release = '0.0.3'
 exclude_patterns = []
 pygments_style = 'sphinx'
 html_theme = 'default'
