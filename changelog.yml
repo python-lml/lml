@@ -1,0 +1,22 @@
+name: jupyter-echarts-pypkg
+organisation: pyecharts
+releases:
+- changes:
+  - action: Added
+    details:
+    - "`dict` can be a pluggable type in addition to `function`, `class`"
+    - get primary tag of your tag, helping you find out which category of plugins your tag points to
+  date: unreleased
+  version: 0.0.3
+- changes:
+  - action: Updated
+    details:
+    - "`pyexcel#103`: include LICENSE in tar ball"
+  date: 23/10/2017
+  version: 0.0.2
+- changes:
+  - action: Added
+    details:
+    - First release
+  date: 30/05/2017
+  version: 0.0.1
