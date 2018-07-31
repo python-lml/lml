@@ -53,7 +53,7 @@ def scan_plugins(prefix, pyinstaller_path, black_list=None, white_list=None,
        For example, robot_cuisine is a built-in module inside robotchef. It
        is listed in white_list.
     """
-    __plugin_name_patterns = "%s.+"
+    __plugin_name_patterns = "^%s.+$" % prefix
     scan_plugins_regex(plugin_name_patterns=__plugin_name_patterns,
                        pyinstaller_path=pyinstaller_path,
                        black_list=black_list,
