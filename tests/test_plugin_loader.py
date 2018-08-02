@@ -4,10 +4,20 @@ from nose.tools import eq_
 
 @patch('pkgutil.get_importer')
 def test_load_from_pyinstaller(pkgutil_get_importer):
-    sample_toc = set(['pyexcel_io', 'pyexcel_xls', 'blah'])
+    sample_toc = set(['pyexcel_io', 'pyexcel_xls', 'blah', 'test.dot.module'])
     pkgutil_get_importer.return_value.toc = sample_toc
     from lml.loader import scan_from_pyinstaller
     module_names = scan_from_pyinstaller('pyexcel_', 'path')
+    expected = ['pyexcel_io', 'pyexcel_xls']
+    eq_(sorted(list(module_names)), sorted(expected))
+
+
+@patch('pkgutil.get_importer')
+def test_load_from_pyinstaller_with_regex(pkgutil_get_importer):
+    sample_toc = set(['pyexcel_io', 'pyexcel_xls', 'blah'])
+    pkgutil_get_importer.return_value.toc = sample_toc
+    from lml.loader import scan_from_pyinstaller
+    module_names = scan_from_pyinstaller('^.+cel_.+$', 'path')
     expected = ['pyexcel_io', 'pyexcel_xls']
     eq_(sorted(list(module_names)), sorted(expected))
 
