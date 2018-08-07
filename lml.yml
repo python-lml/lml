@@ -10,4 +10,5 @@ release: "0.0.4"
 copyright_year: 2017-2018
 license: New BSD
 dependencies: []
-description: "Load me later. A loading plugin management system."
+description: "Load me later. A lazy plugin management system."
+
