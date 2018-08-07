@@ -12,13 +12,15 @@ from lml._version import __version__  # flake8: noqa
 from lml._version import __author__  # flake8: noqa
 
 try:
-     from logging import NullHandler
+    from logging import NullHandler
 except ImportError:
-     class NullHandler(logging.Handler):
-          """
+
+    class NullHandler(logging.Handler):
+        """
           Null handler for logging
           """
-          def emit(self, record):
-              pass
 
-     logging.getLogger(__name__).addHandler(NullHandler())
+        def emit(self, record):
+            pass
+
+    logging.getLogger(__name__).addHandler(NullHandler())
