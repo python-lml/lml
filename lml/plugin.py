@@ -93,9 +93,10 @@ class PluginInfo(object):
         echoing hey..
 
     """
-    def __init__(self, plugin_type,
-                 abs_class_path=None,
-                 tags=None, **keywords):
+
+    def __init__(
+        self, plugin_type, abs_class_path=None, tags=None, **keywords
+    ):
         self.plugin_type = plugin_type
         self.absolute_import_path = abs_class_path
         self.cls = None
@@ -103,9 +104,9 @@ class PluginInfo(object):
         self.__tags = tags
 
     def __getattr__(self, name):
-        if name == 'module_name':
+        if name == "module_name":
             if self.absolute_import_path:
-                module_name = self.absolute_import_path.split('.')[0]
+                module_name = self.absolute_import_path.split(".")[0]
             else:
                 module_name = self.cls.__module__
             return module_name
@@ -124,8 +125,10 @@ class PluginInfo(object):
                 yield tag
 
     def __repr__(self):
-        rep = {"plugin_type": self.plugin_type,
-               "path": self.absolute_import_path}
+        rep = {
+            "plugin_type": self.plugin_type,
+            "path": self.absolute_import_path,
+        }
         rep.update(self.properties)
         return json_dumps(rep)
 
@@ -141,13 +144,14 @@ class PluginInfoChain(object):
 
     It is used in the plugin packages to list all plugin classes
     """
+
     def __init__(self, path):
         self._logger = logging.getLogger(
-            self.__class__.__module__ + '.' + self.__class__.__name__)
+            self.__class__.__module__ + "." + self.__class__.__name__
+        )
         self.module_name = path
 
-    def add_a_plugin(self, plugin_type, submodule=None,
-                     **keywords):
+    def add_a_plugin(self, plugin_type, submodule=None, **keywords):
         """
         Add a plain plugin
 
@@ -161,9 +165,8 @@ class PluginInfoChain(object):
           the relative import path to your plugin class
         """
         a_plugin_info = PluginInfo(
-            plugin_type,
-            self._get_abs_path(submodule),
-            **keywords)
+            plugin_type, self._get_abs_path(submodule), **keywords
+        )
 
         self.add_a_plugin_instance(a_plugin_info)
         return self
@@ -180,9 +183,11 @@ class PluginInfoChain(object):
 
         The developer has to specify the absolute import path
         """
-        self._logger.debug("add %s as '%s' plugin",
-                           plugin_info_instance.absolute_import_path,
-                           plugin_info_instance.plugin_type)
+        self._logger.debug(
+            "add %s as '%s' plugin",
+            plugin_info_instance.absolute_import_path,
+            plugin_info_instance.plugin_type,
+        )
         _load_me_later(plugin_info_instance)
         return self
 
@@ -201,12 +206,14 @@ class PluginManager(object):
         the plugin type. All plugins of this plugin type will be
         registered to it.
     """
+
     def __init__(self, plugin_type):
         self.plugin_name = plugin_type
         self.registry = defaultdict(list)
         self.tag_groups = dict()
         self._logger = logging.getLogger(
-            self.__class__.__module__ + '.' + self.__class__.__name__)
+            self.__class__.__module__ + "." + self.__class__.__name__
+        )
         _register_class(self)
 
     def get_a_plugin(self, key, **keywords):
@@ -237,8 +244,7 @@ class PluginManager(object):
             the key to find the plugin
         """
         self._logger.debug(self.registry.keys())
-        raise Exception(
-            "No %s is found for %s" % (self.plugin_name, key))
+        raise Exception("No %s is found for %s" % (self.plugin_name, key))
 
     def load_me_later(self, plugin_info):
         """
@@ -250,8 +256,7 @@ class PluginManager(object):
         plugin_info:
             a instance of plugin info
         """
-        self._logger.debug('load %s later',
-                           plugin_info.absolute_import_path)
+        self._logger.debug("load %s later", plugin_info.absolute_import_path)
         for key in plugin_info.tags():
             self.registry[key.lower()].append(plugin_info)
 
@@ -282,9 +287,7 @@ class PluginManager(object):
             else:
                 # only library condition coud raise an exception
                 raise Exception("%s is not installed" % library)
-            self._logger.debug("load %s now for '%s'",
-                               cls,
-                               key)
+            self._logger.debug("load %s now for '%s'", cls, key)
             return cls
         else:
             self.raise_exception(key)
@@ -317,8 +320,7 @@ class PluginManager(object):
         plugin_info:
             a instance of plugin info
         """
-        self._logger.debug("register %s",
-                           _show_me_your_name(plugin_cls))
+        self._logger.debug("register %s", _show_me_your_name(plugin_cls))
         primary_tag = None
         for index, key in enumerate(plugin_info.tags()):
             plugin_info.cls = plugin_cls
@@ -334,18 +336,21 @@ class PluginManager(object):
 
 def _register_class(cls):
     """Reigister a newly created plugin manager"""
-    log.debug("declare '%s' plugin manager",
-              cls.plugin_name)
+    log.debug("declare '%s' plugin manager", cls.plugin_name)
     PLUG_IN_MANAGERS[cls.plugin_name] = cls
     if cls.plugin_name in CACHED_PLUGIN_INFO:
         # check if there is early registrations or not
         for plugin_info in CACHED_PLUGIN_INFO[cls.plugin_name]:
             if plugin_info.absolute_import_path:
-                log.debug("load cached plugin info: %s",
-                          plugin_info.absolute_import_path)
+                log.debug(
+                    "load cached plugin info: %s",
+                    plugin_info.absolute_import_path,
+                )
             else:
-                log.debug("load cached plugin info: %s",
-                          _show_me_your_name(plugin_info.cls))
+                log.debug(
+                    "load cached plugin info: %s",
+                    _show_me_your_name(plugin_info.cls),
+                )
             cls.load_me_later(plugin_info)
 
         del CACHED_PLUGIN_INFO[cls.plugin_name]
@@ -358,8 +363,7 @@ def _register_a_plugin(plugin_info, plugin_cls):
         manager.register_a_plugin(plugin_cls, plugin_info)
     else:
         # let's cache it and wait the manager to be registered
-        log.debug("caching %s",
-                  _show_me_your_name(plugin_cls.__name__))
+        log.debug("caching %s", _show_me_your_name(plugin_cls.__name__))
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
@@ -370,17 +374,19 @@ def _load_me_later(plugin_info):
         manager.load_me_later(plugin_info)
     else:
         # let's cache it and wait the manager to be registered
-        log.debug("caching %s for %s",
-                  plugin_info.absolute_import_path,
-                  plugin_info.plugin_type)
+        log.debug(
+            "caching %s for %s",
+            plugin_info.absolute_import_path,
+            plugin_info.plugin_type,
+        )
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 
 def _get_me_pypi_package_name(module):
     try:
         module_name = module.__module__
-        root_module_name = module_name.split('.')[0]
-        return root_module_name.replace('_', '-')
+        root_module_name = module_name.split(".")[0]
+        return root_module_name.replace("_", "-")
     except AttributeError:
         return None
 

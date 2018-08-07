@@ -5,7 +5,6 @@ from lml.utils import do_import
 
 
 def test_json_dumps():
-
     class TestClass:
         pass
 
@@ -16,12 +15,14 @@ def test_json_dumps():
 
 def test_do_import():
     import pyexcel_test
+
     pyexcel_test_package = do_import("pyexcel_test")
     eq_(pyexcel_test_package, pyexcel_test)
 
 
 def test_do_import_2():
     import lml.plugin as plugin
+
     themodule = do_import("lml.plugin")
     eq_(plugin, themodule)
 
@@ -33,5 +34,6 @@ def test_do_import_error():
 
 def test_do_import_cls():
     from lml.utils import do_import_class
+
     manager = do_import_class("lml.plugin.PluginManager")
     eq_(manager, PluginManager)

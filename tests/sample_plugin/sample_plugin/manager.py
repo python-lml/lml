@@ -3,7 +3,7 @@ from lml.plugin import PluginManager
 
 class TestPluginManager(PluginManager):
     def __init__(self):
-        PluginManager.__init__(self, 'test_io2')
+        PluginManager.__init__(self, "test_io2")
 
     def load_me_later(self, plugin_info):
         PluginManager.load_me_later(self, plugin_info)
