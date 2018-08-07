@@ -5,7 +5,7 @@ releases:
   - action: Added
     details:
     - "`#4`: to find plugin names with different naming patterns"
-  date: pending release
+  date: 07.08.2018 
   version: 0.0.4
 - changes:
   - action: Added
