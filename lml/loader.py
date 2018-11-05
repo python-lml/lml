@@ -10,11 +10,11 @@
     :license: New BSD License, see LICENSE for more details
 """
 import re
-import pkgutil
 import logging
+import pkgutil
 from itertools import chain
-from lml.utils import do_import
 
+from lml.utils import do_import
 
 log = logging.getLogger(__name__)
 

@@ -28,9 +28,7 @@
 import logging
 from collections import defaultdict
 
-from lml.utils import do_import_class
-from lml.utils import json_dumps
-
+from lml.utils import json_dumps, do_import_class
 
 PLUG_IN_MANAGERS = {}
 CACHED_PLUGIN_INFO = defaultdict(list)

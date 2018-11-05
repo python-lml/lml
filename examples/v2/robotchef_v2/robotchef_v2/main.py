@@ -1,6 +1,6 @@
 import sys
 
-from robotchef_api import cuisine_manager, NoChefException
+from robotchef_api import NoChefException, cuisine_manager
 
 
 def main():

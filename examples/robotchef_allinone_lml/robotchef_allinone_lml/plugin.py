@@ -1,4 +1,4 @@
-from lml.plugin import PluginManager, PluginInfo
+from lml.plugin import PluginInfo, PluginManager
 
 
 class NoChefException(Exception):
@@ -17,27 +17,23 @@ class CuisineManager(PluginManager):
 
 
 class Chef(object):
-
     def make(self, **params):
         print("I am a chef")
 
 
-@PluginInfo('cuisine', tags=['Portable Battery'])
+@PluginInfo("cuisine", tags=["Portable Battery"])
 class Boost(Chef):
-
     def make(self, food=None, **keywords):
         print("I can cook %s for robots" % food)
 
 
-@PluginInfo('cuisine', tags=['Fish and Chips'])
+@PluginInfo("cuisine", tags=["Fish and Chips"])
 class Fry(Chef):
-
     def make(self, food=None):
         print("I can fry " + food)
 
 
-@PluginInfo('cuisine', tags=['Cornish Scone', 'Jacket Potato'])
+@PluginInfo("cuisine", tags=["Cornish Scone", "Jacket Potato"])
 class Bake(Chef):
-
     def make(self, food=None):
         print("I can bake " + food)

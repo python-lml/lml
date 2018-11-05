@@ -9,8 +9,7 @@
 """
 import sys
 import logging
-from json import dumps, JSONEncoder
-
+from json import JSONEncoder, dumps
 
 PY2 = sys.version_info[0] == 2
 log = logging.getLogger(__name__)
