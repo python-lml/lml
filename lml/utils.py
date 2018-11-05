@@ -11,6 +11,11 @@ import sys
 import logging
 from json import dumps, JSONEncoder
 
+try:
+    ModuleNotFoundError
+except NameError:
+    ModuleNotFoundError = ImportError    
+
 
 PY2 = sys.version_info[0] == 2
 log = logging.getLogger(__name__)
@@ -48,10 +53,7 @@ def do_import(plugin_module_name):
         log.debug("found " + plugin_module_name)
         return plugin_module
     except ModuleNotFoundError:
-        log.info("Module %s is missing", plugin_module_name)
-    except ImportError:
         log.exception("failed to import %s", plugin_module_name)
-        raise
 
 
 def do_import_class(plugin_class):
