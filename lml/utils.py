@@ -47,6 +47,8 @@ def do_import(plugin_module_name):
                 plugin_module = getattr(plugin_module, module)
         log.debug("found " + plugin_module_name)
         return plugin_module
+    except ModuleNotFoundError:
+        log.info("Module %s is missing", plugin_module_name)
     except ImportError:
         log.exception("failed to import %s", plugin_module_name)
         raise
