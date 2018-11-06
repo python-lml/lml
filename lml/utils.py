@@ -42,7 +42,7 @@ def do_import(plugin_module_name):
     if PY36:
         try:
             return _do_import(plugin_module_name)
-        except (ImportError, ModuleNotFoundError):
+        except (ImportError, ModuleNotFoundError):  # noqa: F821
             log.exception("failed to import %s", plugin_module_name)
     else:
         try:
