@@ -2,8 +2,9 @@ import sys
 import logging
 import logging.config
 
-from lml.loader import scan_plugins
 from robotchef.plugin import CuisineManager, NoChefException
+
+from lml.loader import scan_plugins
 
 logging.basicConfig(
     format="%(name)s:%(lineno)d - %(levelname)s - %(message)s",

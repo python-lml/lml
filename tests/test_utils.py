@@ -1,7 +1,6 @@
+from mock import patch
 from lml.utils import do_import, json_dumps
 from lml.plugin import PluginManager
-
-from mock import patch
 from nose.tools import eq_
 
 

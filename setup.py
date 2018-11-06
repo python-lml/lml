@@ -23,7 +23,7 @@ URL = 'https://github.com/chfw/lml'
 DOWNLOAD_URL = '%s/archive/0.0.4.tar.gz' % URL
 FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
-    'python'
+    'python',
 ]
 
 CLASSIFIERS = [

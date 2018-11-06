@@ -1,8 +1,5 @@
 from lml.loader import scan_plugins
-from robotchef_api.plugin import (  # noqa: F401
-    CuisineManager,
-    NoChefException,
-)
+from robotchef_api.plugin import CuisineManager, NoChefException  # noqa: F401
 
 
 BUILTINS = ["robotchef_api.robot_cuisine"]

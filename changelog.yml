@@ -2,10 +2,16 @@ name: lml
 organisation: chfw
 releases:
 - changes:
+  - action: Fixed
+    details:
+    - "`#6`: Catch and Ignore ModuleNotFoundError"
+  date: unreleased
+  version: 0.0.5
+- changes:
   - action: Added
     details:
     - "`#4`: to find plugin names with different naming patterns"
-  date: 07.08.2018 
+  date: 07.08.2018
   version: 0.0.4
 - changes:
   - action: Added
