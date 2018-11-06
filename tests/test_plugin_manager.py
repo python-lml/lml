@@ -1,7 +1,11 @@
 from mock import patch
-from lml.plugin import PluginManager, PLUG_IN_MANAGERS
-from lml.plugin import PluginInfo, _show_me_your_name
-from lml.plugin import CACHED_PLUGIN_INFO
+from lml.plugin import (
+    PLUG_IN_MANAGERS,
+    CACHED_PLUGIN_INFO,
+    PluginInfo,
+    PluginManager,
+    _show_me_your_name,
+)
 from nose.tools import eq_, raises
 
 

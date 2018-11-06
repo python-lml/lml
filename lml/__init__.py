@@ -8,8 +8,8 @@
     :license: New BSD License, see LICENSE for more details
 """
 import logging
-from lml._version import __version__  # flake8: noqa
-from lml._version import __author__  # flake8: noqa
+from lml._version import __version__  # noqa: F401
+from lml._version import __author__  # noqa: F401
 
 try:
     from logging import NullHandler

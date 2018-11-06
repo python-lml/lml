@@ -17,6 +17,5 @@ class CuisineManager(PluginManager):
 
 
 class Chef(object):
-
     def make(self, **params):
         print(self.name)

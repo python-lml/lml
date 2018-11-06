@@ -1,16 +1,17 @@
 import sys
-
-from lml.loader import scan_plugins
-
-from robotchef.plugin import CuisineManager, NoChefException
 import logging
 import logging.config
 
-logging.basicConfig(
-    format='%(name)s:%(lineno)d - %(levelname)s - %(message)s',
-    level=logging.DEBUG)
+from robotchef.plugin import CuisineManager, NoChefException
 
-BUILTINS = ['robotchef.robot_cuisine']
+from lml.loader import scan_plugins
+
+logging.basicConfig(
+    format="%(name)s:%(lineno)d - %(levelname)s - %(message)s",
+    level=logging.DEBUG,
+)
+
+BUILTINS = ["robotchef.robot_cuisine"]
 
 
 def main():
@@ -18,7 +19,7 @@ def main():
         sys.exit(-1)
 
     cuisine_manager = CuisineManager()
-    scan_plugins("robotchef_", 'robotchef', white_list=BUILTINS)
+    scan_plugins("robotchef_", "robotchef", white_list=BUILTINS)
 
     food_name = sys.argv[1]
     try:

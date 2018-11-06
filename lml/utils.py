@@ -9,10 +9,10 @@
 """
 import sys
 import logging
-from json import dumps, JSONEncoder
-
+from json import JSONEncoder, dumps
 
 PY2 = sys.version_info[0] == 2
+PY36 = sys.version_info[0] == 3 and sys.version_info[1] >= 6
 log = logging.getLogger(__name__)
 
 
@@ -39,17 +39,26 @@ def json_dumps(keywords):
 
 def do_import(plugin_module_name):
     """dynamically import a module"""
-    try:
-        plugin_module = __import__(plugin_module_name)
-        if "." in plugin_module_name:
-            modules = plugin_module_name.split(".")
-            for module in modules[1:]:
-                plugin_module = getattr(plugin_module, module)
-        log.debug("found " + plugin_module_name)
-        return plugin_module
-    except ImportError:
-        log.exception("failed to import %s", plugin_module_name)
-        raise
+    if PY36:
+        try:
+            return _do_import(plugin_module_name)
+        except (ImportError, ModuleNotFoundError):  # noqa: F821
+            log.exception("failed to import %s", plugin_module_name)
+    else:
+        try:
+            return _do_import(plugin_module_name)
+        except ImportError:
+            log.exception("failed to import %s", plugin_module_name)
+
+
+def _do_import(plugin_module_name):
+    plugin_module = __import__(plugin_module_name)
+    if "." in plugin_module_name:
+        modules = plugin_module_name.split(".")
+        for module in modules[1:]:
+            plugin_module = getattr(plugin_module, module)
+    log.debug("found " + plugin_module_name)
+    return plugin_module
 
 
 def do_import_class(plugin_class):
