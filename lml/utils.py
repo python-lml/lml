@@ -12,6 +12,7 @@ import logging
 from json import JSONEncoder, dumps
 
 PY2 = sys.version_info[0] == 2
+PY36 = sys.version_info[0] == 3 and sys.version_info[1] >= 6
 log = logging.getLogger(__name__)
 
 
@@ -38,15 +39,15 @@ def json_dumps(keywords):
 
 def do_import(plugin_module_name):
     """dynamically import a module"""
-    if PY2:
+    if PY36:
         try:
             return _do_import(plugin_module_name)
-        except ImportError:
+        except (ImportError, ModuleNotFoundError):
             log.exception("failed to import %s", plugin_module_name)
     else:
         try:
             return _do_import(plugin_module_name)
-        except (ImportError, ModuleNotFoundError):
+        except ImportError:
             log.exception("failed to import %s", plugin_module_name)
 
 
