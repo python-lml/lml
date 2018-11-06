@@ -5,7 +5,7 @@ releases:
   - action: Fixed
     details:
     - "`#6`: Catch and Ignore ModuleNotFoundError"
-  date: unreleased
+  date: 06/11/2018
   version: 0.0.5
 - changes:
   - action: Added
