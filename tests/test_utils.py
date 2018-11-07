@@ -1,7 +1,7 @@
 from mock import patch
 from lml.utils import do_import, json_dumps
 from lml.plugin import PluginManager
-from nose.tools import eq_
+from nose.tools import eq_, raises
 
 
 def test_json_dumps():
@@ -27,10 +27,11 @@ def test_do_import_2():
     eq_(plugin, themodule)
 
 
+@raises(ImportError)
 @patch("lml.utils.log.exception")
 def test_do_import_error(mock_exception):
     do_import("non.exist")
-    mock_exception.assert_called_with("failed to import %s", "non.exist")
+    mock_exception.assert_called_with("No module named 'non'")
 
 
 def test_do_import_cls():

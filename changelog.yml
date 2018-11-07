@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Fixed
     details:
+    - "Revert the version 0.0.5 changes. Raise Import error and log the exception"
+  date: 07/11/2018
+  version: 0.0.6
+- changes:
+  - action: Fixed
+    details:
     - "`#6`: Catch and Ignore ModuleNotFoundError"
   date: 06/11/2018
   version: 0.0.5
