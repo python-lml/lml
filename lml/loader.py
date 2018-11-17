@@ -12,6 +12,7 @@
 import re
 import logging
 import pkgutil
+import warnings
 from itertools import chain
 
 from lml.utils import do_import
@@ -59,6 +60,7 @@ def scan_plugins(
        is listed in white_list.
     """
     __plugin_name_patterns = "^%s.+$" % prefix
+    warnings.warn("Deprecated! since version 0.0.3")
     scan_plugins_regex(
         plugin_name_patterns=__plugin_name_patterns,
         pyinstaller_path=pyinstaller_path,
