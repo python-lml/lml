@@ -33,6 +33,8 @@ def test_load_me_now(mock_import):
     manager.load_me_later(plugin_info)
     actual = manager.load_me_now(test_plugin)
     eq_(actual, custom_class)
+    eq_(manager.tag_groups, {"my plugin": "my plugin"})
+    eq_(plugin_info, manager.registry["my plugin"][0])
 
 
 @raises(Exception)
@@ -87,6 +89,7 @@ def test_register_a_plugin():
     manager.register_a_plugin(TestClass, plugin_info)
     eq_(plugin_info.cls, TestClass)
     eq_(manager.registry["my"][0], plugin_info)
+    eq_(manager.tag_groups, {"my": "my"})
 
 
 def test_get_a_plugin():
