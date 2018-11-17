@@ -60,7 +60,8 @@ def scan_plugins(
        is listed in white_list.
     """
     __plugin_name_patterns = "^%s.+$" % prefix
-    warnings.warn("Deprecated! since version 0.0.3")
+    warnings.warn(
+        "Deprecated! since version 0.0.3. Please use scan_plugins_regex!")
     scan_plugins_regex(
         plugin_name_patterns=__plugin_name_patterns,
         pyinstaller_path=pyinstaller_path,
