@@ -2,6 +2,10 @@ name: lml
 organisation: chfw
 releases:
 - changes:
+  - action: Updated
+    details:
+    - "`#9`: include tests, docs for OpenSuse package validation"
+- changes:
   - action: Fixed
     details:
     - "`#6`: Catch and Ignore ModuleNotFoundError"
