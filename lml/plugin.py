@@ -255,8 +255,7 @@ class PluginManager(object):
             a instance of plugin info
         """
         self._logger.debug("load %s later", plugin_info.absolute_import_path)
-        for key in plugin_info.tags():
-            self.registry[key.lower()].append(plugin_info)
+        self._update_registry_and_expand_tag_groups(plugin_info)
 
     def load_me_now(self, key, library=None, **keywords):
         """
@@ -319,17 +318,20 @@ class PluginManager(object):
             a instance of plugin info
         """
         self._logger.debug("register %s", _show_me_your_name(plugin_cls))
-        primary_tag = None
-        for index, key in enumerate(plugin_info.tags()):
-            plugin_info.cls = plugin_cls
-            self.registry[key.lower()].append(plugin_info)
-            if index == 0:
-                primary_tag = key.lower()
-            self.tag_groups[key.lower()] = primary_tag
+        plugin_info.cls = plugin_cls
+        self._update_registry_and_expand_tag_groups(plugin_info)
 
     def get_primary_key(self, key):
         __key = key.lower()
         return self.tag_groups.get(__key, None)
+
+    def _update_registry_and_expand_tag_groups(self, plugin_info):
+        primary_tag = None
+        for index, key in enumerate(plugin_info.tags()):
+            self.registry[key.lower()].append(plugin_info)
+            if index == 0:
+                primary_tag = key.lower()
+            self.tag_groups[key.lower()] = primary_tag
 
 
 def _register_class(cls):

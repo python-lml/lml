@@ -24,7 +24,7 @@ DESCRIPTION = (
 # -- Project information -----------------------------------------------------
 
 project = u'lml'
-copyright = u'2017-2018 Onni Software Ltd.'
+copyright = u'2017-2019 Onni Software Ltd.'
 author = u'C.W.'
 
 # The short X.Y version

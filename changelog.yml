@@ -5,6 +5,21 @@ releases:
   - action: Updated
     details:
     - "`#9`: include tests, docs for OpenSuse package validation"
+  date: 4/1/2019
+  version: 0.0.8
+- changes:
+  - action: Fixed
+    details:
+    - "`#8`: get_primary_key will fail when a module is loaded later"
+    - "deprecated old style plugin scanner: scan_plugins"
+  date: 17/11/2018
+  version: 0.0.7
+- changes:
+  - action: Fixed
+    details:
+    - "Revert the version 0.0.5 changes. Raise Import error and log the exception"
+  date: 07/11/2018
+  version: 0.0.6
 - changes:
   - action: Fixed
     details:

@@ -7,7 +7,7 @@ company: "Onni Software Ltd."
 version: "0.0.8"
 current_version: "0.0.8"
 release: "0.0.8"
-copyright_year: 2017-2018
+copyright_year: 2017-2019
 license: New BSD
 dependencies: []
 description: "Load me later. A lazy plugin management system."
