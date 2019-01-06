@@ -13,14 +13,14 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'lml'
 AUTHOR = 'C.W.'
-VERSION = '0.0.7'
+VERSION = '0.0.8'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'Load me later. A lazy plugin management system.'
 )
 URL = 'https://github.com/chfw/lml'
-DOWNLOAD_URL = '%s/archive/0.0.7.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.0.8.tar.gz' % URL
 FILES = ['README.rst', 'CHANGELOG.rst']
 KEYWORDS = [
     'python',
@@ -48,8 +48,8 @@ EXTRAS_REQUIRE = {}
 # You do not need to read beyond this line
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs lml v0.0.7 ' +
-              "Find 0.0.7 in changelog for more details")
+GS_COMMAND = ('gs lml v0.0.8 ' +
+              "Find 0.0.8 in changelog for more details")
 NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
                  'Please install gease to enable it.')
 UPLOAD_FAILED_MSG = (
