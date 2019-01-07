@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Updated
     details:
+    - "`#11`: more test contents for OpenSuse package validation"
+  date: 7/1/2019
+  version: 0.0.9
+- changes:
+  - action: Updated
+    details:
     - "`#9`: include tests, docs for OpenSuse package validation"
   date: 4/1/2019
   version: 0.0.8

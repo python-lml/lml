@@ -1,5 +1,5 @@
 include README.rst
 include LICENSE
 include CHANGELOG.rst
-include tests/*.py
+recursive-include tests *
 include docs/source/*

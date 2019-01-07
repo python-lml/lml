@@ -3,6 +3,5 @@ nose
 codecov
 coverage
 flake8
-six
 black;python_version>="3.6"
 isort;python_version>="3.6"
