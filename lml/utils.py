@@ -42,7 +42,7 @@ def do_import(plugin_module_name):
         return _do_import(plugin_module_name)
     except ImportError:
         log.exception(
-            "%s is abscent or cannot be imported", plugin_module_name
+            "%s is absent or cannot be imported", plugin_module_name
         )
         raise
 
