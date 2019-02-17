@@ -51,6 +51,15 @@ or clone it and install it:
     $ cd lml
     $ python setup.py install
 
+lml enabled project
+================================================================================
+
+Beyond the documentation above, here is a list of projects using lml:
+
+#. `pyexcel <https://github.com/pyexcel/pyexcel>`_
+#. `pyecharts <https://github.com/pyecharts/pyecharts>`_
+#. `moban <https://github.com/moremoban/moban>`_
+
 License
 ================================================================================
 

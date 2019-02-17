@@ -47,6 +47,6 @@ Documentation
 
 Beyond the documentation above, here is a list of projects using lml:
 
-#. `pyexcel <https://github.com/pyexcel.pyexcel>`_
-#. `pyexcel-io <https://github.com/pyexcel.pyexcel-io>`_
-#. `pyexcel-chart <https://github.com/pyexcel.pyexcel-chart>`_
+#. `pyexcel <https://github.com/pyexcel/pyexcel>`_
+#. `pyecharts <https://github.com/pyecharts/pyecharts>`_
+#. `moban <https://github.com/moremoban/moban>`_
