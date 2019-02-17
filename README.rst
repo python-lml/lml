@@ -60,6 +60,11 @@ Beyond the documentation above, here is a list of projects using lml:
 #. `pyecharts <https://github.com/pyecharts/pyecharts>`_
 #. `moban <https://github.com/moremoban/moban>`_
 
+lml is available on these distributions:
+
+#. `ARCH linux <https://aur.archlinux.org/packages/python-lml/>`_
+#. `Conda forge <https://anaconda.org/conda-forge/lml>`_
+#. `OpenSuse <https://build.opensuse.org/package/show/devel:languages:python/python-lml>`_
 License
 ================================================================================
 
