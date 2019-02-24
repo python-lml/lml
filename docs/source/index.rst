@@ -68,6 +68,8 @@ At a glance, above code simply replaces the Factory pattern should you write
 them without lml. What's not obvious is, that once you got hands-on with it,
 you can start work on how to do **lazy** loading.
 
+
+
 Documentation
 ----------------
 
