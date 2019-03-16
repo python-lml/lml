@@ -11,7 +11,7 @@ targets:
   - README.rst: CUSTOM_README.rst.jj2
   - setup.py: custom_setup.py.jj2
   - requirements.txt: requirements.txt.jj2
-  - "docs/source/conf.py": "docs/source/myconf.py.jj2"
+  - "docs/source/conf.py": "docs/source/custom_conf.py.jj2"
   - "docs/source/index.rst": "docs/source/custom_index.rst.jj2"
   - test.sh: test.sh.jj2
   - "lml/_version.py": _version.py.jj2
