@@ -65,7 +65,7 @@ Notably, the plugin loader is put in the __init__.py:
 .. literalinclude:: ../../examples/v2/robotchef_api/robotchef_api/__init__.py
   :language: python
 
-scan_plugins here loads all modules that start with "robotchef_" and as well as
+scan_plugins_regex here loads all modules that start with "robotchef_" and as well as
 the module `robotchef_api.robot_cuisine` in the white_list.
 
 This is how you will write the main component as a library.
