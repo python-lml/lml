@@ -35,7 +35,7 @@ LICENSE = "New BSD"
 DESCRIPTION = (
     "Load me later. A lazy plugin management system."
 )
-URL = "https://github.com/chfw/lml"
+URL = "https://github.com/python-lml/lml"
 DOWNLOAD_URL = "%s/archive/0.0.9.tar.gz" % URL
 FILES = ["README.rst", "CHANGELOG.rst"]
 KEYWORDS = [
@@ -111,7 +111,7 @@ class PublishCommand(Command):
             self.status(NO_GS_MESSAGE)
         if run_status:
             if os.system(PUBLISH_COMMAND) != 0:
-                self.status(UPLOAD_FAILED_MSG % PUBLISH_COMMAND)
+                self.status(UPLOAD_FAILED_MSG)
 
         sys.exit()
 

@@ -1,10 +1,6 @@
-requires:
-  - type: git
-    url: https://github.com/moremoban/pypi-mobans
-    submodule: true
 configuration:
   template_dir:
-  - "pypi-mobans:templates"
+  - "git://github.com/moremoban/pypi-mobans.git?submodule=true&branch=dev!/templates"
   - ".moban.d"
   configuration: lml.yml
 targets:

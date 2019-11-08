@@ -2,11 +2,17 @@
 lml - Load me later. A lazy plugin management system.
 ================================================================================
 
-.. image:: https://api.travis-ci.org/chfw/lml.svg
-   :target: http://travis-ci.org/chfw/lml
+.. image:: https://api.travis-ci.org/python-lml/lml.svg
+   :target: http://travis-ci.org/python-lml/lml
 
-.. image:: https://codecov.io/github/chfw/lml/coverage.png
-   :target: https://codecov.io/github/chfw/lml
+.. image:: https://codecov.io/github/python-lml/lml/coverage.png
+   :target: https://codecov.io/github/python-lml/lml
+
+.. image:: https://badge.fury.io/py/lml.svg
+   :target: https://pypi.org/project/lml
+
+.. image:: https://pepy.tech/badge/lml/month
+   :target: https://pepy.tech/project/lml/month
 
 
 .. image:: https://readthedocs.org/projects/lml/badge/?version=latest
@@ -83,7 +89,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/chfw/lml.git
+    $ git clone https://github.com/python-lml/lml.git
     $ cd lml
     $ python setup.py install
 
