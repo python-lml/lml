@@ -1,6 +1,7 @@
 import json
 
 from lml.plugin import PluginInfo
+
 from nose.tools import eq_
 
 

@@ -22,7 +22,7 @@
     can be overridden to help its matching :class:`~lml.plugin.PluginManager`
     to look itself up.
 
-    :copyright: (c) 2017-2018 by Onni Software Ltd.
+    :copyright: (c) 2017-2020 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
 """
 import logging
@@ -363,7 +363,10 @@ def _register_a_plugin(plugin_info, plugin_cls):
         manager.register_a_plugin(plugin_cls, plugin_info)
     else:
         # let's cache it and wait the manager to be registered
-        log.debug("caching %s", _show_me_your_name(plugin_cls.__name__))
+        try:
+            log.debug("caching %s", _show_me_your_name(plugin_cls.__name__))
+        except AttributeError:
+            log.debug("caching %s", _show_me_your_name(plugin_cls))
         CACHED_PLUGIN_INFO[plugin_info.plugin_type].append(plugin_info)
 
 

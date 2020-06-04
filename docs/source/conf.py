@@ -82,5 +82,6 @@ texinfo_documents = [
 ]
 intersphinx_mapping.update({
 })
+master_doc = "index"
 
 master_doc = "index"

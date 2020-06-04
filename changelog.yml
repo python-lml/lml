@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Updated
     details:
+    - "non class object can be a plugin too"
+  date: 4/6/2020
+  version: 0.1.0
+- changes:
+  - action: Updated
+    details:
     - "`#11`: more test contents for OpenSuse package validation"
   date: 7/1/2019
   version: 0.0.9

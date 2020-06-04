@@ -2,9 +2,8 @@ import sys
 import logging
 import logging.config
 
-from robotchef.plugin import CuisineManager, NoChefException
-
 from lml.loader import scan_plugins_regex
+from robotchef.plugin import CuisineManager, NoChefException
 
 logging.basicConfig(
     format="%(name)s:%(lineno)d - %(levelname)s - %(message)s",
@@ -22,7 +21,7 @@ def main():
     scan_plugins_regex(
         plugin_name_patterns="robotchef_",
         pyinstaller_path="robotchef",
-        white_list=BUILTINS
+        white_list=BUILTINS,
     )
 
     food_name = sys.argv[1]
