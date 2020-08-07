@@ -1,5 +1,4 @@
 mock
-nose
 codecov
 coverage
 flake8
