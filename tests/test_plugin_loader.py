@@ -1,5 +1,4 @@
 from mock import patch
-from nose.tools import eq_
 
 
 @patch("pkgutil.get_importer")
@@ -10,7 +9,7 @@ def test_load_from_pyinstaller(pkgutil_get_importer):
 
     module_names = scan_from_pyinstaller("pyexcel_", "path")
     expected = ["pyexcel_io", "pyexcel_xls"]
-    eq_(sorted(list(module_names)), sorted(expected))
+    assert sorted(list(module_names)) == sorted(expected)
 
 
 @patch("pkgutil.get_importer")
@@ -21,7 +20,7 @@ def test_load_from_pyinstaller_with_regex(pkgutil_get_importer):
 
     module_names = scan_from_pyinstaller("^.+cel_.+$", "path")
     expected = ["pyexcel_io", "pyexcel_xls"]
-    eq_(sorted(list(module_names)), sorted(expected))
+    assert sorted(list(module_names)) == sorted(expected)
 
 
 @patch("pkgutil.get_importer")
@@ -37,8 +36,8 @@ def test_load_plugins(pkgutil_iter_modules, pkgutil_get_importer):
     from lml.plugin import CACHED_PLUGIN_INFO
 
     info = CACHED_PLUGIN_INFO["test_io"][0]
-    eq_(info.plugin_type, "test_io")
-    eq_(info.absolute_import_path, "pyexcel_test.x")
+    assert info.plugin_type == "test_io"
+    assert info.absolute_import_path == "pyexcel_test.x"
 
 
 @patch("pkgutil.get_importer")
@@ -57,8 +56,8 @@ def test_load_plugins_without_pyinstaller(
     from lml.plugin import CACHED_PLUGIN_INFO
 
     info = CACHED_PLUGIN_INFO["test_io"][0]
-    eq_(info.plugin_type, "test_io")
-    eq_(info.absolute_import_path, "pyexcel_test.x")
+    assert info.plugin_type == "test_io"
+    assert info.absolute_import_path == "pyexcel_test.x"
 
 
 @patch("pkgutil.get_importer")
@@ -73,7 +72,7 @@ def test_load_plugins_without_any_plugins(
     from lml.loader import scan_plugins
 
     scan_plugins("pyexcel_", ".", ["pyexcel_io"])
-    assert mocked_load_me_later.called is False
+    assert not mocked_load_me_later.called
 
 
 @patch("pkgutil.get_importer")
@@ -88,7 +87,7 @@ def test_load_plugins_without_black_list(
     from lml.loader import scan_plugins
 
     scan_plugins("pyexcel_", ".")
-    assert mocked_load_me_later.called is False
+    assert not mocked_load_me_later.called
 
 
 @patch("pkgutil.get_importer")
@@ -103,4 +102,4 @@ def test_load_plugins_import_error(
     from lml.loader import scan_plugins
 
     scan_plugins("test_", ".", ["pyexcel_io"])
-    assert mocked_load_me_later.called is False
+    assert not mocked_load_me_later.called
