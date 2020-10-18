@@ -10,7 +10,7 @@
   {%endif%}
 {%endif%}
 pip freeze
-pytest tests --verbosity=3 --cov=moban --doctest-glob=*.rst && flake8 . --exclude=.moban.d,docs,setup.py {%block flake8_options%}--builtins=unicode,xrange,long{%endblock%}
+pytest tests --verbosity=3 --cov=lml --doctest-glob=*.rst && flake8 . --exclude=.moban.d,docs,setup.py {%block flake8_options%}--builtins=unicode,xrange,long{%endblock%}
 
 {%block posttest%}
 {%endblock%}
