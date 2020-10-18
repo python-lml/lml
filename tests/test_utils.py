@@ -1,8 +1,8 @@
-from pytest import raises
 from lml.utils import do_import, json_dumps
 from lml.plugin import PluginManager
 
 from mock import patch
+from pytest import raises
 
 
 def test_json_dumps():
@@ -32,7 +32,9 @@ def test_do_import_2():
 def test_do_import_error(mock_exception):
     with raises(ImportError):
         do_import("non.exist")
-    mock_exception.assert_called_with("No module named 'non'")
+    mock_exception.assert_called_with(
+        "%s is absent or cannot be imported", "non.exist"
+    )
 
 
 def test_do_import_cls():
