@@ -5,7 +5,7 @@ BUILTINS = ["robotchef_api.robot_cuisine"]
 
 
 scan_plugins_regex(
-    plugin_name_patterns="^Robotchef_.*$",
+    plugin_name_patterns="^robotchef_.*$",
     pyinstaller_path=__path__,  # noqa: F821
     white_list=BUILTINS,
 )
