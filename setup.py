@@ -69,13 +69,14 @@ PACKAGES = find_packages(exclude=["ez_setup", "examples", "tests", "tests.*"])
 EXTRAS_REQUIRE = {}
 # You do not need to read beyond this line
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
-GS_COMMAND = ("gs lml v0.0.9 " +
+HERE = os.path.abspath(os.path.dirname(__file__))
+
+GS_COMMAND = ("gease lml v0.0.9 " +
               "Find 0.0.9 in changelog for more details")
 NO_GS_MESSAGE = ("Automatic github release is disabled. " +
                  "Please install gease to enable it.")
 UPLOAD_FAILED_MSG = (
     'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND)
-HERE = os.path.abspath(os.path.dirname(__file__))
 
 
 class PublishCommand(Command):
@@ -120,7 +121,6 @@ class PublishCommand(Command):
 SETUP_COMMANDS.update({
     "publish": PublishCommand
 })
-
 
 def has_gease():
     """
@@ -191,7 +191,7 @@ if __name__ == "__main__":
         license=LICENSE,
         keywords=KEYWORDS,
         extras_require=EXTRAS_REQUIRE,
-        tests_require=["pytest"],
+        tests_require=["nose"],
         install_requires=INSTALL_REQUIRES,
         packages=PACKAGES,
         include_package_data=True,

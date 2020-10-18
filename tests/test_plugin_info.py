@@ -2,6 +2,7 @@ import json
 
 from lml.plugin import PluginInfo
 
+
 def test_plugin_info():
     info = PluginInfo(
         "renderer", abs_class_path="good.plugin.path", custom="property"

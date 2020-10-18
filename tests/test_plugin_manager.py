@@ -1,3 +1,4 @@
+from pytest import raises
 from lml.plugin import (
     PLUG_IN_MANAGERS,
     CACHED_PLUGIN_INFO,
@@ -7,7 +8,6 @@ from lml.plugin import (
 )
 
 from mock import patch
-from pytest import raises
 
 
 def test_plugin_manager():
