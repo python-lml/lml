@@ -26,4 +26,4 @@ def test_module_name_scenario_2():
 
     info = PluginInfo("renderer", custom="property")
     info.cls = TestClass2
-    assert info.module_name == "test_plugin_info"
+    assert info.module_name == "tests.test_plugin_info"
