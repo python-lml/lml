@@ -15,10 +15,10 @@ def test_json_dumps():
 
 
 def test_do_import():
-    import pyexcel_test
+    import isort
 
-    pyexcel_test_package = do_import("pyexcel_test")
-    assert pyexcel_test_package == pyexcel_test
+    test_package = do_import("isort")
+    assert test_package == isort
 
 
 def test_do_import_2():

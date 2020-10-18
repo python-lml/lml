@@ -12,5 +12,7 @@ license: New BSD
 dependencies: []
 test_dependencies:
   - lml
+  - pytest
+  - pytest-cov
 description: "Load me later. A lazy plugin management system."
 
