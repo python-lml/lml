@@ -1,4 +1,3 @@
-from pytest import raises
 from lml.plugin import (
     PLUG_IN_MANAGERS,
     CACHED_PLUGIN_INFO,
@@ -8,6 +7,7 @@ from lml.plugin import (
 )
 
 from mock import patch
+from pytest import raises
 
 
 def test_plugin_manager():
@@ -46,15 +46,15 @@ def test_load_me_now_exception(mock_import):
     with raises(Exception):
         manager = PluginManager(test_plugin)
         plugin_info = make_me_a_plugin_info("my")
-    manager.load_me_later(plugin_info)
-    manager.load_me_now("my", "my special library")
+        manager.load_me_later(plugin_info)
+        manager.load_me_now("my", "my special library")
 
 
 def test_load_me_now_no_key_found():
     test_plugin = "my plugin"
     with raises(Exception):
         manager = PluginManager(test_plugin)
-    manager.load_me_now("my", custom_property="here")
+        manager.load_me_now("my", custom_property="here")
 
 
 @patch("lml.plugin.do_import_class")
@@ -88,7 +88,7 @@ def test_register_a_plugin():
     manager = PluginManager(test_plugin)
     plugin_info = make_me_a_plugin_info("my")
     manager.register_a_plugin(TestClass, plugin_info)
-    assert plugin_info.cls == TestClas
+    assert plugin_info.cls == TestClass
     assert manager.registry["my"][0] == plugin_info
     assert manager.tag_groups == {"my": "my"}
 

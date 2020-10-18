@@ -1,6 +1,6 @@
 #!/bin/bash
 
-virtualenv --no-site-packages /tmp/v1-robot
+virtualenv /tmp/v1-robot
 source /tmp/v1-robot/bin/activate
 cd ..
 python setup.py install

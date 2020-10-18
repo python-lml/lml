@@ -10,5 +10,7 @@ release: "0.0.9"
 copyright_year: 2017-2019
 license: New BSD
 dependencies: []
+test_dependencies:
+  - lml
 description: "Load me later. A lazy plugin management system."
 
