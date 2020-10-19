@@ -1,3 +1,3 @@
 cd ../..
 python setup.py install
-nosetests
+pytest

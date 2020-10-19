@@ -1,7 +1,6 @@
 import sys
 
 from mock import patch
-from nose.tools import eq_
 
 PY2 = sys.version_info[0] == 2
 
@@ -18,4 +17,4 @@ def test_peking_duck(stdout):
 
     with patch.object(sys, "argv", arguments):
         main()
-        eq_(stdout.getvalue(), "I can bake Jacket Potato\n")
+        assert stdout.getvalue() == "I can bake Jacket Potato\n"
