@@ -16,3 +16,12 @@
 [submodule "examples/robotchef_chinesecuisine"]
 	path = examples/robotchef_chinesecuisine
 	url = https://github.com/python-lml/robotchef_chinesecuisine.git
+[submodule "examples/v2/robotchef_v2"]
+	path = examples/v2/robotchef_v2
+	url = https://github.com/python-lml/robotchef_v2.git
+[submodule "examples/v2/robotchef_britishcuisine"]
+	path = examples/v2/robotchef_britishcuisine
+	url = https://github.com/python-lml/robotchef_britishcuisine_v2
+[submodule "examples/v2/robotchef_api"]
+	path = examples/v2/robotchef_api
+	url = https://github.com/python-lml/robotchef_api
