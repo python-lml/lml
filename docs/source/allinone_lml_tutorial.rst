@@ -12,10 +12,9 @@ the next section where we will make the plugins to be loaded later.
 Demo
 --------------------------------------------------------------------------------
 
-Please navigate to
-`lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
-you would find robotchef_allinone_lml and its packages. Do the following::
+Please navigate to robotchef_allinone_lml and its packages. Do the following::
 
+    $ git clone https://github.com/python-lml/robotchef_allinone_lml
     $ cd robotchef_allinone_lml
     $ python setup.py install
 

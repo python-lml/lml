@@ -16,8 +16,11 @@ you would find robotchef and its packages. Do the following::
 
     $ virtualenv --no-site-packages robotchefv2
     $ source robotchefv2/bin/activate
+    $ git clone https://github.com/python-lml/robotchef_v2
     $ cd robotchef_v2
     $ python setup.py install
+    $ cd ..
+    $ git clone https://github.com/python-lml/robotchef_api
     $ cd robotchef_api
     $ python setup.py install
 
@@ -31,7 +34,8 @@ And then you can type in and test the second version of Robot Chef::
 In order to add "Jacket Potato" in the know-how, you would need to install
 robotchef_britishcuisine in this folder::
 
-    $ cd robotchef_britishcuisine
+    $ git clone https://github.com/python-lml/robotchef_britishcuisine_v2
+    $ cd robotchef_britishcuisine_v2
     $ python setup.py install
     $ robotchef_v2 "Jacket Potato"
     I can bake Jacket Potato
