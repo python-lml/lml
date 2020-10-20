@@ -273,6 +273,7 @@ class PluginManager(object):
         if keywords:
             self._logger.debug(keywords)
         __key = key.lower()
+
         if __key in self.registry:
             for plugin_info in self.registry[__key]:
                 cls = self.dynamic_load_library(plugin_info)
@@ -282,8 +283,9 @@ class PluginManager(object):
                 else:
                     break
             else:
-                # only library condition coud raise an exception
-                raise Exception("%s is not installed" % library)
+                # only library condition could raise an exception
+                self._logger.debug("%s is not installed" % library)
+                self.raise_exception(key)
             self._logger.debug("load %s now for '%s'", cls, key)
             return cls
         else:
