@@ -1,0 +1,3 @@
+[submodule "examples/robotchef_allinone"]
+	path = examples/robotchef_allinone
+	url = https://github.com/python-lml/robotchef_allinone.git
