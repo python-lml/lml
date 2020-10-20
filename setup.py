@@ -32,14 +32,14 @@ except (ValueError, UnicodeError, locale.Error):
 
 NAME = "lml"
 AUTHOR = "C.W."
-VERSION = "0.0.9"
+VERSION = "0.1.0"
 EMAIL = "wangc_2011@hotmail.com"
 LICENSE = "New BSD"
 DESCRIPTION = (
     "Load me later. A lazy plugin management system."
 )
 URL = "https://github.com/python-lml/lml"
-DOWNLOAD_URL = "%s/archive/0.0.9.tar.gz" % URL
+DOWNLOAD_URL = "%s/archive/0.1.0.tar.gz" % URL
 FILES = ["README.rst", "CHANGELOG.rst"]
 KEYWORDS = [
     "python",
@@ -71,8 +71,8 @@ EXTRAS_REQUIRE = {}
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-GS_COMMAND = ("gease lml v0.0.9 " +
-              "Find 0.0.9 in changelog for more details")
+GS_COMMAND = ("gease lml v0.1.0 " +
+              "Find 0.1.0 in changelog for more details")
 NO_GS_MESSAGE = ("Automatic github release is disabled. " +
                  "Please install gease to enable it.")
 UPLOAD_FAILED_MSG = (

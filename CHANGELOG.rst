@@ -7,6 +7,8 @@ Change log
 **Updated**
 
 #. non class object can be a plugin too
+#. `#20 <https://github.com/chfw/lml/issues/20>`_: When a plugin was not
+   installed, it now calls raise_exception method
 
 0.0.9 - 7/1/2019
 --------------------------------------------------------------------------------
