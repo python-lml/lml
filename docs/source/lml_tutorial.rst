@@ -9,7 +9,7 @@ demonstrates the changes needed to plugin them back with the main package.
 Demo
 --------------------------------------------------------------------------------
 
-Please navigate to robotchef and its packages. Do the following::
+Do the following::
 
     $ git clone https://github.com/python-lml/robotchef
     $ cd robotchef

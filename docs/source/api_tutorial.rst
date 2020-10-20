@@ -11,8 +11,7 @@ two so as to showcase how to use lml to write a shared api library.
 Demo
 --------------------------------------------------------------------------------
 
-Navigate to `lml/examples/v2 <https://github.com/chfw/lml/tree/master/examples/v2>`_,
-you would find robotchef and its packages. Do the following::
+Please checkout the following examples::
 
     $ virtualenv --no-site-packages robotchefv2
     $ source robotchefv2/bin/activate
