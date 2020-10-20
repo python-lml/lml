@@ -39,6 +39,18 @@ def test_load_me_now(mock_import):
 
 
 @patch("lml.plugin.do_import_class")
+def test_load_me_now_with_known_missing_library(mock_import):
+    custom_class = PluginInfo
+    mock_import.return_value = custom_class
+    test_plugin = "my plugin"
+    manager = PluginManager(test_plugin)
+    plugin_info = make_me_a_plugin_info(test_plugin)
+    manager.load_me_later(plugin_info)
+    with raises(Exception):
+        manager.load_me_now(test_plugin, library='alien')
+
+
+@patch("lml.plugin.do_import_class")
 def test_load_me_now_exception(mock_import):
     custom_class = PluginInfo
     mock_import.return_value = custom_class
