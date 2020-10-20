@@ -1,6 +1,0 @@
-pytest-cov
-pytest
-codecov
-coverage
-flake8
-mock
