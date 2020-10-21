@@ -1,12 +1,12 @@
 name: lml
-organisation: chfw
+organisation: python-lml
 releases:
 - changes:
   - action: Updated
     details:
     - "non class object can be a plugin too"
     - "`#20`: When a plugin was not installed, it now calls raise_exception method"
-  date: 4/6/2020
+  date: 21/10/2020
   version: 0.1.0
 - changes:
   - action: Updated
