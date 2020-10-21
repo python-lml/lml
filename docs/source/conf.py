@@ -25,7 +25,7 @@ project = 'lml'
 copyright = '2017-2020 Onni Software Ltd.'
 author = 'C.W.'
 # The short X.Y version
-version = '0.0.9'
+version = '0.1.0'
 # The full version, including alpha/beta/rc tags
 release = '0.1.0'
 
