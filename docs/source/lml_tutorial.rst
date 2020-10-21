@@ -9,10 +9,9 @@ demonstrates the changes needed to plugin them back with the main package.
 Demo
 --------------------------------------------------------------------------------
 
-Please navigate to
-`lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
-you would find robotchef and its packages. Do the following::
+Do the following::
 
+    $ git clone https://github.com/python-lml/robotchef
     $ cd robotchef
     $ python setup.py install
 
@@ -30,6 +29,7 @@ as below::
 it starts to understand it once you install Chinese cuisine package to complement
 its knowledge::
 
+    $ git clone https://github.com/python-lml/robotchef_britishcuisine
     $ cd robotchef_britishcuisine
     $ python setup.py install
 

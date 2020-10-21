@@ -1,4 +1,3 @@
-from mock import patch
 from lml.plugin import (
     PLUG_IN_MANAGERS,
     CACHED_PLUGIN_INFO,
@@ -6,7 +5,9 @@ from lml.plugin import (
     PluginManager,
     _show_me_your_name,
 )
-from nose.tools import eq_, raises
+
+from mock import patch
+from pytest import raises
 
 
 def test_plugin_manager():
@@ -32,28 +33,40 @@ def test_load_me_now(mock_import):
     plugin_info = make_me_a_plugin_info(test_plugin)
     manager.load_me_later(plugin_info)
     actual = manager.load_me_now(test_plugin)
-    eq_(actual, custom_class)
-    eq_(manager.tag_groups, {"my plugin": "my plugin"})
-    eq_(plugin_info, manager.registry["my plugin"][0])
+    assert actual == custom_class
+    assert manager.tag_groups == {"my plugin": "my plugin"}
+    assert plugin_info == manager.registry["my plugin"][0]
 
 
-@raises(Exception)
+@patch("lml.plugin.do_import_class")
+def test_load_me_now_with_known_missing_library(mock_import):
+    custom_class = PluginInfo
+    mock_import.return_value = custom_class
+    test_plugin = "my plugin"
+    manager = PluginManager(test_plugin)
+    plugin_info = make_me_a_plugin_info(test_plugin)
+    manager.load_me_later(plugin_info)
+    with raises(Exception):
+        manager.load_me_now(test_plugin, library='alien')
+
+
 @patch("lml.plugin.do_import_class")
 def test_load_me_now_exception(mock_import):
     custom_class = PluginInfo
     mock_import.return_value = custom_class
     test_plugin = "my plugin"
-    manager = PluginManager(test_plugin)
-    plugin_info = make_me_a_plugin_info("my")
-    manager.load_me_later(plugin_info)
-    manager.load_me_now("my", "my special library")
+    with raises(Exception):
+        manager = PluginManager(test_plugin)
+        plugin_info = make_me_a_plugin_info("my")
+        manager.load_me_later(plugin_info)
+        manager.load_me_now("my", "my special library")
 
 
-@raises(Exception)
 def test_load_me_now_no_key_found():
     test_plugin = "my plugin"
-    manager = PluginManager(test_plugin)
-    manager.load_me_now("my", custom_property="here")
+    with raises(Exception):
+        manager = PluginManager(test_plugin)
+        manager.load_me_now("my", custom_property="here")
 
 
 @patch("lml.plugin.do_import_class")
@@ -64,7 +77,7 @@ def test_dynamic_load_library(mock_import):
     manager = PluginManager(test_plugin)
     plugin_info = make_me_a_plugin_info(test_plugin)
     manager.dynamic_load_library(plugin_info)
-    eq_(custom_obj, plugin_info.cls)
+    assert custom_obj == plugin_info.cls
 
 
 @patch("lml.plugin.do_import_class")
@@ -87,9 +100,9 @@ def test_register_a_plugin():
     manager = PluginManager(test_plugin)
     plugin_info = make_me_a_plugin_info("my")
     manager.register_a_plugin(TestClass, plugin_info)
-    eq_(plugin_info.cls, TestClass)
-    eq_(manager.registry["my"][0], plugin_info)
-    eq_(manager.tag_groups, {"my": "my"})
+    assert plugin_info.cls == TestClass
+    assert manager.registry["my"][0] == plugin_info
+    assert manager.tag_groups == {"my": "my"}
 
 
 def test_get_a_plugin():
@@ -121,11 +134,11 @@ def test_load_me_later_function():
     assert list(manager.registry.keys()) == [test_plugin]
 
 
-@raises(ImportError)
 def test_do_import_cls_error():
     from lml.plugin import do_import_class
 
-    do_import_class("non.exist.class")
+    with raises(ImportError):
+        do_import_class("non.exist.class")
 
 
 def test_register_a_plugin_function_1():
@@ -157,7 +170,7 @@ def test_primary_key():
         pass
 
     pk = manager.get_primary_key("key 1")
-    eq_(pk, "primary key")
+    assert pk == "primary key"
 
 
 def test_dict_as_plugin_payload():
@@ -167,7 +180,7 @@ def test_dict_as_plugin_payload():
     plugin(dict(B=1))
 
     instance = manager.load_me_now("key 1")
-    eq_(instance, dict(B=1))
+    assert instance == dict(B=1)
 
 
 def test_show_me_your_name():
@@ -175,7 +188,7 @@ def test_show_me_your_name():
         pass
 
     name = _show_me_your_name(Test)
-    eq_(name, "Test")
+    assert name == "Test"
 
     name2 = _show_me_your_name(dict(A=1))
     assert "dict" in name2

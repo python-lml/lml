@@ -8,7 +8,7 @@ me show you how to enable the logs of lml.
 Enable the logging
 -------------------
 
-Let us open robotchef's `main.py <https://github.com/chfw/lml/blob/master/examples/robotchef/robotchef/main.py>`_. Insert the highlighted codes.
+Let us open robotchef's `main.py <https://github.com/python-lml/robotchef/blob/master/robotchef/main.py>`_. Insert the highlighted codes.
 
 .. code-block:: python
     :emphasize-lines: 5-10

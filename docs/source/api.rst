@@ -3,8 +3,8 @@ API documentation
 
 .. automodule:: lml.loader
 
-.. autofunction:: scan_plugins
-				  
+.. autofunction:: scan_plugins_regex
+
 .. automodule:: lml.plugin
 
 .. autoclass:: PluginInfo
@@ -13,4 +13,3 @@ API documentation
 
 .. autoclass:: PluginManager
    :members:
-		

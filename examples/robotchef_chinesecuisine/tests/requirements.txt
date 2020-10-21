@@ -1,4 +1,0 @@
-nose
-codecov
-coverage
-flake8

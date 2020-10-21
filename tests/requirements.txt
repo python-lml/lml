@@ -1,5 +1,6 @@
 mock
-nose
+pytest
+pytest-cov
 codecov
 coverage
 flake8

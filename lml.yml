@@ -1,14 +1,20 @@
 name: "lml"
 full_name: "Load me later. A lazy plugin management system."
-organisation: "chfw"
+organisation: "python-lml"
 author: "C.W."
 contact: "wangc_2011@hotmail.com"
 company: "Onni Software Ltd."
-version: "0.0.9"
-current_version: "0.0.9"
-release: "0.0.9"
-copyright_year: 2017-2019
+version: "0.1.0"
+current_version: "0.1.0"
+release: "0.1.0"
+copyright_year: 2017-2020
 license: New BSD
 dependencies: []
+test_dependencies:
+  - lml
+  - pytest
+  - pytest-cov
 description: "Load me later. A lazy plugin management system."
-
+excluded_github_users:
+  - chfw
+  - gitter-badger

@@ -7,13 +7,9 @@ without lml. In later on chapters, we will bring in **lml** step by step.
 Demo
 --------------------------------------------------------------------------------
 
-Please checkout lml::
+Please checkout the robot chef example::
 
-    $ git clone https://github.com/chfw/lml.git
-
-And navigate to `lml/examples <https://github.com/chfw/lml/tree/master/examples>`_,
-you would find robotchef_allinone and its packages. Do the following::
-
+    $ git clone https://github.com/python-lml/robotchef_allinone
     $ cd robotchef_allinone
     $ python setup.py install
 
@@ -40,7 +36,7 @@ actual implementations. Boost are for "robots". Bake and Fry are for human.
 
 .. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/plugin.py
   :language: python
-  :lines: 5-26
+  :lines: 5-30
 
 Line 13, class `Chef` defines the plugin class interface. For robotchef, `make` is
 defined to illustrate the functionality. Naturally you will be deciding the
@@ -61,7 +57,7 @@ raises NoChefException.
 
 .. literalinclude:: ../../examples/robotchef_allinone/robotchef_allinone/plugin.py
   :language: python
-  :lines: 29-
+  :lines: 33-
 
 main.py
 +++++++++++

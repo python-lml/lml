@@ -2,7 +2,7 @@ READ ME
 =========
 
 A robot chef was created to master the cuisines around the world. It learns faster
-than a human because it just requres a plugin to be installed. It consumes less
+than a human because it just needs a plugin to be installed. It consumes less
 memory as it load the cuisine knowlege on demand.
 
 Please note that there are two implementations of the robot chef. One is pure

@@ -4,7 +4,7 @@
 
     json utils for dump plugin info class
 
-    :copyright: (c) 2017-2018 by Onni Software Ltd.
+    :copyright: (c) 2017-2020 by Onni Software Ltd.
     :license: New BSD License, see LICENSE for more details
 """
 import sys
@@ -41,9 +41,7 @@ def do_import(plugin_module_name):
     try:
         return _do_import(plugin_module_name)
     except ImportError:
-        log.exception(
-            "%s is abscent or cannot be imported", plugin_module_name
-        )
+        log.exception("%s is absent or cannot be imported", plugin_module_name)
         raise
 
 
