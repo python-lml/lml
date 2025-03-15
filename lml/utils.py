@@ -48,10 +48,6 @@ def do_import(plugin_module_name):
 
 def _do_import(plugin_module_name):
     plugin_module = importlib.import_module(plugin_module_name)
-    if "." in plugin_module_name:
-        modules = plugin_module_name.split(".")
-        for module in modules[1:]:
-            plugin_module = getattr(plugin_module, module)
     log.debug("found " + plugin_module_name)
     return plugin_module
 
@@ -59,12 +55,10 @@ def _do_import(plugin_module_name):
 def do_import_class(plugin_class):
     """dynamically import a class"""
     try:
-        plugin_module_name = plugin_class.rsplit(".", 1)[0]
+        plugin_module_name, class_name = plugin_class.rsplit(".", 1)
         plugin_module = importlib.import_module(plugin_module_name)
-        modules = plugin_class.split(".")
-        for module in modules[1:]:
-            plugin_module = getattr(plugin_module, module)
-        return plugin_module
+        cls = getattr(plugin_module, class_name)
+        return cls
     except ImportError:
         log.exception("Failed to import %s", plugin_module_name)
         raise
