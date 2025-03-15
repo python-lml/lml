@@ -22,12 +22,12 @@ DESCRIPTION = (
 # -- Project information -----------------------------------------------------
 
 project = 'lml'
-copyright = '2017-2020 Onni Software Ltd.'
+copyright = '2017-2020 C.W.'
 author = 'C.W.'
 # The short X.Y version
-version = '0.1.0'
+version = '0.2.0'
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -77,7 +77,7 @@ html_theme = 'default'
 texinfo_documents = [
     ('index', 'lml',
      'lml Documentation',
-     'Onni Software Ltd.', 'lml',
+     'C.W.', 'lml',
      DESCRIPTION,
      'Miscellaneous'),
 ]
