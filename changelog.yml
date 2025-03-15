@@ -4,6 +4,12 @@ releases:
 - changes:
   - action: Updated
     details:
+    - "replace __import__ with importlib"
+  date: 15/03/2025
+  version: 0.2.0
+- changes:
+  - action: Updated
+    details:
     - "non class object can be a plugin too"
     - "`#20`: When a plugin was not installed, it now calls raise_exception method"
   date: 21/10/2020

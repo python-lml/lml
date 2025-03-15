@@ -9,6 +9,7 @@
 """
 import sys
 import logging
+import importlib
 from json import JSONEncoder, dumps
 
 PY2 = sys.version_info[0] == 2
@@ -46,7 +47,7 @@ def do_import(plugin_module_name):
 
 
 def _do_import(plugin_module_name):
-    plugin_module = __import__(plugin_module_name)
+    plugin_module = importlib.import_module(plugin_module_name)
     if "." in plugin_module_name:
         modules = plugin_module_name.split(".")
         for module in modules[1:]:
@@ -59,7 +60,7 @@ def do_import_class(plugin_class):
     """dynamically import a class"""
     try:
         plugin_module_name = plugin_class.rsplit(".", 1)[0]
-        plugin_module = __import__(plugin_module_name)
+        plugin_module = importlib.import_module(plugin_module_name)
         modules = plugin_class.split(".")
         for module in modules[1:]:
             plugin_module = getattr(plugin_module, module)
