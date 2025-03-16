@@ -22,7 +22,7 @@ DESCRIPTION = (
 # -- Project information -----------------------------------------------------
 
 project = 'lml'
-copyright = '2017-2020 C.W.'
+copyright = '2017-2025 C.W.'
 author = 'C.W.'
 # The short X.Y version
 version = '0.2.0'
