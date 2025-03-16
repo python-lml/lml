@@ -2,8 +2,6 @@
 lml - Load me later. A lazy plugin management system.
 ================================================================================
 
-.. image:: https://api.travis-ci.org/python-lml/lml.svg
-   :target: http://travis-ci.org/python-lml/lml
 
 .. image:: https://codecov.io/github/python-lml/lml/coverage.png
    :target: https://codecov.io/github/python-lml/lml
@@ -11,7 +9,7 @@ lml - Load me later. A lazy plugin management system.
    :target: https://pypi.org/project/lml
 
 .. image:: https://pepy.tech/badge/lml/month
-   :target: https://pepy.tech/project/lml/month
+   :target: https://pepy.tech/project/lml
 
 .. image:: https://img.shields.io/github/stars/python-lml/lml.svg?style=social&maxAge=3600&label=Star
     :target: https://github.com/python-lml/lml/stargazers

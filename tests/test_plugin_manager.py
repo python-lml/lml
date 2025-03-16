@@ -6,7 +6,7 @@ from lml.plugin import (
     _show_me_your_name,
 )
 
-from mock import patch
+from unittest.mock import patch
 from pytest import raises
 
 

@@ -22,12 +22,12 @@ DESCRIPTION = (
 # -- Project information -----------------------------------------------------
 
 project = 'lml'
-copyright = '2017-2020 Onni Software Ltd.'
+copyright = '2017-2025 C.W.'
 author = 'C.W.'
 # The short X.Y version
-version = '0.1.0'
+version = '0.2.0'
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 
@@ -57,7 +57,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -68,7 +68,8 @@ html_static_path = ['_static']
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/3/': None}
+intersphinx_mapping = {'python': ('https://docs.python.org/3',
+                                  'python-inv.txt')}
 # TODO: html_theme not configurable upstream
 html_theme = 'default'
 
@@ -76,7 +77,7 @@ html_theme = 'default'
 texinfo_documents = [
     ('index', 'lml',
      'lml Documentation',
-     'Onni Software Ltd.', 'lml',
+     'C.W.', 'lml',
      DESCRIPTION,
      'Miscellaneous'),
 ]

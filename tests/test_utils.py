@@ -1,7 +1,7 @@
 from lml.utils import do_import, json_dumps
 from lml.plugin import PluginManager
 
-from mock import patch
+from unittest.mock import patch
 from pytest import raises
 
 
