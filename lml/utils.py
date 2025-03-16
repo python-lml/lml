@@ -4,15 +4,13 @@
 
     json utils for dump plugin info class
 
-    :copyright: (c) 2017-2020 by Onni Software Ltd.
+    :copyright: (c) 2017-2025 by C.W.
     :license: New BSD License, see LICENSE for more details
 """
-import sys
 import logging
 import importlib
 from json import JSONEncoder, dumps
 
-PY2 = sys.version_info[0] == 2
 log = logging.getLogger(__name__)
 
 
@@ -23,8 +21,6 @@ class PythonObjectEncoder(JSONEncoder):
 
     def default(self, obj):
         a_list_of_types = (list, dict, str, int, float, bool, type(None))
-        if PY2:
-            a_list_of_types += (unicode,)
         if isinstance(obj, a_list_of_types):
             return JSONEncoder.default(self, obj)
         return {"_python_object": str(obj)}

@@ -5,7 +5,10 @@ releases:
   - action: Updated
     details:
     - "replace __import__ with importlib"
-  date: 15/03/2025
+  - action: Removed
+    details:
+    - "removed python 2 support"
+  date: 16/03/2025
   version: 0.2.0
 - changes:
   - action: Updated
