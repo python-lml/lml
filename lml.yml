@@ -18,3 +18,4 @@ description: "Load me later. A lazy plugin management system."
 excluded_github_users:
   - chfw
   - gitter-badger
+sphinx_html_theme: sphinx_rtd_theme

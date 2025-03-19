@@ -71,7 +71,7 @@ html_static_path = ['_static']
 intersphinx_mapping = {'python': ('https://docs.python.org/3',
                                   'python-inv.txt')}
 # TODO: html_theme not configurable upstream
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # TODO: DESCRIPTION not configurable upstream
 texinfo_documents = [
