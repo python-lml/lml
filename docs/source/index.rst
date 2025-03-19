@@ -13,22 +13,24 @@
 Introduction
 -------------
 
-**lml** seamlessly finds the lml based plugins from your current python
-environment but loads your plugins on demand. It is designed to support
-plugins that have external dependencies, especially bulky and/or
-memory hungry ones. lml provides the plugin management system only and the
-plugin interface is on your shoulder.
+**lml** effortlessly discovers lml-based plugins within your current Python
+environment and loads them as needed. It is specifically designed to support
+plugins with external dependencies, particularly those that are large or
+memory-intensive. lml offers a plugin management system, while the plugin
+interface remains your responsibility.
 
-**lml** enabled applications helps your customers [#f1]_ in two ways:
+Applications that use lml benefit your customers in two key ways:
 
-#. Your customers could cherry-pick the plugins from pypi per python environment.
-   They could remove a plugin using `pip uninstall` command.
-#. Only the plugins used at runtime gets loaded into computer memory.
+#. Customers can selectively install plugins from PyPI for each Python
+   environment, and easily remove them using the pip uninstall command.
+#. Only the plugins that are actively used at runtime are loaded into
+   memory, optimizing resource usage.
 
-When you would use **lml** to refactor your existing code, it aims to flatten the
-complexity and to shrink the size of your bulky python library by
-distributing the similar functionalities across its plugins. However, you as
-the developer need to do the code refactoring by yourself and lml would lend you a hand.
+When refactoring your existing code with lml, the goal is to simplify
+complexity and reduce the size of your bulky Python library by distributing
+related functionalities across plugins. However, the actual code refactoring
+is up to you—the developer—while lml provides valuable support in the process.
+
 
 .. [#f1] the end developers who uses your library and packages achieve their
          objectives.
