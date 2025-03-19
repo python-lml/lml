@@ -1,8 +1,8 @@
 Logging facility
-======================
+================================================================================
 
-During the development of lml package, the logging facility helps debugging a lot. Let
-me show you how to enable the logs of lml.
+During the development of lml package, the logging facility helps debugging a
+lot. Let me show you how to enable the logs of lml.
 
 
 Enable the logging
