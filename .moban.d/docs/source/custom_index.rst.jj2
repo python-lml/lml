@@ -3,8 +3,8 @@
 
 
 :Author: C.W.
-:Source code: http://github.com/{{name}}/{{name}}.git
-:Issues: http://github.com/{{name}}/{{name}}/issues
+:Source code: http://github.com/{{organisation}}/{{name}}.git
+:Issues: http://github.com/{{organisation}}/{{name}}/issues
 :License: New BSD License
 :Released: |version|
 :Generated: |today|
