@@ -3,8 +3,8 @@
 
 
 :Author: C.W.
-:Source code: http://github.com/lml/lml.git
-:Issues: http://github.com/lml/lml/issues
+:Source code: https://github.com/python-lml/lml
+:Issues: https://github.com/python-lml/lml/issues
 :License: New BSD License
 :Released: |version|
 :Generated: |today|
